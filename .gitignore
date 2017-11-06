@@ -31,3 +31,5 @@ target/
 .project
 .settings
 
+#Intellij IDEA
+.idea
