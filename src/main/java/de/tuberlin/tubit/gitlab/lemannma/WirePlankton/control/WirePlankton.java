@@ -6,11 +6,10 @@ package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
  *
  */
 
-public class WirePlankton 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
-        
-    }
+public class WirePlankton {
+	public static void main(String[] args) {
+
+		ViewController.launch();
+
+	}
 }
