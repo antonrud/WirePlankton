@@ -7,6 +7,10 @@ import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.core.PcapNetworkInterface.PromiscuousMode;
 import org.pcap4j.packet.Packet;
 
+/**
+ * @author Anton Rudacov
+ *
+ */
 public class CaptureController {
 
 	static final int SNAP_LEN = 65536;

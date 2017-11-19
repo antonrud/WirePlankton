@@ -3,7 +3,7 @@
  */
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -11,14 +11,14 @@ import org.junit.Test;
  * @author Anton Rudacov
  *
  */
-public class WirePlanktonTest {
+public class MainControllerTest {
 
 	/**
 	 * Test method for
-	 * {@link de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.WirePlankton#main(java.lang.String[])}.
+	 * {@link de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.MainController#capturePacket(int, int)}.
 	 */
 	@Test
-	public void testMain() {
+	public void testCapturePacket() {
 		assertTrue(true); // TODO
 	}
 

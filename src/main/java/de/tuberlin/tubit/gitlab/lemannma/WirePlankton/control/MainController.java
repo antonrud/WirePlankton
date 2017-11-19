@@ -9,6 +9,10 @@ import org.pcap4j.packet.Packet;
 
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
 
+/**
+ * @author Anton Rudacov
+ *
+ */
 public class MainController {
 
 	static private ArrayList<Packet> packetList;
