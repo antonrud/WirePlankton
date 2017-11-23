@@ -1,5 +1,7 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view;
 
-public class MenuBar {
+import javafx.scene.layout.HBox;
+
+public class MenuBar extends HBox{
 
 }

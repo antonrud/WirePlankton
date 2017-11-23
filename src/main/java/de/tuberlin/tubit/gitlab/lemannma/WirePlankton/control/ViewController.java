@@ -1,6 +1,8 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.MenuBar;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.PacketView;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.RealTimeView;
 import javafx.application.*;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -19,7 +21,7 @@ public class ViewController extends Application {
 	public void start(Stage ps) {
 
 		root = new BorderPane();
-		ps.setTitle("TrackMan 0.1");
+		ps.setTitle("Wireplankton v0.1");
 		s = new Scene(root, 800, 600);
 		masterWidth = s.getWidth();
 		masterHeight = s.getHeight();
@@ -36,6 +38,12 @@ public class ViewController extends Application {
 
 	public static void reload(){
 		//TODO Method stub
+	}
+
+
+	public static void go() {
+		ViewController.launch();
+
 	}
 
 }
