@@ -4,4 +4,5 @@ import javafx.scene.layout.VBox;
 
 public class PacketView extends VBox {
 
+
 }
