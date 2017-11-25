@@ -4,7 +4,6 @@ import java.net.InetAddress;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
-import org.pcap4j.core.Pcaps;
 import org.pcap4j.packet.Packet;
 
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
@@ -15,55 +14,67 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
  */
 public class MainController {
 
-	static private ArrayList<Packet> packetList;
-	static private InetAddress address;
+	private static ArrayList<Packet> packetList = new ArrayList<Packet>();
 
-	static public void capturePacket(int amount, int timeout) throws Exception {
-		CaptureController.doCapture(Pcaps.getDevByAddress(address), amount, timeout, packetList);
+	public static void capturePacket(int amount, int timeout, InetAddress address) throws Exception {
+		CaptureController.doCapture(amount, timeout, address);
+		packetList.stream().forEach(System.out::println);
 	}
 
-	static public void stopCapture() {
+	public static void stopCapture() {
 		CaptureController.stop();
 	}
 
-	static public void importData(Path path) {
-		packetList = ImportExportController.doImport();
+	// public static void importData(Path path) {
+	// packetList = ImportExportController.doImport();
+	// }
+
+	public static void exportData(Path path) {
+
 	}
 
-	static public void exportData(Path path) {
-
-	}
-
-	static public void safe(Path path) {
+	public static void safe(Path path) {
 		// TODO failure handling
 	}
 
-	static public void load() {
+	public static void load() {
 
 	}
 
-	static public ArrayList<Setting> getSettings() {
+	public static ArrayList<Setting> getSettings() {
 		return SettingsController.getSettigsList();
 	}
 
-	static public Setting getSetting(String name) {
+	public static Setting getSetting(String name) {
 		return SettingsController.getSettig();
 	}
 
-	static public void setSetting(Setting setting) {
+	public static void setSetting(Setting setting) {
 
 	}
 
-	static public void initApp() {
+	public static void initApp() {
 
 	}
 
-	static public void setAddress(String ip) throws Exception {
-		address = InetAddress.getByName(ip);
+	public static void addPacket(Packet packet) {
+		packetList.add(packet);
 	}
 
-	static public String getAddress() {
-		return address.toString();
+	public static ArrayList<Packet> getPacketList() {
+		return packetList;
 	}
+
+//	public static void setAddress(String ip) throws Exception {
+//		address = InetAddress.getByName(ip);
+//	}
+//
+//	public static void setLocalHost() throws Exception {
+//		address = InetAddress.getLocalHost();
+//	}
+//
+//	public static InetAddress getAddress() {
+//		return address;
+//	}
 
 }

@@ -1,9 +1,12 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import org.pcap4j.core.PcapHandle;
 import org.pcap4j.core.PcapNetworkInterface;
+import org.pcap4j.core.Pcaps;
 import org.pcap4j.core.PcapNetworkInterface.PromiscuousMode;
 import org.pcap4j.packet.Packet;
 
@@ -13,21 +16,19 @@ import org.pcap4j.packet.Packet;
  */
 public class CaptureController {
 
-	static final int SNAP_LEN = 65536;
-	static final PromiscuousMode MODE = PromiscuousMode.PROMISCUOUS;
-
-	static public ArrayList<Packet> doCapture(PcapNetworkInterface netInterface, int amount, int timeout, ArrayList<Packet> packetList) throws Exception {
-
-		PcapHandle pcapHandle = netInterface.openLive(SNAP_LEN, MODE, timeout);
+	private static final PromiscuousMode MODE = PromiscuousMode.PROMISCUOUS;
+	private static final int SNAP_LEN = 65536;
+	
+	public static void doCapture(int amount, int timeout, InetAddress address) throws Exception {
+		
+		PcapNetworkInterface netInterface = Pcaps.getDevByAddress(address);
+		PcapHandle handle = netInterface.openLive(SNAP_LEN, MODE, timeout);
 
 		for (int packetNr = 1; packetNr <= amount; packetNr++) {
-			packetList.add(pcapHandle.getNextPacketEx());
+			MainController.addPacket(handle.getNextPacketEx());
 		}
-
-		pcapHandle.close();
-		System.out.println("Capture done");
-
-		return packetList;
+		
+		handle.close();
 	}
 
 	public static void stop() {
