@@ -11,8 +11,6 @@ package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 public class WirePlankton {
 	public static void main(String[] args) {
 
-		ViewController.go();
-/**
 		try {
 			MainController.setAddress("localhost");
 			MainController.capturePacket(2, 30);
@@ -20,7 +18,7 @@ public class WirePlankton {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-	**/
+		
+		ViewController.go();
 	}
 }
