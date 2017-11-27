@@ -1,5 +1,7 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view;
 
-public class ExportView {
+import javafx.scene.layout.HBox;
+
+public class ExportView extends HBox{
 
 }
