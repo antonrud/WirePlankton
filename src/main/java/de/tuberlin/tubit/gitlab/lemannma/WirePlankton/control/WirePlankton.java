@@ -1,24 +1,26 @@
 /**
- * 
+ *
  */
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
+import java.net.InetAddress;
+
 /**
- * 
+ *
  * @author Anton, Matthias, Stefan, Lana
  *
  */
 public class WirePlankton {
 	public static void main(String[] args) {
 
-		//ViewController.launch();
-		
 		try {
-			MainController.setAddress("localhost");
-			MainController.capturePacket(2, 30);
-		} catch (Exception e) {
+			InetAddress address = InetAddress.getLocalHost();
+			MainController.capturePacket(3, 100000, address);
+		} catch (Exception e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
+		
+		ViewController.go();
 	}
 }
