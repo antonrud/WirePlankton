@@ -15,7 +15,7 @@ public class WirePlankton {
 
 		try {
 			InetAddress address = InetAddress.getLocalHost();
-			MainController.capturePacket(3, 10000, address);
+			MainController.capturePacket(3, 100000, address);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

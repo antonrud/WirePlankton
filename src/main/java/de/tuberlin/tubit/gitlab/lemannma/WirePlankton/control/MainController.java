@@ -18,6 +18,8 @@ public class MainController {
 
 	public static void capturePacket(int amount, int timeout, InetAddress address) throws Exception {
 		CaptureController.doCapture(amount, timeout, address);
+		
+		//This is just for checking. Must be removed after connection to GUI
 		packetList.stream().forEach(System.out::println);
 	}
 
