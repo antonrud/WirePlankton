@@ -18,10 +18,14 @@ public class PacketViewItem extends HBox{
 	public PacketViewItem(Packet p, int index){
 		this.p = p;
 		this.index = new Label(""+index);
-		this.preview = new Label(p.toString());
+		this.preview = new Label(p.toString().replaceAll("\n", "").replaceAll("\r", ""));
+
+		this.preview.setWrapText(false);
+		this.preview.setMaxWidth(90.0);
 
 		this.getChildren().add(this.index);
 		this.getChildren().add(this.preview);
+
 
 		this.setOnMouseClicked(new EventHandler<MouseEvent>() {
 

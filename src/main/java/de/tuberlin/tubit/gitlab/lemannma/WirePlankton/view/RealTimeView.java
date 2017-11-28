@@ -11,7 +11,7 @@ public class RealTimeView  extends VBox{
 
 	public RealTimeView(){
 		this.setStyle("background-color: red;");
-		this.text = new Label("Hier könnte ihre Werbung stehen");
+		this.text = new Label();
 		this.getChildren().add(text);
 	}
 
