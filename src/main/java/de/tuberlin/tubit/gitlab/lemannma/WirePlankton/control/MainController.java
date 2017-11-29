@@ -1,9 +1,11 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
+import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import org.pcap4j.core.Pcaps;
+import org.pcap4j.packet.IpV4Packet;
 import org.pcap4j.packet.Packet;
 
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
@@ -21,6 +23,7 @@ public class MainController {
 		
 		//This is just for checking. Must be removed after connection to GUI
 		packetList.stream().forEach(System.out::println);
+
 	}
 
 	public static void stopCapture() {

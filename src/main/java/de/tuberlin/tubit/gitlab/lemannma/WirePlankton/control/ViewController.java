@@ -34,7 +34,7 @@ public class ViewController extends Application {
 	private static double masterWidth;
 	private static double masterHeight;
 
-	//TODO Enums sollten eigentlich CAPS sein, dann muss ich aber eine extraliste für die Menünamen pflegen..
+	//TODO Enums sollten eigentlich CAPS sein, dann muss ich aber eine extraliste fï¿½r die Menï¿½namen pflegen..
 	public static enum ViewModes{
 		Liveview, Settings, File
 	};
@@ -55,7 +55,7 @@ public class ViewController extends Application {
 		masterWidth = s.getWidth();
 		masterHeight = s.getHeight();
 		ps.setScene(s);
-		
+
 		//Init StandardView
 		changeView(0);
 
@@ -75,16 +75,40 @@ public class ViewController extends Application {
 				root.setTop(menubar);
 				root.setRight(realtimeview);
 				root.setLeft(packetview);
+				packetview.generatePacketList();
 				break;
 			case 1:
 				root.setTop(menubar);
 				root.setCenter(settingsview);
+				break;
 			case 2:
 				root.setTop(menubar);
 				root.setCenter(exportview);
-
+				break;
 		}
 
 	}
+
+	public static MenuBar getMenubar() {
+		return menubar;
+	}
+
+	public static PacketView getPacketview() {
+		return packetview;
+	}
+
+	public static ExportView getExportview() {
+		return exportview;
+	}
+
+	public static RealTimeView getRealtimeview() {
+		return realtimeview;
+	}
+
+	public static SettingsView getSettingsview() {
+		return settingsview;
+	}
+
+
 
 }
