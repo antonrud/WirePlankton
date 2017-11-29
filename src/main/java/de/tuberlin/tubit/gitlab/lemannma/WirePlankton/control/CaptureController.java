@@ -19,6 +19,7 @@ public class CaptureController {
 	private static final PromiscuousMode MODE = PromiscuousMode.PROMISCUOUS;
 	private static final int SNAP_LEN = 65536;
 	
+	
 	public static void doCapture(int amount, int timeout, InetAddress address) throws Exception {
 		
 		PcapNetworkInterface netInterface = Pcaps.getDevByAddress(address);
@@ -32,7 +33,8 @@ public class CaptureController {
 	}
 
 	public static void stop() {
-		// TODO Auto-generated method stub
+		// TODO A good approach might be to run doCapture as own Thread. 
+		// In order to stop() - interrupt capture thread and close handle 
 
 	}
 
