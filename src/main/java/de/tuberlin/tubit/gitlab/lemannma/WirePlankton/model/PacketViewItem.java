@@ -2,13 +2,6 @@ package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model;
 
 import org.pcap4j.packet.Packet;
 
-import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.MainController;
-import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.ViewController;
-import javafx.event.EventHandler;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-
 public class PacketViewItem{
 
 	int index;

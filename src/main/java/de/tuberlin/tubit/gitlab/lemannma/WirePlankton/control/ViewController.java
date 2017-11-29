@@ -1,14 +1,10 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
-import java.util.List;
-
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.ExportView;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.MenuBar;
-import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.MenuButton;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.PacketView;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.RealTimeView;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.SettingsView;
-import javafx.scene.control.Button;
 import javafx.application.*;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
