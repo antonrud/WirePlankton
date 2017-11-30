@@ -20,7 +20,6 @@ public class MainController {
 		
 		//This is just for checking. Must be removed after connection to GUI
 		packetList.stream().forEach(System.out::println);
-
 	}
 
 	public static void stopCapture() {
@@ -78,5 +77,4 @@ public class MainController {
 //	public static InetAddress getAddress() {
 //		return address;
 //	}
-
 }
