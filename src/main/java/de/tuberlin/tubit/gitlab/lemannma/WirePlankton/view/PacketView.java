@@ -16,8 +16,9 @@ public class PacketView extends VBox{
 
 	ObservableList<PacketViewItem> data;
 	TableView<PacketViewItem> view;
-
+	
 	public PacketView(){
+		
 		data = FXCollections.observableArrayList();
 		view = new TableView<PacketViewItem>();
 		this.setStyle("background-color: yellow;");
@@ -29,15 +30,15 @@ public class PacketView extends VBox{
 		view.getColumns().add(index);
 		view.getColumns().add(value);
 
-		view.setRowFactory(tv -> {
-		    TableRow<PacketViewItem> row = new TableRow<>();
-		    row.setOnMouseClicked(event -> {
-		        if (!row.isEmpty()) {
-		        	PacketViewItem rowContent = row.getItem();
+		view.setRowFactory(tableView -> {
+		    TableRow<PacketViewItem> tableRow = new TableRow<>();
+		    tableRow.setOnMouseClicked(event -> {
+		        if (!tableRow.isEmpty()) {
+		        	PacketViewItem rowContent = tableRow.getItem();
 		            ViewController.getRealtimeview().setPacket(rowContent.getP());
 		        }
 		    });
-		    return row ;
+		    return tableRow ;
 		});
 
 		index.setCellValueFactory(
@@ -55,11 +56,11 @@ public class PacketView extends VBox{
 	public void generatePacketList() {
 		data.clear();
 		//this.getChildren().clear();
+		
+		//was ist ein iItem?
 		for(int iItem=0; iItem < MainController.getPacketList().size();iItem++){
 			data.add(new PacketViewItem(MainController.getPacketList().get(iItem), iItem));
 			//this.getChildren().add(new PacketViewItem(MainController.getPacketList().get(iItem), iItem));
 		}
 	}
-
-
 }
