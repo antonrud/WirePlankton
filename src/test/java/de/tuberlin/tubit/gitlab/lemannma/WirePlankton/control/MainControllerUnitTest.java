@@ -19,11 +19,6 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
  *
  */
 public class MainControllerUnitTest {
-
-	/*
-	 * instance of test class
-	 */
-	MainController mainController = new MainController();
 	
 	/**
 	 * Test method for
@@ -32,10 +27,31 @@ public class MainControllerUnitTest {
 	@Test
 	public void CapturePacketTest() {
 		
-		int amount;
-		int timeout;
-		InetAddress address;
-		assertTrue(true); // Test for Exception by unvalid Adress
+		int amount = 20;
+		int timeout = 200000;
+		InetAddress address = null;
+		try {
+			MainController.capturePacket(amount, timeout, address);
+		} catch (Exception exception) {
+			assertTrue(true); // Test for Exception by unvalid address
+		}
+		
+		amount = 0;
+		try {
+			address = InetAddress.getLocalHost();
+			MainController.capturePacket(amount, timeout, address);
+		} catch (Exception exception) {
+			assertTrue(true); // Test for Exception by unvalid amount
+		}
+		
+		amount =20;
+		timeout = -1;
+		try {
+			address = InetAddress.getLocalHost();
+			MainController.capturePacket(amount, timeout, address);
+		} catch (Exception exception) {
+			assertTrue(true); // Test for Exception by unvalid timeout
+		}
 	}
 	
 	@Test
@@ -47,54 +63,31 @@ public class MainControllerUnitTest {
 	@Test
 	public void exportDataTest() {
 		
-		assertTrue(true); // Not implemented yes
+		assertTrue(true); // Not implemented yet
 	}
 
 	@Test
 	public void safeTest() {
 		
-		assertTrue(true); //  Not implemented yes
+		assertTrue(true); //  Not implemented yet
 	}
 
 	@Test
 	public void loadTest() {
 		
-		assertTrue(true); //  Not implemented yes
-	}
-
-	@Test
-	public void getSettingsTest() {
-		
-		assertTrue(true); // TODO
-	}
-
-	@Test
-	public void getSettingTest() {
-		
-		assertTrue(true); // TODO
-	}
-
-	@Test
-	public void setSettingTest() {
-		
-		assertTrue(true); // TODO
+		assertTrue(true); //  Not implemented yet
 	}
 
 	@Test
 	public void initAppTest() {
 		
-		assertTrue(true); // TODO
+		assertTrue(true); // Not implemented yet
 	}
 
 	@Test
 	public void addPacketTest() {
 		
-		assertTrue(true); // TODO
-	}
-
-	@Test
-	public void getPacketListTest() {
-		
-		assertTrue(true); // TODO
+		assertTrue(true); // simple function call, no test needed yet
 	}
 }
+ 

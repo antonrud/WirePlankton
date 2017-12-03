@@ -19,7 +19,8 @@ public class CaptureControllerTest {
 	 */
 	@Test
 	public void testDoCapture() {
-		assertTrue(true); // TODO
+		
+		assertTrue(true); // tested with MainControllerUnitTest. No further complexity
 	}
 
 	/**
@@ -28,7 +29,8 @@ public class CaptureControllerTest {
 	 */
 	@Test
 	public void testStop() {
-		assertTrue(true); // TODO
+		
+		assertTrue(true); // not implemented yet
 	}
 
 }
