@@ -7,17 +7,17 @@ import javafx.scene.layout.VBox;
 
 public class RealTimeView  extends VBox{
 
-	Label text;
+	Label label;
 
 	public RealTimeView(){
 		this.setStyle("background-color: red;");
-		this.text = new Label();
-		this.getChildren().add(text);
+		this.label = new Label();
+		this.getChildren().add(label);
 	}
 
-	public void setPacket(Packet p) {
-		this.text.setText(p.toString());
-
+	public void setPacket(Packet packet) {
+	
+		this.label.setText(packet.toString());
 	}
 
 }

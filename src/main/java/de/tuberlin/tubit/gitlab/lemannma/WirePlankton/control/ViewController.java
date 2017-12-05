@@ -11,98 +11,92 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 
-
 public class ViewController extends Application {
-
 
 	//Init basic elements
 	private static BorderPane root;
-	private static Scene s;
+	private static Scene scene;
 
-	private static MenuBar menubar;
-	private static PacketView packetview;
-	private static ExportView exportview;
-	private static RealTimeView realtimeview;
-	private static SettingsView settingsview;
-
+	private static MenuBar menuBar;
+	private static PacketView packetView;
+	private static ExportView exportView;
+	private static RealTimeView realtimeView;
+	private static SettingsView settingsView;
 
 	//control of height and width
-	private static double masterWidth;
-	private static double masterHeight;
+	private static double masterWidth = 800;
+	private static double masterHeight = 600;
 
 	//TODO Enums sollten eigentlich CAPS sein, dann muss ich aber eine extraliste f�r die Men�namen pflegen..
 	public static enum ViewModes{
 		Liveview, Settings, File
 	};
 
-	public void start(Stage ps) {
+	public void start(Stage primaryStage) {
 
 		//Init Elements
-		menubar = new MenuBar();
-		packetview = new PacketView();
-		exportview = new ExportView();
-		realtimeview = new RealTimeView();
-		settingsview = new SettingsView();
+		menuBar = new MenuBar();
+		packetView = new PacketView();
+		exportView = new ExportView();
+		realtimeView = new RealTimeView();
+		settingsView = new SettingsView();
 
 		//Init Window
 		root = new BorderPane();
-		ps.setTitle("Wireplankton v0.1");
-		s = new Scene(root, 800, 600);
-		masterWidth = s.getWidth();
-		masterHeight = s.getHeight();
-		ps.setScene(s);
+		primaryStage.setTitle("Wireplankton v0.1");
+		scene = new Scene(root, masterWidth, masterHeight);
+		primaryStage.setScene(scene);
 
 		//Init StandardView
 		changeView(0);
 
-		ps.show();
+		primaryStage.show();
 	}
 
 	public static void go() {
-		ViewController.launch();
 
+		ViewController.launch();
 	}
 
-
 	public static void changeView(int view) {
+		
 		root.getChildren().clear();
 		switch (view){
 			case 0:
-				root.setTop(menubar);
-				root.setRight(realtimeview);
-				root.setLeft(packetview);
-				packetview.generatePacketList();
+				root.setTop(menuBar);
+				root.setRight(realtimeView);
+				root.setLeft(packetView);
+				packetView.generatePacketList();
 				break;
 			case 1:
-				root.setTop(menubar);
-				root.setCenter(settingsview);
+				root.setTop(menuBar);
+				root.setCenter(settingsView);
 				break;
 			case 2:
-				root.setTop(menubar);
-				root.setCenter(exportview);
+				root.setTop(menuBar);
+				root.setCenter(exportView);
 				break;
 		}
-
 	}
 
 	public static MenuBar getMenubar() {
-		return menubar;
+		return menuBar;
 	}
 
 	public static PacketView getPacketview() {
-		return packetview;
+		return packetView;
 	}
 
 	public static ExportView getExportview() {
-		return exportview;
+		return exportView;
 	}
 
 	public static RealTimeView getRealtimeview() {
-		return realtimeview;
+		return realtimeView;
 	}
 
 	public static SettingsView getSettingsview() {
-		return settingsview;
+		return settingsView;
 	}
 
 
