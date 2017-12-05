@@ -14,12 +14,18 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
 public class MainController {
 
 	private static ArrayList<Packet> packetList = new ArrayList<Packet>();
+	
+	
+	//Shows: We want it static
+	private MainController() {
+		
+	}
 
-	public static void capturePacket(int amount, int timeout, InetAddress address) throws Exception {
+	public static void capturePacket(int amount, int timeout, InetAddress address) throws Exception{
 		CaptureController.doCapture(amount, timeout, address);
 		
 		//This is just for checking. Must be removed after connection to GUI
-		packetList.stream().forEach(System.out::println);
+		//packetList.stream().forEach(System.out::println);
 
 	}
 

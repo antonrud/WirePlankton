@@ -10,13 +10,16 @@ import org.pcap4j.core.PcapNetworkInterface.PromiscuousMode;
  * @author Anton Rudacov
  *
  */
-public class CaptureController {
+
+
+//Think about NOT static here
+public class CaptureController{
 
 	private static final PromiscuousMode MODE = PromiscuousMode.PROMISCUOUS;
 	private static final int SNAP_LEN = 65536;
 	
 	
-	public static void doCapture(int amount, int timeout, InetAddress address) throws Exception {
+	public static void doCapture(int amount, int timeout, InetAddress address) throws Exception{
 		
 		PcapNetworkInterface netInterface = Pcaps.getDevByAddress(address);
 		PcapHandle handle = netInterface.openLive(SNAP_LEN, MODE, timeout);
