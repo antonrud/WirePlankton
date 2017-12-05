@@ -12,11 +12,6 @@ import org.junit.Test;
  *
  */
 public class WirePlanktonUnitTest {
-
-	/* 
-	 * instance of WirePlankton for test cases
-	 */
-	private WirePlankton wirePlankton = new WirePlankton();
 	
 	/**
 	 * Test method for

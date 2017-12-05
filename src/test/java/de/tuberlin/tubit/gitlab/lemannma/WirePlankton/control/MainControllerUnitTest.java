@@ -20,21 +20,26 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
  */
 public class MainControllerUnitTest {
 	
+	int amount = 20;
+	int timeout = 200000;
+	InetAddress address = null;
+	
 	/**
 	 * Test method for
 	 * {@link de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.MainController#capturePacket(int, int)}.
 	 */
 	@Test
-	public void CapturePacketTest() {
+	public void CapturePacketTestUnvalidAddress() {
 		
-		int amount = 20;
-		int timeout = 200000;
-		InetAddress address = null;
 		try {
 			MainController.capturePacket(amount, timeout, address);
 		} catch (Exception exception) {
 			assertTrue(true); // Test for Exception by unvalid address
 		}
+	}
+	
+	@Test
+	public void CapturePacketTestUnvalidAmount() {
 		
 		amount = 0;
 		try {
@@ -43,6 +48,10 @@ public class MainControllerUnitTest {
 		} catch (Exception exception) {
 			assertTrue(true); // Test for Exception by unvalid amount
 		}
+	}
+	
+	@Test
+	public void CapturePacketTestUnvalidTimeout() { 
 		
 		amount =20;
 		timeout = -1;
