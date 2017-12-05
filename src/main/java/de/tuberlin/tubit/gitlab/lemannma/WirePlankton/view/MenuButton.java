@@ -15,6 +15,7 @@ public class MenuButton extends Button {
 	private int view;
 
 	public MenuButton(int view, String label){
+		
 		super();
 		this.view = view;
 
@@ -23,16 +24,16 @@ public class MenuButton extends Button {
 
 		//Set Integer for viewchange
 		this.setOnAction(new EventHandler<ActionEvent>() {
-			@Override public void handle(ActionEvent e) {
+			@Override public void handle(ActionEvent event) {
 				//TODO Okay oder eigenes Event?
-				ViewController.changeView(((MenuButton)e.getSource()).getView());
+				ViewController.changeView(((MenuButton)event.getSource()).getView());
 			}
 		});
-
 		//TODO Styling
 	}
 
 	public int getView() {
+		
 		return view;
 	}
 

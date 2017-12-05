@@ -20,13 +20,10 @@ public class MenuBar extends HBox{
 	public MenuBar(){
 		this.thisMenuButtons = new LinkedList<MenuButton>();
 
-		for (ViewModes viewmode : ViewController.ViewModes.values()){
-			thisMenuButtons.add(new MenuButton(viewmode.ordinal(), viewmode.toString()));
+		for (ViewModes viewMode : ViewController.ViewModes.values()){
+			thisMenuButtons.add(new MenuButton(viewMode.ordinal(), viewMode.toString()));
 		}
 		this.getChildren().addAll(this.thisMenuButtons);
-
-
-
 	}
-
+	
 }

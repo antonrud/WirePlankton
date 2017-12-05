@@ -3,7 +3,7 @@
  */
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
-import java.net.InetAddress;
+//import java.net.InetAddress;
 
 /**
  *
@@ -12,9 +12,7 @@ import java.net.InetAddress;
  */
 public class WirePlankton {
 	public static void main(String[] args) {
-
+		
 		ViewController.go();
-
-
 	}
 }
