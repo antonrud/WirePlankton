@@ -14,6 +14,24 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>central</id>
+			<name>Maven Central Repository</name>
+			<url>https://repo.maven.apache.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>PRISE_gruppe_1_releases</id>
+			<name>WirePlankton_Releases</name>
+			<url>http://prise-runner.aot.tu-berlin.de:8081/repository/PRISE_gruppe_1_releases/</url>
+		</repository>
+		<repository>
+			<id>PRISE_gruppe_1_snapshots</id>
+			<name>WirePlankton_Snapshots</name>
+			<url>http://prise-runner.aot.tu-berlin.de:8081/repository/PRISE_gruppe_1_snapshots/</url>
+		</repository>
+	</repositories>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -27,6 +45,19 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>PRISE_gruppe_1_releases</id>
+			<name>WirePlankton_Releases</name>
+			<url>http://prise-runner.aot.tu-berlin.de:8081/repository/PRISE_gruppe_1_releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>PRISE_gruppe_1_snapshots</id>
+			<name>WirePlankton_Snapshots</name>
+			<url>http://prise-runner.aot.tu-berlin.de:8081/repository/PRISE_gruppe_1_snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<dependencies>
 		<dependency>
@@ -54,6 +85,11 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-jdk14</artifactId>
 			<version>1.7.25</version>
+		</dependency>
+		<dependency>
+			<groupId>prise.gruppe.1</groupId>
+			<artifactId>test.project</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
