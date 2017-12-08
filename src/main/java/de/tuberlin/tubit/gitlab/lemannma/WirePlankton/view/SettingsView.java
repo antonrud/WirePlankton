@@ -12,10 +12,11 @@ public class SettingsView extends HBox{
 
 	private Button submitButton;
 	//bitte noch sinnvoll bennennen
-	private int magicNumber1 = 20;
-	private int magicNumber2 = 300000;
+	private int amount = 20;
+	private int timeout = 300000;
 
 	public SettingsView(){
+		
 		super();
 		this.submitButton = new Button("Start");
 
@@ -26,7 +27,7 @@ public class SettingsView extends HBox{
 			public void handle(ActionEvent e) {
 				try {
 					InetAddress address = InetAddress.getLocalHost();
-					MainController.capturePacket(magicNumber1, magicNumber2, address);
+					MainController.capturePacket(amount, timeout, address);
 				} catch (Exception exception) {
 					// TODO Auto-generated catch block
 					exception.printStackTrace();
@@ -36,6 +37,7 @@ public class SettingsView extends HBox{
 	}
 
 	public Button getSubmitButton() {
+		
 		return submitButton;
 	}
 }

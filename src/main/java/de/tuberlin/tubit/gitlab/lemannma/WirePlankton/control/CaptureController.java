@@ -16,7 +16,6 @@ public class CaptureController {
 	private static final int SNAP_LEN = 65536;
 	private static boolean continueCapture;
 	
-	
 	public static void doCapture(int amount, int timeout, InetAddress address) throws Exception {
 		
 		PcapNetworkInterface netInterface = Pcaps.getDevByAddress(address);
