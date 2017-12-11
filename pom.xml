@@ -3,7 +3,7 @@
 
 	<groupId>de.tuberlin.tubit.gitlab.lemannma</groupId>
 	<artifactId>WirePlankton</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>WirePlankton</name>
@@ -22,7 +22,7 @@
 		<repository>
 			<id>PRISE_gruppe_1_releases</id>
 			<name>WirePlankton_Releases</name>
-			<url>http://130.149.154.167:8081/repository/PRISE_gruppe_1_releases/</url>
+			<url>http://prise-runner.aot.tu-berlin.de:8081/repository/PRISE_gruppe_1_releases/</url>
 		</repository>
 		<repository>
 			<id>PRISE_gruppe_1_snapshots</id>
@@ -59,7 +59,7 @@
 		<repository>
 			<id>PRISE_gruppe_1_releases</id>
 			<name>WirePlankton_Releases</name>
-			<url>http://130.149.154.167:8081/repository/PRISE_gruppe_1_releases/</url>
+			<url>http://prise-runner.aot.tu-berlin.de:8081/repository/PRISE_gruppe_1_releases/</url>
 		</repository>
 		<snapshotRepository>
 			<id>PRISE_gruppe_1_snapshots</id>
@@ -72,7 +72,6 @@
 		<connection>scm:git:https://gitlab.tubit.tu-berlin.de/lemannma/AOT-Praktikum.git</connection>
 		<url>https://gitlab.tubit.tu-berlin.de/lemannma/AOT-Praktikum</url>
 		<developerConnection>scm:git:https://gitlab.tubit.tu-berlin.de/lemannma/AOT-Praktikum.git</developerConnection>
-	  <tag>HEAD</tag>
   </scm>
 
 	<dependencies>
