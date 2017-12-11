@@ -54,6 +54,7 @@ public class PacketView extends VBox{
 	}
 
 	public void generatePacketList() {
+		
 		data.clear();
 		//this.getChildren().clear();
 		

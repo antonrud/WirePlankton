@@ -10,6 +10,7 @@ public class RealTimeView  extends VBox{
 	Label label;
 
 	public RealTimeView(){
+		
 		this.setStyle("background-color: red;");
 		this.label = new Label();
 		this.getChildren().add(label);

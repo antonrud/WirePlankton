@@ -21,7 +21,9 @@ public class MainController {
 		
 	}
 
-	public static void capturePacket(int amount, int timeout, InetAddress address) throws Exception{
+	public static void capturePacket(int amount, int timeout, InetAddress address) throws Exception {
+		
+
 		CaptureController.doCapture(amount, timeout, address);
 		
 		//This is just for checking. Must be removed after connection to GUI
@@ -29,6 +31,7 @@ public class MainController {
 	}
 
 	public static void stopCapture() {
+		
 		CaptureController.stop();
 	}
 
@@ -49,10 +52,12 @@ public class MainController {
 	}
 
 	public static ArrayList<Setting> getSettings() {
+	
 		return SettingsController.getSettigsList();
 	}
 
 	public static Setting getSetting(String name) {
+	
 		return SettingsController.getSettig();
 	}
 
@@ -65,10 +70,12 @@ public class MainController {
 	}
 
 	public static void addPacket(Packet packet) {
+		
 		packetList.add(packet);
 	}
 
 	public static ArrayList<Packet> getPacketList() {
+	
 		return packetList;
 	}
 
