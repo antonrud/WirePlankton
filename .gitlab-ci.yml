@@ -30,7 +30,7 @@ Deploy:
 Release:
     stage: release
     script:
-       - echo RELEASE
+        - mvn release:prepare release:perform 
     only:
         - master
     tags:

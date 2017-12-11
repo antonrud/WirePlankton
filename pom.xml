@@ -22,7 +22,7 @@
 		<repository>
 			<id>PRISE_gruppe_1_releases</id>
 			<name>WirePlankton_Releases</name>
-			<url>http://prise-runner.aot.tu-berlin.de:8081/repository/PRISE_gruppe_1_releases/</url>
+			<url>http://130.149.154.167:8081/repository/PRISE_gruppe_1_releases/</url>
 		</repository>
 		<repository>
 			<id>PRISE_gruppe_1_snapshots</id>
@@ -59,7 +59,7 @@
 		<repository>
 			<id>PRISE_gruppe_1_releases</id>
 			<name>WirePlankton_Releases</name>
-			<url>http://prise-runner.aot.tu-berlin.de:8081/repository/PRISE_gruppe_1_releases/</url>
+			<url>http://130.149.154.167:8081/repository/PRISE_gruppe_1_releases/</url>
 		</repository>
 		<snapshotRepository>
 			<id>PRISE_gruppe_1_snapshots</id>
