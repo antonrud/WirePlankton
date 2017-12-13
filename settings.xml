@@ -1,0 +1,29 @@
+ <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                          https://maven.apache.org/xsd/settings-1.0.0.xsd">
+	<localRepository/>
+	<interactiveMode/>
+	<usePluginRegistry/>
+	<offline/>
+	<pluginGroups/>
+
+	<servers>
+		<server>
+			<id>PRISE_gruppe_1_releases</id>
+			<username>PRISE_gruppe_1_user</username>
+			<password>$NEXUS_PASS</password>
+		</server>
+		<server>
+			<id>PRISE_gruppe_1_snapshots</id>
+			<username>PRISE_gruppe_1_user</username>
+			<password>$NEXUS_PASS</password>
+		</server>
+	</servers>
+
+	<mirrors/>
+	<proxies/>
+	<profiles/>
+	<activeProfiles/>
+</settings>
+	
