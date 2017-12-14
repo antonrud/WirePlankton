@@ -21,7 +21,7 @@ Test:
 Deploy:
     stage: deploy
     script:
-        - mvn clean deploy
+        - mvn --settings settings.xml deploy
     only:
         - develop
     tags:

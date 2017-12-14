@@ -80,22 +80,27 @@ public class ViewController extends Application {
 	}
 
 	public static MenuBar getMenubar() {
+		
 		return menuBar;
 	}
 
 	public static PacketView getPacketview() {
+		
 		return packetView;
 	}
 
 	public static ExportView getExportview() {
+		
 		return exportView;
 	}
 
 	public static RealTimeView getRealtimeview() {
+		
 		return realtimeView;
 	}
 
 	public static SettingsView getSettingsview() {
+		
 		return settingsView;
 	}
 

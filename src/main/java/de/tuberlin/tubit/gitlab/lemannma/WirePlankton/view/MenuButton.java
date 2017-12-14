@@ -37,5 +37,4 @@ public class MenuButton extends Button {
 		return view;
 	}
 
-
 }
