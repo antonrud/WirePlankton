@@ -7,6 +7,8 @@ stages:
 Verify:
     stage: verify
     script:
+        - java -version
+        - mvn -v
         - mvn package
     tags:
         - verify
