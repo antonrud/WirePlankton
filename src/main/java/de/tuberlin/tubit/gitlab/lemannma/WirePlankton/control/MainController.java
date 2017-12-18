@@ -12,7 +12,8 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
  *
  */
 public class MainController {
-
+	
+					//Change type to ObservableList<PacketViewItem>
 	private static ArrayList<Packet> packetList = new ArrayList<Packet>();
 	
 	
@@ -69,6 +70,8 @@ public class MainController {
 
 	}
 
+	
+	//Use PacketViewItem here!
 	public static void addPacket(Packet packet) {
 		
 		packetList.add(packet);

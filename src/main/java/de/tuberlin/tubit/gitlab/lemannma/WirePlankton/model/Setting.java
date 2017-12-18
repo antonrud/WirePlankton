@@ -1,10 +1,12 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model;
 
+import java.util.ArrayList;
+
 public class Setting {
 	
 	int id;
 	String name;
-	String value;
+	ArrayList <String> values;
 	String fieldType;
 	
 	public Setting(int id) {
