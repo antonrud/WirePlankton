@@ -66,7 +66,7 @@ public class ViewController extends Application {
 				root.setTop(menuBar);
 				root.setRight(realtimeView);
 				root.setLeft(packetView);
-				packetView.generatePacketList();
+				//packetView.generatePacketList();
 				break;
 			case 1:
 				root.setTop(menuBar);

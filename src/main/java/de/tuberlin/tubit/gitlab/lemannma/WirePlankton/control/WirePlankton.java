@@ -14,6 +14,8 @@ public class WirePlankton {
 	public static void main(String[] args) {
 		//NexusConnection.textNexusConnection();
 		
+		//TODO Init Settings here!
+		
 		ViewController.go();
 	}
 }

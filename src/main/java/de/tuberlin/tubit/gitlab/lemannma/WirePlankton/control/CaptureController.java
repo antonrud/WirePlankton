@@ -27,7 +27,7 @@ public class CaptureController{
 
 		continueCapture = true;
 		int packetNr = 1;
-		//make this to while and 
+
 		while (packetNr <= amount && continueCapture) {
 			MainController.addPacket(handle.getNextPacketEx());
 			packetNr++;
