@@ -7,7 +7,6 @@ stages:
 Verify:
     stage: verify
     script:
-        - echo $JAVA_HOME
         - mvn verify
     tags:
         - verify
