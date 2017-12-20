@@ -1,7 +1,6 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view;
 
 
-import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.MainController;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.ViewController;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketViewItem;
 import javafx.collections.FXCollections;
@@ -50,18 +49,21 @@ public class PacketView extends VBox{
 		view.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		view.setItems(data);
 
-		generatePacketList();
+		//TODO Might be unnecessary now
+		//generatePacketList();
 	}
 
-	public void generatePacketList() {
-		
-		data.clear();
-		//this.getChildren().clear();
-		
-		//was ist ein iItem?
-		for(int iItem=0; iItem < MainController.getPacketList().size();iItem++){
-			data.add(new PacketViewItem(MainController.getPacketList().get(iItem), iItem));
-			//this.getChildren().add(new PacketViewItem(MainController.getPacketList().get(iItem), iItem));
-		}
-	}
+	//TODO Might be unnecessary now
+//	public void generatePacketList() {
+//		
+//		data.clear();
+//		//this.getChildren().clear();
+//		
+//		//was ist ein iItem?
+//		for(int iItem=0; iItem < MainController.getPacketList().size();iItem++){
+//			data.add(new PacketViewItem(MainController.getPacketList().get(iItem), iItem));
+//			//this.getChildren().add(new PacketViewItem(MainController.getPacketList().get(iItem), iItem));
+//		}
+//	}
+	
 }
