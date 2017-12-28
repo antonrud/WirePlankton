@@ -18,15 +18,21 @@ public class MainController {
 
 	// Changed type from ArrayList<Packet> to ObservableList<PacketViewItem>
 	private static ObservableList<PacketViewItem> packetList = FXCollections.observableArrayList();
+	static Thread captureThread;
 
 	// Shows: We want it static
 	private MainController() {
 
 	}
 
-	public static void capturePacket(int amount, int timeout, InetAddress address) throws Exception {
+	public static void capturePacket(int amount, int timeout, InetAddress address) throws InterruptedException {
 
-		CaptureController.doCapture(amount, timeout, address);
+		captureThread = new Thread(new CaptureController(amount, timeout, address));
+		captureThread.start();
+		// TODO Maybe join() ??
+
+		// Old version without threading
+		// CaptureController.doCapture(amount, timeout, address);
 
 		// This is just for checking. Must be removed after connection to GUI
 		// packetList.stream().forEach(System.out::println);
@@ -34,7 +40,7 @@ public class MainController {
 
 	public static void stopCapture() {
 
-		CaptureController.stop();
+		captureThread.interrupt();
 	}
 
 	// public static void importData(Path path) {
@@ -72,9 +78,9 @@ public class MainController {
 	}
 
 	// Use PacketViewItem here!
-	public static void addPacket(Packet packet) {
+	public static void addPacket(Packet packet, int packetNr) {
 
-		packetList.add(new PacketViewItem(packet));
+		packetList.add(new PacketViewItem(packet, packetNr));
 	}
 
 	public static ObservableList<PacketViewItem> getPacketList() {
