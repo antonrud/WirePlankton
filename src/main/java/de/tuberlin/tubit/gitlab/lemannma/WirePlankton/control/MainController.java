@@ -35,7 +35,8 @@ public class MainController {
 		// CaptureController.doCapture(amount, timeout, address);
 
 		// This is just for checking. Must be removed after connection to GUI
-		// packetList.stream().forEach(System.out::println);
+		captureThread.join();
+		packetList.stream().forEach(x -> System.out.println(x.getPreview()));
 	}
 
 	public static void stopCapture() {
