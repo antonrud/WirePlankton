@@ -47,6 +47,7 @@ public class PacketView extends VBox{
 			);
 		view.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		view.setItems(data);
-
+		this.setPrefWidth(400);
+		this.view.setPrefHeight(10000);
 	}
 }

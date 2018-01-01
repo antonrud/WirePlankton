@@ -6,8 +6,13 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.PacketView;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.RealTimeView;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.SettingsView;
 import javafx.application.*;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 
@@ -15,6 +20,7 @@ public class ViewController extends Application {
 
 	//Init basic elements
 	private static BorderPane root;
+	private static GridPane currentView;
 	private static Scene scene;
 
 	private static MenuBar menuBar;
@@ -29,7 +35,7 @@ public class ViewController extends Application {
 
 	//TODO Enums sollten eigentlich CAPS sein, dann muss ich aber eine extraliste f�r die Men�namen pflegen..
 	public static enum ViewModes{
-		Liveview, Settings, File
+		Liveview, Settings, File, Statistics
 	};
 
 	public void start(Stage primaryStage) {
@@ -43,6 +49,15 @@ public class ViewController extends Application {
 
 		//Init Window
 		root = new BorderPane();
+		currentView = new GridPane();
+		RowConstraints rc = new RowConstraints();
+		rc.setPercentHeight(100);
+		rc.setValignment(VPos.TOP);
+		currentView.getRowConstraints().add(rc);
+		currentView.setPrefSize(10000, 10000);
+		root.setTop(menuBar);
+		root.setCenter(currentView);
+
 		primaryStage.setTitle("Wireplankton v0.1");
 		scene = new Scene(root, masterWidth, masterHeight);
 		primaryStage.setScene(scene);
@@ -59,48 +74,63 @@ public class ViewController extends Application {
 	}
 
 	public static void changeView(int view) {
-		
-		root.getChildren().clear();
+
+		currentView.getColumnConstraints().clear();
+		currentView.getChildren().clear();
+		int col;
+		if(view == 0){
+			col = 2;
+		} else{
+			col = 1;
+		}
+
+		for (int i=0;i<col;i++){
+			ColumnConstraints cc = new ColumnConstraints();
+	        cc.setHalignment(HPos.LEFT);
+	        cc.setPercentWidth(100/col);
+	        currentView.getColumnConstraints().add(cc);
+		}
 		switch (view){
 			case 0:
-				root.setTop(menuBar);
-				root.setRight(realtimeView);
-				root.setLeft(packetView);
-				//packetView.generatePacketList();
+				currentView.add(packetView, 0, 0);
+				currentView.add(realtimeView, 1, 0);
 				break;
 			case 1:
-				root.setTop(menuBar);
-				root.setCenter(settingsView);
+				currentView.add(settingsView, 0, 0);
 				break;
 			case 2:
-				root.setTop(menuBar);
-				root.setCenter(exportView);
+				currentView.add(exportView, 0, 0);
+				break;
+			case 3:
+				break;
+			default:
 				break;
 		}
+		
 	}
 
 	public static MenuBar getMenubar() {
-		
+
 		return menuBar;
 	}
 
 	public static PacketView getPacketview() {
-		
+
 		return packetView;
 	}
 
 	public static ExportView getExportview() {
-		
+
 		return exportView;
 	}
 
 	public static RealTimeView getRealtimeview() {
-		
+
 		return realtimeView;
 	}
 
 	public static SettingsView getSettingsview() {
-		
+
 		return settingsView;
 	}
 
