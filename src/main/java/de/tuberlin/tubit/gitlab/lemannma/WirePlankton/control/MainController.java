@@ -31,9 +31,6 @@ public class MainController {
 		captureThread.start();
 		// TODO Maybe join() ??
 
-		// Old version without threading
-		// CaptureController.doCapture(amount, timeout, address);
-
 		// This is just for checking. Must be removed after connection to GUI
 		captureThread.join();
 		packetList.stream().forEach(x -> System.out.println(x.getPreview()));
