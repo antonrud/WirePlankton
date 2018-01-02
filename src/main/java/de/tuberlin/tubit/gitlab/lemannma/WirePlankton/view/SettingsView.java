@@ -16,7 +16,7 @@ public class SettingsView extends HBox{
 	private int timeout = 300000;
 
 	public SettingsView(){
-		
+
 		super();
 		this.submitButton = new Button("Start");
 
@@ -37,7 +37,7 @@ public class SettingsView extends HBox{
 	}
 
 	public Button getSubmitButton() {
-		
+
 		return submitButton;
 	}
 }

@@ -1,9 +1,9 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view;
 
 
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.MainController;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.ViewController;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketViewItem;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -15,12 +15,11 @@ public class PacketView extends VBox{
 
 	ObservableList<PacketViewItem> data;
 	TableView<PacketViewItem> view;
-	
+
 	public PacketView(){
-		
-		data = FXCollections.observableArrayList();
+
+		data = MainController.getPacketList();
 		view = new TableView<PacketViewItem>();
-		this.setStyle("background-color: yellow;");
 		this.getChildren().add(view);
 
 		TableColumn<PacketViewItem,Integer> index = new TableColumn<PacketViewItem,Integer>("Index");
@@ -48,22 +47,7 @@ public class PacketView extends VBox{
 			);
 		view.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		view.setItems(data);
-
-		//TODO Might be unnecessary now
-		//generatePacketList();
+		this.setPrefWidth(400);
+		this.view.setPrefHeight(10000);
 	}
-
-	//TODO Might be unnecessary now
-//	public void generatePacketList() {
-//		
-//		data.clear();
-//		//this.getChildren().clear();
-//		
-//		//was ist ein iItem?
-//		for(int iItem=0; iItem < MainController.getPacketList().size();iItem++){
-//			data.add(new PacketViewItem(MainController.getPacketList().get(iItem), iItem));
-//			//this.getChildren().add(new PacketViewItem(MainController.getPacketList().get(iItem), iItem));
-//		}
-//	}
-	
 }
