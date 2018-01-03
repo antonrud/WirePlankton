@@ -55,8 +55,6 @@ public class ViewController extends Application {
 		rc.setValignment(VPos.TOP);
 		currentView.getRowConstraints().add(rc);
 		currentView.setPrefSize(10000, 10000);
-		root.setTop(menuBar);
-		root.setCenter(currentView);
 
 		primaryStage.setTitle("Wireplankton v0.1");
 		scene = new Scene(root, masterWidth, masterHeight);
@@ -74,7 +72,9 @@ public class ViewController extends Application {
 	}
 
 	public static void changeView(int view) {
-
+		root.getChildren().clear();
+		root.setTop(menuBar);
+		root.setCenter(currentView);
 		currentView.getColumnConstraints().clear();
 		currentView.getChildren().clear();
 		int col;

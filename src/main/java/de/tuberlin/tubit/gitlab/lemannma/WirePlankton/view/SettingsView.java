@@ -19,9 +19,9 @@ public class SettingsView extends HBox{
 
 		super();
 		this.submitButton = new Button("Start");
-
 		this.getChildren().add(submitButton);
-
+		
+		
 		submitButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -34,6 +34,10 @@ public class SettingsView extends HBox{
 				}
 			}
 		});
+		
+		
+		
+		
 	}
 
 	public Button getSubmitButton() {
