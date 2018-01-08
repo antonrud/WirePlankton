@@ -3,7 +3,7 @@
  */
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
-import java.net.InetAddress;
+//import prise.nexus.test.NexusConnection;
 
 /**
  *
@@ -12,9 +12,10 @@ import java.net.InetAddress;
  */
 public class WirePlankton {
 	public static void main(String[] args) {
-
+		//NexusConnection.textNexusConnection();
+		
+		//TODO Init Settings here!
+		
 		ViewController.go();
-
-
 	}
 }

@@ -4,7 +4,6 @@ package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.MainController;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.ViewController;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketViewItem;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -18,9 +17,9 @@ public class PacketView extends VBox{
 	TableView<PacketViewItem> view;
 
 	public PacketView(){
-		data = FXCollections.observableArrayList();
+
+		data = MainController.getPacketList();
 		view = new TableView<PacketViewItem>();
-		this.setStyle("background-color: yellow;");
 		this.getChildren().add(view);
 
 		TableColumn<PacketViewItem,Integer> index = new TableColumn<PacketViewItem,Integer>("Index");
@@ -29,15 +28,15 @@ public class PacketView extends VBox{
 		view.getColumns().add(index);
 		view.getColumns().add(value);
 
-		view.setRowFactory(tv -> {
-		    TableRow<PacketViewItem> row = new TableRow<>();
-		    row.setOnMouseClicked(event -> {
-		        if (!row.isEmpty()) {
-		        	PacketViewItem rowContent = row.getItem();
+		view.setRowFactory(tableView -> {
+		    TableRow<PacketViewItem> tableRow = new TableRow<>();
+		    tableRow.setOnMouseClicked(event -> {
+		        if (!tableRow.isEmpty()) {
+		        	PacketViewItem rowContent = tableRow.getItem();
 		            ViewController.getRealtimeview().setPacket(rowContent.getP());
 		        }
 		    });
-		    return row ;
+		    return tableRow ;
 		});
 
 		index.setCellValueFactory(
@@ -48,18 +47,7 @@ public class PacketView extends VBox{
 			);
 		view.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		view.setItems(data);
-
-		generatePacketList();
+		this.setPrefWidth(400);
+		this.view.setPrefHeight(10000);
 	}
-
-	public void generatePacketList() {
-		data.clear();
-		//this.getChildren().clear();
-		for(int iItem=0; iItem < MainController.getPacketList().size();iItem++){
-			data.add(new PacketViewItem(MainController.getPacketList().get(iItem), iItem));
-			//this.getChildren().add(new PacketViewItem(MainController.getPacketList().get(iItem), iItem));
-		}
-	}
-
-
 }

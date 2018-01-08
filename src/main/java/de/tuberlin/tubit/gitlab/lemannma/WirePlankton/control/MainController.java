@@ -5,6 +5,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import org.pcap4j.packet.Packet;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketViewItem;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
 
 /**
@@ -13,18 +16,29 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
  */
 public class MainController {
 
-	private static ArrayList<Packet> packetList = new ArrayList<Packet>();
+	// Changed type from ArrayList<Packet> to ObservableList<PacketViewItem>
+	private static ObservableList<PacketViewItem> packetList = FXCollections.observableArrayList();
+	static Thread captureThread;
 
-	public static void capturePacket(int amount, int timeout, InetAddress address) throws Exception {
-		CaptureController.doCapture(amount, timeout, address);
-		
-		//This is just for checking. Must be removed after connection to GUI
-		packetList.stream().forEach(System.out::println);
+	// Shows: We want it static
+	private MainController() {
 
 	}
 
+	public static void capturePacket(int amount, int timeout, InetAddress address) throws InterruptedException {
+
+		captureThread = new Thread(new CaptureController(amount, timeout, address));
+		captureThread.start();
+		// TODO Maybe join() ??
+
+		// This is just for checking. Must be removed after connection to GUI
+		captureThread.join();
+		packetList.stream().forEach(x -> System.out.println(x.getPreview()));
+	}
+
 	public static void stopCapture() {
-		CaptureController.stop();
+
+		captureThread.interrupt();
 	}
 
 	// public static void importData(Path path) {
@@ -44,10 +58,12 @@ public class MainController {
 	}
 
 	public static ArrayList<Setting> getSettings() {
+
 		return SettingsController.getSettigsList();
 	}
 
 	public static Setting getSetting(String name) {
+
 		return SettingsController.getSettig();
 	}
 
@@ -59,24 +75,26 @@ public class MainController {
 
 	}
 
-	public static void addPacket(Packet packet) {
-		packetList.add(packet);
+	// Use PacketViewItem here!
+	public static void addPacket(Packet packet, int packetNr) {
+
+		packetList.add(new PacketViewItem(packet, packetNr));
 	}
 
-	public static ArrayList<Packet> getPacketList() {
+	public static ObservableList<PacketViewItem> getPacketList() {
+
 		return packetList;
 	}
 
-//	public static void setAddress(String ip) throws Exception {
-//		address = InetAddress.getByName(ip);
-//	}
-//
-//	public static void setLocalHost() throws Exception {
-//		address = InetAddress.getLocalHost();
-//	}
-//
-//	public static InetAddress getAddress() {
-//		return address;
-//	}
-
+	// public static void setAddress(String ip) throws Exception {
+	// address = InetAddress.getByName(ip);
+	// }
+	//
+	// public static void setLocalHost() throws Exception {
+	// address = InetAddress.getLocalHost();
+	// }
+	//
+	// public static InetAddress getAddress() {
+	// return address;
+	// }
 }

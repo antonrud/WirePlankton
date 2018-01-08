@@ -6,103 +6,132 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.PacketView;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.RealTimeView;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.SettingsView;
 import javafx.application.*;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
-
 
 
 public class ViewController extends Application {
 
-
 	//Init basic elements
 	private static BorderPane root;
-	private static Scene s;
+	private static GridPane currentView;
+	private static Scene scene;
 
-	private static MenuBar menubar;
-	private static PacketView packetview;
-	private static ExportView exportview;
-	private static RealTimeView realtimeview;
-	private static SettingsView settingsview;
-
+	private static MenuBar menuBar;
+	private static PacketView packetView;
+	private static ExportView exportView;
+	private static RealTimeView realtimeView;
+	private static SettingsView settingsView;
 
 	//control of height and width
-	private static double masterWidth;
-	private static double masterHeight;
+	private static double masterWidth = 800;
+	private static double masterHeight = 600;
 
 	//TODO Enums sollten eigentlich CAPS sein, dann muss ich aber eine extraliste f�r die Men�namen pflegen..
 	public static enum ViewModes{
-		Liveview, Settings, File
+		Liveview, Settings, File, Statistics
 	};
 
-	public void start(Stage ps) {
+	public void start(Stage primaryStage) {
 
 		//Init Elements
-		menubar = new MenuBar();
-		packetview = new PacketView();
-		exportview = new ExportView();
-		realtimeview = new RealTimeView();
-		settingsview = new SettingsView();
+		menuBar = new MenuBar();
+		packetView = new PacketView();
+		exportView = new ExportView();
+		realtimeView = new RealTimeView();
+		settingsView = new SettingsView();
 
 		//Init Window
 		root = new BorderPane();
-		ps.setTitle("Wireplankton v0.1");
-		s = new Scene(root, 800, 600);
-		masterWidth = s.getWidth();
-		masterHeight = s.getHeight();
-		ps.setScene(s);
+		currentView = new GridPane();
+		RowConstraints rc = new RowConstraints();
+		rc.setPercentHeight(100);
+		rc.setValignment(VPos.TOP);
+		currentView.getRowConstraints().add(rc);
+		currentView.setPrefSize(10000, 10000);
+
+		primaryStage.setTitle("Wireplankton v0.1");
+		scene = new Scene(root, masterWidth, masterHeight);
+		primaryStage.setScene(scene);
 
 		//Init StandardView
 		changeView(0);
 
-		ps.show();
+		primaryStage.show();
 	}
 
 	public static void go() {
+
 		ViewController.launch();
-
 	}
-
 
 	public static void changeView(int view) {
 		root.getChildren().clear();
-		switch (view){
-			case 0:
-				root.setTop(menubar);
-				root.setRight(realtimeview);
-				root.setLeft(packetview);
-				packetview.generatePacketList();
-				break;
-			case 1:
-				root.setTop(menubar);
-				root.setCenter(settingsview);
-				break;
-			case 2:
-				root.setTop(menubar);
-				root.setCenter(exportview);
-				break;
+		root.setTop(menuBar);
+		root.setCenter(currentView);
+		currentView.getColumnConstraints().clear();
+		currentView.getChildren().clear();
+		int col;
+		if(view == 0){
+			col = 2;
+		} else{
+			col = 1;
 		}
 
+		for (int i=0;i<col;i++){
+			ColumnConstraints cc = new ColumnConstraints();
+	        cc.setHalignment(HPos.LEFT);
+	        cc.setPercentWidth(100/col);
+	        currentView.getColumnConstraints().add(cc);
+		}
+		switch (view){
+			case 0:
+				currentView.add(packetView, 0, 0);
+				currentView.add(realtimeView, 1, 0);
+				break;
+			case 1:
+				currentView.add(settingsView, 0, 0);
+				break;
+			case 2:
+				currentView.add(exportView, 0, 0);
+				break;
+			case 3:
+				break;
+			default:
+				break;
+		}
+		
 	}
 
 	public static MenuBar getMenubar() {
-		return menubar;
+
+		return menuBar;
 	}
 
 	public static PacketView getPacketview() {
-		return packetview;
+
+		return packetView;
 	}
 
 	public static ExportView getExportview() {
-		return exportview;
+
+		return exportView;
 	}
 
 	public static RealTimeView getRealtimeview() {
-		return realtimeview;
+
+		return realtimeView;
 	}
 
 	public static SettingsView getSettingsview() {
-		return settingsview;
+
+		return settingsView;
 	}
 
 

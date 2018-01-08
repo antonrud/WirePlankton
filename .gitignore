@@ -1,6 +1,10 @@
 # Compiled class file
 *.class
 
+# Maven Release Plugin
+*.releaseBackup
+*.properties
+
 # Log file
 *.log
 
