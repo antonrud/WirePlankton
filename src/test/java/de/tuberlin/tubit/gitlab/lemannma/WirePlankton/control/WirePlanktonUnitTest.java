@@ -20,7 +20,7 @@ public class WirePlanktonUnitTest {
 	@Test
 	public void testMain() {
 		
-		//no side effects, so nothing to test yet
+		//no side effects, Test happen in ViewControllerTest
 		assertTrue(true);
 	}
 

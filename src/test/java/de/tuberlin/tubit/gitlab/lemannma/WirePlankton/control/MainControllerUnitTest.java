@@ -12,14 +12,15 @@ import java.util.ArrayList;
 import org.junit.Test;
 import org.pcap4j.packet.Packet;
 
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketViewItem;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
+import javafx.collections.ObservableList;
 
 /**
  * @author Anton Rudacov
  *
  */
 public class MainControllerUnitTest {
-	
 	int amount = 20;
 	int timeout = 200000;
 	InetAddress address = null;
@@ -66,37 +67,24 @@ public class MainControllerUnitTest {
 	@Test
 	public void StopCaptureTest() {
 		
-		assertTrue(true); // Nothing to Test yet, cause no side effects
-	}
-	
-	@Test
-	public void exportDataTest() {
-		
-		assertTrue(true); // Not implemented yet
+		assertTrue(true); // no idea how to test
 	}
 
 	@Test
-	public void safeTest() {
+	public void addAndGetPacketTest() {
 		
-		assertTrue(true); //  Not implemented yet
-	}
-
-	@Test
-	public void loadTest() {
+		Packet packet = null;
+		int packetNr = 42;
 		
-		assertTrue(true); //  Not implemented yet
-	}
-
-	@Test
-	public void initAppTest() {
+		ObservableList<PacketViewItem> packetList = MainController.getPacketList();		
+		assertTrue(packetList.isEmpty());
 		
-		assertTrue(true); // Not implemented yet
-	}
-
-	@Test
-	public void addPacketTest() {
-		
-		assertTrue(true); // simple function call, no test needed yet
+		//not working, bug in code
+		/*
+		MainController.addPacket(packet, packetNr);
+		packetList = MainController.getPacketList();		
+		assertTrue(!packetList.isEmpty());
+		*/
 	}
 }
  

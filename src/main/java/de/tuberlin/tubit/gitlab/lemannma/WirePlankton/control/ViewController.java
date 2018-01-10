@@ -33,7 +33,7 @@ public class ViewController extends Application {
 	private static double masterWidth = 800;
 	private static double masterHeight = 600;
 
-	//TODO Enums sollten eigentlich CAPS sein, dann muss ich aber eine extraliste f�r die Men�namen pflegen..
+	//TODO Enums sollten eigentlich CAPS sein, dann muss ich aber eine extraliste fuer die Menuenamen pflegen..
 	public static enum ViewModes{
 		Liveview, Settings, File, Statistics
 	};
