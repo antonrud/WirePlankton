@@ -20,6 +20,7 @@ public class Setting {
 		this.fieldType = fieldType;
 	}
 
+	//don't get that, is it a setter or should it be really a constructor?
 	public Setting(int id) {
 
 		this.id = id;

@@ -21,4 +21,8 @@ public class RealTimeView  extends VBox{
 		this.label.setText(packet.toString());
 	}
 
+	public Label getLabel() {
+		
+		return this.label;
+	}
 }

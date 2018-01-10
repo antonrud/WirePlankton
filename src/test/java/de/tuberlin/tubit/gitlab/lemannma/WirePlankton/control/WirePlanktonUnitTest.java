@@ -11,15 +11,17 @@ import org.junit.Test;
  * @author Anton Rudacov
  *
  */
-public class WirePlanktonTest {
-
+public class WirePlanktonUnitTest {
+	
 	/**
 	 * Test method for
 	 * {@link de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.WirePlankton#main(java.lang.String[])}.
 	 */
 	@Test
 	public void testMain() {
-		assertTrue(true); // TODO
+		
+		//no side effects, Test happen in ViewControllerTest
+		assertTrue(true);
 	}
 
 }

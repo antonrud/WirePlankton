@@ -11,7 +11,6 @@ import javafx.scene.layout.HBox;
 public class SettingsView extends HBox{
 
 	private Button submitButton;
-	//bitte noch sinnvoll bennennen
 	private int amount = 20;
 	private int timeout = 300000;
 
