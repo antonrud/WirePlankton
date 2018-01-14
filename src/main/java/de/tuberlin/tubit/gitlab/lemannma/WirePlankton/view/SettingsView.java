@@ -1,8 +1,12 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view;
 
 import java.net.InetAddress;
+import java.util.ArrayList;
 
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.MainController;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.SettingsController;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.inputs.SingleChoice;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -19,8 +23,8 @@ public class SettingsView extends HBox{
 		super();
 		this.submitButton = new Button("Start");
 		this.getChildren().add(submitButton);
-		
-		
+
+
 		submitButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -33,10 +37,30 @@ public class SettingsView extends HBox{
 				}
 			}
 		});
-		
-		
-		
-		
+
+		buildSettings();
+
+	}
+
+	private void buildSettings() {
+
+		for (Setting setting : MainController.getSettings()) {
+			switch(setting.getFieldType()){
+
+			case "SINGLECHOICE":
+				System.out.println(setting.getChoices().get(3));
+				SingleChoice f = new SingleChoice(setting);
+				this.getChildren().add(f);
+				break;
+			case "MULTICHOICE":
+				break;
+			case "TEXT":
+				break;
+			case "NUMBER":
+				break;
+			}
+		}
+
 	}
 
 	public Button getSubmitButton() {
