@@ -17,18 +17,34 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
 public class WirePlankton {
 	public static void main(String[] args) {
 		//NexusConnection.textNexusConnection();
-		ArrayList<String> testlist = new ArrayList<String>();
-		ArrayList<String> active = new ArrayList<String>();
-		active.add("a");
-		testlist.add("this");
-		testlist.add("is");
-		testlist.add("a");
-		testlist.add("test");
+
+		//Single Choice Setting
+		String[] scChoice = {"this", "is", "a", "test"};
+		String[] scActive = {"a"};
+		String scField = "SINGLECHOICE";
+		String scName = "sc Testcase";
+		Setting scTest = new Setting(scName, scActive, scField, scChoice);
+		MainController.addSetting(scTest);
+
+		//Multi Choice
+		String[] mcChoice = {"this", "is", "a", "test"};
+		String[] mcActive = {"a"};
+		String mcField = "MULTICHOICE";
+		String mcName = "mc Testcase";
+		Setting mcTest = new Setting(mcName, mcActive, mcField, mcChoice);
+		MainController.addSetting(mcTest);
+
+		//Text - Mal gucken, ob wir das brauchen
+
+		//Number - Input für Nummern
+		String[] nActive = {"17"};
+		String nField = "NUMBER";
+		String nName = "n Testcase";
+		Setting nTest = new Setting(nName, nActive, nField);
+		MainController.addSetting(nTest);
 
 		//TODO Init Settings here!
-		Setting testChoice = new Setting("TESTCASE", active, "SINGLECHOICE", testlist);
-		System.out.println(testlist.get(3));
-		MainController.addSetting(testChoice);
+
 
 		ViewController.go();
 	}

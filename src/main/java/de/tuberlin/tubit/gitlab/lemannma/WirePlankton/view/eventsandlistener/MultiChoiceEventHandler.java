@@ -7,9 +7,9 @@ import javafx.event.EventHandler;
 import javafx.scene.control.CheckBox;
 
 public class MultiChoiceEventHandler<T extends Event> implements EventHandler<T> {
-	
+
 	Setting setting;
-	
+
 	public MultiChoiceEventHandler(Setting setting) {
 		this.setting = setting;
 	}
@@ -17,11 +17,11 @@ public class MultiChoiceEventHandler<T extends Event> implements EventHandler<T>
 	@Override
 	public void handle(T event) {
 		if (((CheckBox)event.getSource()).isSelected()){
-			setting.getChoices().add(((CheckBox)event.getSource()).getText());
+			setting.getActive().add(((CheckBox)event.getSource()).getText());
 		} else{
-			setting.getChoices().remove(setting.getChoices().indexOf(((CheckBox)event.getSource()).getText()));
+			setting.getActive().remove(setting.getActive().indexOf(((CheckBox)event.getSource()).getText()));
 		}
-		
+
 	}
 
 }

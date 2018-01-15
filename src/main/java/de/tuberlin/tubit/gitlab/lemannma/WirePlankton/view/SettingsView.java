@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.MainController;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.SettingsController;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.inputs.MultiChoice;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.inputs.SingleChoice;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -48,11 +49,12 @@ public class SettingsView extends HBox{
 			switch(setting.getFieldType()){
 
 			case "SINGLECHOICE":
-				System.out.println(setting.getChoices().get(3));
 				SingleChoice f = new SingleChoice(setting);
 				this.getChildren().add(f);
 				break;
 			case "MULTICHOICE":
+				MultiChoice m = new MultiChoice(setting);
+				this.getChildren().add(m);
 				break;
 			case "TEXT":
 				break;

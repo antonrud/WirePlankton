@@ -16,10 +16,14 @@ public class MultiChoice extends VBox {
 
 	public MultiChoice(Setting setting){
 
+		l = new Label(setting.getName());
+		this.setting = setting;
+
+		this.getChildren().add(l);
 
 		for(String s : setting.getChoices()){
 			CheckBox b = new CheckBox(s);
-			b.setSelected(true);
+			b.setSelected(setting.getActive().contains(s));
 			b.setOnAction(new MultiChoiceEventHandler<ActionEvent>(this.setting));
 			this.getChildren().add(b);
 		}

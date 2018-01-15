@@ -2,6 +2,8 @@ package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model;
 
 import java.util.ArrayList;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
+
 /**
  * Supports Integer, Choice, Multichoice,
  * @author Stef
@@ -15,17 +17,17 @@ public class Setting {
 	ArrayList <String> active;
 	String fieldType;
 
-	public Setting(String name, ArrayList<String> active, String fieldType){
+	public Setting(String name, String[] active, String fieldType){
 		this.name = name;
-		this.active = active;
+		this.active = new ArrayList<String>(Arrays.asList(active));
 		this.fieldType = fieldType;
 	}
 
-	public Setting(String name, ArrayList<String> active, String fieldType, ArrayList<String> choices){
+	public Setting(String name, String[] active, String fieldType, String[] choices){
 		this.name = name;
-		this.active = active;
+		this.active = new ArrayList<String>(Arrays.asList(active));
 		this.fieldType = fieldType;
-		this.choices = choices;
+		this.choices = new ArrayList<String>(Arrays.asList(choices));
 	}
 
 	public int getId() {
