@@ -3,6 +3,8 @@ package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view;
 import java.util.LinkedList;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.ViewController;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.ViewController.ViewModes;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.MainMenuEvent;
+import javafx.event.ActionEvent;
 import javafx.scene.layout.HBox;
 
 /**
@@ -17,13 +19,10 @@ public class MenuBar extends HBox{
 	/**
 	 *
 	 */
-	public MenuBar(){
+	public MenuBar(LinkedList<MenuButton> buttons){
 
-		this.thisMenuButtons = new LinkedList<MenuButton>();
+		this.thisMenuButtons = buttons;
 
-		for (ViewModes viewMode : ViewController.ViewModes.values()){
-			thisMenuButtons.add(new MenuButton(viewMode.ordinal(), viewMode.toString()));
-		}
 		this.setStyle("-fx-background-color: white");
 		this.getChildren().addAll(this.thisMenuButtons);
 	}

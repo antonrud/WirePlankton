@@ -2,7 +2,7 @@ package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model;
 
 import java.util.ArrayList;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
+import java.util.Arrays;
 
 /**
  * Supports Integer, Choice, Multichoice,
