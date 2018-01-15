@@ -1,8 +1,12 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.pcap4j.packet.Packet;
 
 import javafx.collections.FXCollections;
@@ -45,7 +49,7 @@ public class MainController {
 	// packetList = ImportExportController.doImport();
 	// }
 
-	public static void exportData(Path path) {
+	public static void exportData(File f) {
 
 	}
 
@@ -57,7 +61,7 @@ public class MainController {
 
 	}
 
-	public static ArrayList<Setting> getSettings() {
+	public static LinkedList<Setting> getSettings() {
 
 		return SettingsController.getSettigsList();
 	}
@@ -84,6 +88,15 @@ public class MainController {
 	public static ObservableList<PacketViewItem> getPacketList() {
 
 		return packetList;
+	}
+
+	public static void addSetting(Setting s) {
+		SettingsController.addSetting(s);
+
+	}
+
+	public static List<Setting> getExportSettings() {
+		return SettingsController.getExportSettingsList();
 	}
 
 	// public static void setAddress(String ip) throws Exception {

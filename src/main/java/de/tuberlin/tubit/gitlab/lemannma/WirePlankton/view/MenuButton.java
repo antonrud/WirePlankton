@@ -14,32 +14,19 @@ import javafx.scene.control.Button;
  */
 public class MenuButton extends Button {
 
-	private int view;
-
-	public MenuButton(int view, String label){
+	public MenuButton(String label, EventHandler<ActionEvent> event){
 
 		super();
-		this.view = view;
 
 		//Set Label
 		this.setText(label);
 
 		//Set Integer for viewchange
-		this.setOnAction(new EventHandler<ActionEvent>() {
-			@Override public void handle(ActionEvent event) {
-				//TODO Okay oder eigenes Event?
-				ViewController.changeView(((MenuButton)event.getSource()).getView());
-			}
-		});
+		this.setOnAction(event);
 
 		File css = new File("styles/menu.css");
 		this.getStyleClass().add("button");
 		this.getStylesheets().add("file:///"+css.getAbsolutePath().replace("\\", "/"));
-	}
-
-	public int getView() {
-
-		return view;
 	}
 
 }
