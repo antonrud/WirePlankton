@@ -11,9 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 
-public class SingleChoice extends HBox{
+public class SingleChoice extends VBox{
 
 	ObservableList<String> inputs;
 

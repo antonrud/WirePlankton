@@ -13,8 +13,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
-public class SettingsView extends HBox{
+public class SettingsView extends VBox{
 
 	public SettingsView(){
 
