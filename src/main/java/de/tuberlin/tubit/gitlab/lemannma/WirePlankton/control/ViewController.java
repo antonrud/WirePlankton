@@ -1,11 +1,18 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
+import java.util.LinkedList;
+
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.ExportView;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.MenuBar;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.MenuButton;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.PacketView;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.RealTimeView;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.SettingsView;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.MainMenuEvent;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartCaptureEvent;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartExportEvent;
 import javafx.application.*;
+import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
@@ -24,6 +31,8 @@ public class ViewController extends Application {
 	private static Scene scene;
 
 	private static MenuBar menuBar;
+	private static MenuBar settingsBar;
+	private static MenuBar dataBar;
 	private static PacketView packetView;
 	private static ExportView exportView;
 	private static RealTimeView realtimeView;
@@ -38,10 +47,35 @@ public class ViewController extends Application {
 		Liveview, Settings, File, Statistics
 	};
 
+	public static enum captureModes{
+		Start
+	};
+
+	public static enum dataModes{
+		Export, Save, Load
+	};
+
 	public void start(Stage primaryStage) {
 
 		//Init Elements
-		menuBar = new MenuBar();
+		LinkedList<MenuButton> mainMenu = new LinkedList<MenuButton>();
+		for (ViewModes viewMode : ViewController.ViewModes.values()){
+			mainMenu.add(new MenuButton(viewMode.toString(), new MainMenuEvent<ActionEvent>(viewMode.ordinal())));
+		}
+		menuBar = new MenuBar(mainMenu);
+		LinkedList<MenuButton> settingsMenu = new LinkedList<MenuButton>();
+		for (captureModes sMode : ViewController.captureModes.values()){
+			settingsMenu.add(new MenuButton(sMode.toString(), new StartCaptureEvent<ActionEvent>()));
+		}
+		settingsBar = new MenuBar(settingsMenu);
+
+		LinkedList<MenuButton> dataMenu = new LinkedList<MenuButton>();
+		dataMenu.add(new MenuButton(dataModes.Export.toString(), new StartExportEvent<ActionEvent>()));
+
+
+		dataBar = new MenuBar(dataMenu);
+
+
 		packetView = new PacketView();
 		exportView = new ExportView();
 		realtimeView = new RealTimeView();
@@ -97,16 +131,18 @@ public class ViewController extends Application {
 				break;
 			case 1:
 				currentView.add(settingsView, 0, 0);
+				root.setBottom(settingsBar);
 				break;
 			case 2:
 				currentView.add(exportView, 0, 0);
+				root.setBottom(dataBar);
 				break;
 			case 3:
 				break;
 			default:
 				break;
 		}
-		
+
 	}
 
 	public static MenuBar getMenubar() {

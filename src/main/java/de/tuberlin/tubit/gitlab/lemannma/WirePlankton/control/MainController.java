@@ -1,8 +1,15 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
+import java.io.EOFException;
+import java.io.File;
 import java.net.InetAddress;
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.TimeoutException;
+
+import org.pcap4j.core.NotOpenException;
+import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.packet.Packet;
 
 import javafx.collections.FXCollections;
@@ -11,7 +18,7 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketViewItem;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
 
 /**
- * @author Anton Rudacov
+ * @author Anton, Stefan, Matthias, Lana
  *
  */
 public class MainController {
@@ -29,11 +36,6 @@ public class MainController {
 
 		captureThread = new Thread(new CaptureController(amount, timeout, address));
 		captureThread.start();
-		// TODO Maybe join() ??
-
-		// This is just for checking. Must be removed after connection to GUI
-		captureThread.join();
-		packetList.stream().forEach(x -> System.out.println(x.getPreview()));
 	}
 
 	public static void stopCapture() {
@@ -41,11 +43,38 @@ public class MainController {
 		captureThread.interrupt();
 	}
 
-	// public static void importData(Path path) {
-	// packetList = ImportExportController.doImport();
-	// }
+	public static void importData() {
+		ImportExportController importController = new ImportExportController("dump.pcap");
 
-	public static void exportData(Path path) {
+		try {
+			importController.doImport();
+		} catch (EOFException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PcapNativeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TimeoutException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotOpenException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void exportData(File f) {
+		ImportExportController exportController = new ImportExportController(f.getPath());
+
+		try {
+			exportController.doExport(packetList);
+		} catch (PcapNativeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotOpenException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -57,7 +86,7 @@ public class MainController {
 
 	}
 
-	public static ArrayList<Setting> getSettings() {
+	public static LinkedList<Setting> getSettings() {
 
 		return SettingsController.getSettigsList();
 	}
@@ -84,6 +113,19 @@ public class MainController {
 	public static ObservableList<PacketViewItem> getPacketList() {
 
 		return packetList;
+	}
+
+	public static void clearPacketList() {
+		packetList.clear();
+	}
+
+	public static void addSetting(Setting s) {
+		SettingsController.addSetting(s);
+
+	}
+
+	public static List<Setting> getExportSettings() {
+		return SettingsController.getExportSettingsList();
 	}
 
 	// public static void setAddress(String ip) throws Exception {
