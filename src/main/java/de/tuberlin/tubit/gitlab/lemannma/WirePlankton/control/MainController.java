@@ -1,6 +1,7 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
 import java.io.EOFException;
+import java.io.File;
 import java.net.InetAddress;
 import java.nio.file.Path;
 import java.util.LinkedList;
@@ -62,7 +63,7 @@ public class MainController {
 		}
 	}
 
-	public static void exportData() {
+	public static void exportData(File f) {
 		ImportExportController exportController = new ImportExportController("dump.pcap");
 
 		try {
