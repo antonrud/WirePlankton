@@ -3,8 +3,6 @@
  */
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
-import java.util.ArrayList;
-
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
 
 //import prise.nexus.test.NexusConnection;
@@ -36,7 +34,7 @@ public class WirePlankton {
 
 		//Text - Mal gucken, ob wir das brauchen
 
-		//Number - Input für Nummern
+		//Number - Input fï¿½r Nummern
 		String[] nActive = {"17"};
 		String nField = "NUMBER";
 		String nName = "n Testcase";

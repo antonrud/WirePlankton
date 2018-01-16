@@ -2,7 +2,6 @@ package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
 import java.util.LinkedList;
 
-import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.ViewController.ViewModes;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.ExportView;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.MenuBar;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.MenuButton;

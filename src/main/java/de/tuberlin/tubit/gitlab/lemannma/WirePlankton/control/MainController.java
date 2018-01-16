@@ -3,7 +3,6 @@ package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 import java.io.File;
 import java.net.InetAddress;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,11 +32,6 @@ public class MainController {
 
 		captureThread = new Thread(new CaptureController(amount, timeout, address));
 		captureThread.start();
-		// TODO Maybe join() ??
-
-		// This is just for checking. Must be removed after connection to GUI
-		captureThread.join();
-		packetList.stream().forEach(x -> System.out.println(x.getPreview()));
 	}
 
 	public static void stopCapture() {
