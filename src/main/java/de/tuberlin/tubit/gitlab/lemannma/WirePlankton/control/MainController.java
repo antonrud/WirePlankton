@@ -64,7 +64,7 @@ public class MainController {
 	}
 
 	public static void exportData(File f) {
-		ImportExportController exportController = new ImportExportController("dump.pcap");
+		ImportExportController exportController = new ImportExportController(f.getPath());
 
 		try {
 			exportController.doExport(packetList);
