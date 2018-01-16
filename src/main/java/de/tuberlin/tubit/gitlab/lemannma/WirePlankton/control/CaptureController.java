@@ -27,7 +27,6 @@ public class CaptureController implements Runnable {
 	}
 
 	public void doCapture(int amount, int timeout, InetAddress address) throws Exception {
-
 		PcapNetworkInterface netInterface = Pcaps.getDevByAddress(address);
 		PcapHandle handle = netInterface.openLive(SNAP_LEN, PROMISCOUS_MODE, timeout);
 
