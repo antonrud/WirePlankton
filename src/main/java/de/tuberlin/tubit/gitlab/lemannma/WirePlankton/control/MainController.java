@@ -1,6 +1,7 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.nio.file.Path;
 import java.util.LinkedList;
@@ -39,12 +40,24 @@ public class MainController {
 		captureThread.interrupt();
 	}
 
-	// public static void importData(Path path) {
-	// packetList = ImportExportController.doImport();
-	// }
+	public static void importData() {
+		ImportExportController importController = new ImportExportController("file.pcap");
+		try {
+			packetList = importController.doImport();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
-	public static void exportData(File f) {
-
+	public static void exportData() {
+		ImportExportController exportController = new ImportExportController("file.pcap");
+		try {
+			exportController.doExport(packetList);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static void safe(Path path) {
