@@ -43,8 +43,8 @@ public class MainController {
 		captureThread.interrupt();
 	}
 
-	public static void importData() {
-		ImportExportController importController = new ImportExportController("dump.pcap");
+	public static void importData(File f) {
+		ImportExportController importController = new ImportExportController(f.getPath());
 
 		try {
 			importController.doImport();

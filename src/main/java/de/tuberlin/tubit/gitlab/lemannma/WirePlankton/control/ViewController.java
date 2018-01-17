@@ -11,6 +11,7 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.SettingsView;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.MainMenuEvent;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartCaptureEvent;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartExportEvent;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartLoadEvent;
 import javafx.application.*;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
@@ -71,6 +72,7 @@ public class ViewController extends Application {
 
 		LinkedList<MenuButton> dataMenu = new LinkedList<MenuButton>();
 		dataMenu.add(new MenuButton(dataModes.Export.toString(), new StartExportEvent<ActionEvent>()));
+		dataMenu.add(new MenuButton(dataModes.Load.toString(), new StartLoadEvent<ActionEvent>()));
 
 
 		dataBar = new MenuBar(dataMenu);
