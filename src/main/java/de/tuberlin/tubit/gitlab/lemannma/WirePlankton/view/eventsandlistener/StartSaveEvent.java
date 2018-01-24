@@ -9,9 +9,9 @@ import javafx.event.EventHandler;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class StartExportEvent <T extends Event> implements EventHandler<T> {
+public class StartSaveEvent <T extends Event> implements EventHandler<T> {
 
-	public StartExportEvent() {
+	public StartSaveEvent() {
 
 	}
 
@@ -33,7 +33,7 @@ public class StartExportEvent <T extends Event> implements EventHandler<T> {
 		}
 		if(f != null){
 
-			MainController.exportData(f);
+			MainController.doSave(f);
 		}
 
 	}

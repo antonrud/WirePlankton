@@ -2,8 +2,8 @@ package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
 import java.io.EOFException;
 import java.io.File;
+import java.io.IOException;
 import java.net.InetAddress;
-import java.nio.file.Path;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
@@ -23,7 +23,6 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
  */
 public class MainController {
 
-	// Changed type from ArrayList<Packet> to ObservableList<PacketViewItem>
 	private static ObservableList<PacketViewItem> packetList = FXCollections.observableArrayList();
 	static Thread captureThread;
 
@@ -43,11 +42,41 @@ public class MainController {
 		captureThread.interrupt();
 	}
 
-	public static void importData(File f) {
-		ImportExportController importController = new ImportExportController(f.getPath());
+	// TODO No needed yet
+	// public static void doCSVImport(File f) {
+	//
+	// }
+
+	public static void doCSVExport(File f) {
+		ImportExportController exportController = new ImportExportController(f.getPath());
 
 		try {
-			importController.doImport();
+			exportController.doCSVExport(packetList);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void doSave(File f) {
+		ImportExportController saveController = new ImportExportController(f.getPath());
+
+		try {
+			saveController.doSave(packetList);
+		} catch (PcapNativeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotOpenException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void doLoad(File f) {
+		ImportExportController loadController = new ImportExportController(f.getPath());
+
+		try {
+			loadController.doLoad();
 		} catch (EOFException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,29 +90,6 @@ public class MainController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public static void exportData(File f) {
-		ImportExportController exportController = new ImportExportController(f.getPath());
-
-		try {
-			exportController.doExport(packetList);
-		} catch (PcapNativeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NotOpenException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	public static void safe(Path path) {
-		// TODO failure handling
-	}
-
-	public static void load() {
-
 	}
 
 	public static LinkedList<Setting> getSettings() {
@@ -104,14 +110,11 @@ public class MainController {
 
 	}
 
-	// Use PacketViewItem here!
 	public static void addPacket(Packet packet, int packetNr) {
-
 		packetList.add(new PacketViewItem(packet, packetNr));
 	}
 
 	public static ObservableList<PacketViewItem> getPacketList() {
-
 		return packetList;
 	}
 
@@ -127,16 +130,4 @@ public class MainController {
 	public static List<Setting> getExportSettings() {
 		return SettingsController.getExportSettingsList();
 	}
-
-	// public static void setAddress(String ip) throws Exception {
-	// address = InetAddress.getByName(ip);
-	// }
-	//
-	// public static void setLocalHost() throws Exception {
-	// address = InetAddress.getLocalHost();
-	// }
-	//
-	// public static InetAddress getAddress() {
-	// return address;
-	// }
 }

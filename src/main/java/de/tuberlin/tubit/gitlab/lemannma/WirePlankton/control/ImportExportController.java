@@ -1,6 +1,9 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
+import java.io.BufferedWriter;
 import java.io.EOFException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 import org.pcap4j.core.Pcaps;
@@ -11,6 +14,7 @@ import org.pcap4j.core.PcapDumper;
 import org.pcap4j.core.PcapHandle;
 import org.pcap4j.core.PcapNativeException;
 
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketCSVItem;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketViewItem;
 import javafx.collections.ObservableList;
 
@@ -22,7 +26,7 @@ public class ImportExportController {
 		this.path = path;
 	}
 
-	public void doImport() throws PcapNativeException, EOFException, TimeoutException, NotOpenException {
+	public void doLoad() throws PcapNativeException, EOFException, TimeoutException, NotOpenException {
 		MainController.clearPacketList();
 
 		PcapHandle handle = Pcaps.openOffline(path);
@@ -38,7 +42,7 @@ public class ImportExportController {
 		handle.close();
 	}
 
-	public void doExport(ObservableList<PacketViewItem> packetList) throws PcapNativeException, NotOpenException {
+	public void doSave(ObservableList<PacketViewItem> packetList) throws PcapNativeException, NotOpenException {
 		PcapHandle handle = Pcaps.openDead(DataLinkType.EN10MB, 65536);
 		PcapDumper dumper = handle.dumpOpen(path);
 
@@ -51,9 +55,36 @@ public class ImportExportController {
 			}
 		});
 
-		// File file = new File("Dump.pcap");
-
 		dumper.close();
 		handle.close();
 	}
+
+	public void doCSVExport(ObservableList<PacketViewItem> packetList) throws IOException {
+
+		FileWriter writer = new FileWriter(path, true);
+		BufferedWriter buffer = new BufferedWriter(writer);
+
+		for (PacketViewItem packet : packetList) {
+			buffer.write(new PacketCSVItem(packet.getP(), packet.getIndex()).toCSVFormat());
+			buffer.newLine();
+		}
+
+		buffer.close();
+		writer.close();
+	}
+
+	// TODO CSV Import can't be handled by now. Might not be necessary at all.
+	// public ObservableList<PacketItem> doCSVImport() throws IOException {
+	//
+	// BufferedReader reader = new BufferedReader(new FileReader(path));
+	// String line;
+	//
+	// while ((line = reader.readLine()) != null) {
+	// packetList.add(new PacketItem(line));
+	// }
+	//
+	// reader.close();
+	//
+	// return packetList;
+	// }
 }

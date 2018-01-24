@@ -25,7 +25,7 @@ public class StartLoadEvent  <T extends Event> implements EventHandler<T>{
 
 		if(f != null){
 
-			MainController.importData(f);
+			MainController.doLoad(f);
 		}
 
 	}
