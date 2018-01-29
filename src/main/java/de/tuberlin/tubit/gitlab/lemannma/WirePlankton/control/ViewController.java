@@ -1,5 +1,6 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
+import java.io.File;
 import java.util.LinkedList;
 
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.ExportView;
@@ -97,8 +98,14 @@ public class ViewController extends Application {
 		primaryStage.setTitle("Wireplankton v0.1");
 		scene = new Scene(root, masterWidth, masterHeight);
 		primaryStage.setScene(scene);
-		root.setStyle("-fx-background-color: white");
-		currentView.setStyle("-fx-background-color: white");
+
+		//Style Panes
+
+		File css = new File("styles/main.css");
+		root.getStyleClass().add("background");
+		currentView.getStyleClass().add("background");
+		root.getStylesheets().add("file:///"+css.getAbsolutePath().replace("\\", "/"));
+		root.getStylesheets().add("file:///"+css.getAbsolutePath().replace("\\", "/"));
 
 
 		//Init StandardView

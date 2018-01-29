@@ -1,10 +1,11 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view;
 
+import java.io.File;
+
 import org.pcap4j.packet.Packet;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.VBox;
 
 public class RealTimeView  extends ScrollPane{
 
@@ -12,13 +13,17 @@ public class RealTimeView  extends ScrollPane{
 
 	public RealTimeView(){
 
-		this.setStyle("-fx-background-color: white;");
 		this.label = new Label();
-		this.label.setStyle("-fx-background-color: white;");
 		this.setContent(label);
 
 		this.setPrefWidth(10000);
 		this.setPrefHeight(10000);
+
+		File css = new File("styles/live.css");
+		this.getStyleClass().add("background");
+		this.getStylesheets().add("file:///"+css.getAbsolutePath().replace("\\", "/"));
+		this.label.getStyleClass().add("liveView");
+		this.label.getStylesheets().add("file:///"+css.getAbsolutePath().replace("\\", "/"));
 	}
 
 	public void setPacket(Packet packet) {

@@ -127,6 +127,11 @@ public class MainController {
 
 	}
 
+	public static void addExportSetting(Setting s) {
+		SettingsController.addExportSetting(s);
+
+	}
+
 	public static List<Setting> getExportSettings() {
 		return SettingsController.getExportSettingsList();
 	}

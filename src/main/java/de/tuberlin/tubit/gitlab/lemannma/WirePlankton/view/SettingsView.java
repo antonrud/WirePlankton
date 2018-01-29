@@ -45,6 +45,12 @@ public class SettingsView extends ScrollPane{
 		this.setContent(this.settingsContent);
 
 		//Style
+		File css = new File("styles/settings.css");
+		this.getStyleClass().add("settingsBack");
+		this.getStylesheets().add("file:///"+css.getAbsolutePath().replace("\\", "/"));
+		this.settingsContent.getStyleClass().add("settingsBack");
+		this.settingsContent.getStylesheets().add("file:///"+css.getAbsolutePath().replace("\\", "/"));
+
 		this.setStyle("-fx-background: white");
 		this.settingsContent.setStyle("-fx-background-color: white");
 		//File css = new File("styles/settings.css");

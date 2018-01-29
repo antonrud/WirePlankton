@@ -45,7 +45,7 @@ public class WirePlankton {
 		MainController.addSetting(scTest);
 
 		// Multi Choice
-		String[] mcChoice = { "this", "is", "a", "test" };
+		String[] mcChoice = { "this", "is", "a", "test","but","I","need","MOOOORE","Öptions","","Wuuuut","usw","\nTroll" };
 		String[] mcActive = { "a" };
 		String mcField = "MULTICHOICE";
 		String mcName = "mc Testcase";
@@ -60,6 +60,13 @@ public class WirePlankton {
 		String nName = "n Testcase";
 		Setting nTest = new Setting(nName, nActive, nField);
 		MainController.addSetting(nTest);
+
+		// Number - Input fï¿½r Nummern
+		String[] neActive = { "17" };
+		String neField = "NUMBER";
+		String neName = "n Testcase";
+		Setting neTest = new Setting(nName, nActive, nField);
+		MainController.addExportSetting(neTest);
 
 		ViewController.go();
 	}

@@ -1,0 +1,9 @@
+.liveView{
+	-fx-font-weight: bold;
+	-fx-padding: 8,8,8,8;
+	-fx-background-color: white;
+}
+
+.background{
+	-fx-background: white;
+}
