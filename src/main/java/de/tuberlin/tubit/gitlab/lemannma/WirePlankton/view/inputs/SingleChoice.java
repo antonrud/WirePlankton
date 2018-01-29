@@ -1,5 +1,6 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.inputs;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
@@ -18,9 +19,9 @@ public class SingleChoice extends VBox{
 
 	ObservableList<String> inputs;
 
-	Setting s;
-	ChoiceBox<String> field;
-	Label name;
+	private Setting s;
+	private ChoiceBox<String> field;
+	private Label name;
 
 	public SingleChoice(Setting s){
 
@@ -35,6 +36,13 @@ public class SingleChoice extends VBox{
 
 		this.getChildren().add(name);
 		this.getChildren().add(field);
+
+		//style
+		File css = new File("styles/settings.css");
+		this.getStyleClass().add("multiChoice");
+		this.name.getStyleClass().add("settingsHeader");
+		this.name.getStylesheets().add("file:///"+css.getAbsolutePath().replace("\\", "/"));
+		this.getStylesheets().add("file:///"+css.getAbsolutePath().replace("\\", "/"));
 
 	}
 

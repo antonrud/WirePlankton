@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 
 public class NumberField extends TextField{
 
-	Setting setting;
+	private Setting setting;
 
 	public NumberField(Setting setting){
 		this.setting = setting;

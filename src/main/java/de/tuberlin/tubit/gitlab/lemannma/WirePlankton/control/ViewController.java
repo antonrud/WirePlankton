@@ -97,6 +97,9 @@ public class ViewController extends Application {
 		primaryStage.setTitle("Wireplankton v0.1");
 		scene = new Scene(root, masterWidth, masterHeight);
 		primaryStage.setScene(scene);
+		root.setStyle("-fx-background-color: white");
+		currentView.setStyle("-fx-background-color: white");
+
 
 		//Init StandardView
 		changeView(0);

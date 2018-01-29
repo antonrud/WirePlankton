@@ -1,5 +1,6 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.inputs;
 
+import java.io.File;
 import java.util.LinkedList;
 
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
@@ -11,8 +12,8 @@ import javafx.scene.layout.VBox;
 
 public class MultiChoice extends VBox {
 
-	Setting setting;
-	Label l;
+	private Setting setting;
+	private Label l;
 
 	public MultiChoice(Setting setting){
 
@@ -27,6 +28,13 @@ public class MultiChoice extends VBox {
 			b.setOnAction(new MultiChoiceEventHandler<ActionEvent>(this.setting));
 			this.getChildren().add(b);
 		}
+
+		//Styling
+		File css = new File("styles/settings.css");
+		this.getStyleClass().add("multiChoice");
+		this.l.getStyleClass().add("settingsHeader");
+		this.l.getStylesheets().add("file:///"+css.getAbsolutePath().replace("\\", "/"));
+		this.getStylesheets().add("file:///"+css.getAbsolutePath().replace("\\", "/"));
 	}
 
 }
