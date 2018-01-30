@@ -10,8 +10,9 @@ import org.pcap4j.packet.Packet;
  */
 public class PacketItem {
 
-	private int index;
 	private static int indexGen = 0;
+	
+	private int index;
 	private Packet packet;
 	private String preview;
 	private String capturedAt;
@@ -21,19 +22,18 @@ public class PacketItem {
 	private String packetType;
 
 	public PacketItem(Packet packet) {
+		
+		this.index = ++indexGen;
 
 		this.packet = packet;
 		this.preview = packet.toString().replaceAll("\n", "").replaceAll("\r", "");
 
 		String[] splited = packet.toString().split("\\s*\\r?\\n\\s*");
-
 		this.capturedAt = splited[0];
 		this.originalLength = splited[1];
 		this.destinationAddress = splited[3];
 		this.sourceAddress = splited[4];
 		this.packetType = splited[5];
-
-		this.index = indexGen++;
 	}
 
 	public String toCSVFormat() {

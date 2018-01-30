@@ -26,7 +26,7 @@ public class StartExportEvent <T extends Event> implements EventHandler<T> {
 		//Filter
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Pcap files (*.csv)", "*.pcap");
         fileChooser.getExtensionFilters().add(extFilter);
-        fileChooser.initialFileNameProperty().set("WirePlanktonSave.csv");
+        fileChooser.initialFileNameProperty().set("WirePlanktonExport.csv");
 
 		File f = fileChooser.showSaveDialog(s);
 		if(!f.getAbsolutePath().endsWith(".csv")){

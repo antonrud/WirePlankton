@@ -19,7 +19,7 @@ public class StartLoadEvent  <T extends Event> implements EventHandler<T>{
 		//Filter
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Pcap files (*.pcap)", "*.pcap");
         fileChooser.getExtensionFilters().add(extFilter);
-        fileChooser.initialFileNameProperty().set("WirePlanktonExport.pcap");
+        fileChooser.initialFileNameProperty().set("WirePlanktonSave.pcap");
 
 		File f = fileChooser.showOpenDialog(s);
 
