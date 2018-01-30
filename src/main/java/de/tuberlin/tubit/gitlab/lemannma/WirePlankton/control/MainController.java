@@ -14,7 +14,7 @@ import org.pcap4j.packet.Packet;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketViewItem;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketItem;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
 
 /**
@@ -23,7 +23,7 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
  */
 public class MainController {
 
-	private static ObservableList<PacketViewItem> packetList = FXCollections.observableArrayList();
+	private static ObservableList<PacketItem> packetList = FXCollections.observableArrayList();
 	static Thread captureThread;
 
 	// Shows: We want it static
@@ -110,11 +110,11 @@ public class MainController {
 
 	}
 
-	public static void addPacket(Packet packet, int packetNr) {
-		packetList.add(new PacketViewItem(packet, packetNr));
+	public static void addPacket(Packet packet) {
+		packetList.add(new PacketItem(packet));
 	}
 
-	public static ObservableList<PacketViewItem> getPacketList() {
+	public static ObservableList<PacketItem> getPacketList() {
 		return packetList;
 	}
 
@@ -124,6 +124,11 @@ public class MainController {
 
 	public static void addSetting(Setting s) {
 		SettingsController.addSetting(s);
+
+	}
+
+	public static void addExportSetting(Setting s) {
+		SettingsController.addExportSetting(s);
 
 	}
 

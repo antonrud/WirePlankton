@@ -14,8 +14,7 @@ import org.pcap4j.core.PcapDumper;
 import org.pcap4j.core.PcapHandle;
 import org.pcap4j.core.PcapNativeException;
 
-import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketCSVItem;
-import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketViewItem;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketItem;
 import javafx.collections.ObservableList;
 
 public class ImportExportController {
@@ -32,17 +31,15 @@ public class ImportExportController {
 		PcapHandle handle = Pcaps.openOffline(path);
 
 		Packet packet;
-		int packetNr = 1;
 
 		while ((packet = handle.getNextPacketEx()) != null) {
-			MainController.addPacket(packet, packetNr);
-			packetNr++;
+			MainController.addPacket(packet);
 		}
 
 		handle.close();
 	}
 
-	public void doSave(ObservableList<PacketViewItem> packetList) throws PcapNativeException, NotOpenException {
+	public void doSave(ObservableList<PacketItem> packetList) throws PcapNativeException, NotOpenException {
 		PcapHandle handle = Pcaps.openDead(DataLinkType.EN10MB, 65536);
 		PcapDumper dumper = handle.dumpOpen(path);
 
@@ -59,13 +56,13 @@ public class ImportExportController {
 		handle.close();
 	}
 
-	public void doCSVExport(ObservableList<PacketViewItem> packetList) throws IOException {
+	public void doCSVExport(ObservableList<PacketItem> packetList) throws IOException {
 
 		FileWriter writer = new FileWriter(path, true);
 		BufferedWriter buffer = new BufferedWriter(writer);
 
-		for (PacketViewItem packet : packetList) {
-			buffer.write(new PacketCSVItem(packet.getP(), packet.getIndex()).toCSVFormat());
+		for (PacketItem packet : packetList) {
+			buffer.write(new PacketItem(packet.getP()).toCSVFormat());
 			buffer.newLine();
 		}
 

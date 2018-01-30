@@ -11,16 +11,18 @@ import java.util.Arrays;
  */
 public class Setting {
 
-	int id;
-	String name;
-	ArrayList <String> choices;
-	ArrayList <String> active;
-	String fieldType;
+	private int id;
+	private static int idGen = 0;
+	private String name;
+	private ArrayList <String> choices;
+	private ArrayList <String> active;
+	private String fieldType;
 
 	public Setting(String name, String[] active, String fieldType){
 		this.name = name;
 		this.active = new ArrayList<String>(Arrays.asList(active));
 		this.fieldType = fieldType;
+		this.id = idGen++;
 	}
 
 	public Setting(String name, String[] active, String fieldType, String[] choices){
@@ -28,6 +30,7 @@ public class Setting {
 		this.active = new ArrayList<String>(Arrays.asList(active));
 		this.fieldType = fieldType;
 		this.choices = new ArrayList<String>(Arrays.asList(choices));
+		this.id = idGen++;
 	}
 
 	public int getId() {

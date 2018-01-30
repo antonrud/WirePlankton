@@ -1,5 +1,6 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view;
 
+import java.io.File;
 import java.util.LinkedList;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.ViewController;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.ViewController.ViewModes;
@@ -22,8 +23,10 @@ public class MenuBar extends HBox{
 	public MenuBar(LinkedList<MenuButton> buttons){
 
 		this.thisMenuButtons = buttons;
-
-		this.setStyle("-fx-background-color: white");
 		this.getChildren().addAll(this.thisMenuButtons);
+
+		File css = new File("styles/menu.css");
+		this.getStyleClass().add("menu");
+		this.getStylesheets().add("file:///"+css.getAbsolutePath().replace("\\", "/"));
 	}
 }
