@@ -33,7 +33,7 @@ public class CaptureController implements Runnable {
 		int packetNr = 1;
 
 		while (packetNr <= amount) {
-			MainController.addPacket(handle.getNextPacketEx(), packetNr);
+			MainController.addPacket(handle.getNextPacketEx());
 			packetNr++;
 		}
 

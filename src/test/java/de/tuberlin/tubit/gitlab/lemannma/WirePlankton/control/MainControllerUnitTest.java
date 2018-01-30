@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 import org.pcap4j.packet.Packet;
 
-import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketViewItem;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketItem;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
 import javafx.collections.ObservableList;
 
@@ -76,7 +76,7 @@ public class MainControllerUnitTest {
 		Packet packet = null;
 		int packetNr = 42;
 		
-		ObservableList<PacketViewItem> packetList = MainController.getPacketList();		
+		ObservableList<PacketItem> packetList = MainController.getPacketList();		
 		assertTrue(packetList.isEmpty());
 		
 		//not working, bug in code
