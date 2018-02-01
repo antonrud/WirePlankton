@@ -31,9 +31,9 @@ public class MainController {
 
 	}
 
-	public static void capturePacket(int amount, int timeout, InetAddress address) throws InterruptedException {
+	public static void capturePacket(int amount, int limit, int timeout, InetAddress address) throws InterruptedException {
 
-		captureThread = new Thread(new CaptureController(amount, timeout, address));
+		captureThread = new Thread(new CaptureController(amount, limit, timeout, address));
 		captureThread.start();
 	}
 
