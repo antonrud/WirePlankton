@@ -31,7 +31,8 @@ public class MainController {
 
 	}
 
-	public static void capturePacket(int amount, int limit, int timeout, InetAddress address) throws InterruptedException {
+	public static void capturePacket(int amount, int limit, int timeout, InetAddress address)
+			throws InterruptedException {
 
 		captureThread = new Thread(new CaptureController(amount, limit, timeout, address));
 		captureThread.start();
@@ -92,22 +93,12 @@ public class MainController {
 		}
 	}
 
-	public static LinkedList<Setting> getSettings() {
-
-		return SettingsController.getSettigsList();
-	}
-
-	public static Setting getSetting(String name) {
-
-		return SettingsController.getSettig();
-	}
-
-	public static void setSetting(Setting setting) {
-
-	}
-
 	public static void initApp() {
-
+		stopCapture();
+		packetList.clear();
+		SettingsController.settingsList.clear();
+		
+		WirePlankton.main(new String[0]);
 	}
 
 	public static void addPacket(Packet packet) {
@@ -127,6 +118,10 @@ public class MainController {
 
 	}
 
+	public static Setting getSetting(int id) {
+		return SettingsController.getSetting(id);
+	}
+
 	public static void addExportSetting(Setting s) {
 		SettingsController.addExportSetting(s);
 
@@ -134,5 +129,10 @@ public class MainController {
 
 	public static List<Setting> getExportSettings() {
 		return SettingsController.getExportSettingsList();
+	}
+
+	public static LinkedList<Setting> getSettings() {
+
+		return SettingsController.getSettigsList();
 	}
 }
