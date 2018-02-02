@@ -38,18 +38,13 @@ public class CaptureController implements Runnable {
 			int captured = 0;
 			Packet packet;
 
-			while (captured < limit) {
-				packet = handle.getNextPacketEx();
+			while ((captured += (packet = handle.getNextPacketEx()).length()) < limit) {
 				MainController.addPacket(packet);
-				captured = packet.length();
 			}
 		} else {
 
-			int packetNr = 1;
-
-			while (packetNr <= amount) {
+			for (int packetNr = 1; packetNr <= amount; packetNr++) {
 				MainController.addPacket(handle.getNextPacketEx());
-				packetNr++;
 			}
 		}
 

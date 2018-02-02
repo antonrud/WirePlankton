@@ -97,7 +97,7 @@ public class MainController {
 		stopCapture();
 		packetList.clear();
 		SettingsController.settingsList.clear();
-		
+
 		WirePlankton.main(new String[0]);
 	}
 

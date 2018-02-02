@@ -14,16 +14,17 @@ import org.junit.Test;
 public class CaptureControllerUnitTest {
 
 	private int amount = 1;
+	private int limit = 1;
 	private int timeout = 1;
-	
+
 	/**
 	 * Test method for
 	 * {@link de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.CaptureControllerUnitTest#doCapture(org.pcap4j.core.PcapNetworkInterface, int, int, java.util.ArrayList)}.
 	 */
 	@Test
 	public void testDoCapture() {
-		
-		assertTrue(true); //tested indirect with testRun
+
+		assertTrue(true); // tested indirect with testRun
 	}
 
 	/**
@@ -32,21 +33,21 @@ public class CaptureControllerUnitTest {
 	 */
 	@Test
 	public void testRun() {
-		
-		//should run without exception
+
+		// should run without exception
 		try {
 			InetAddress address = InetAddress.getLocalHost();
-			CaptureController captureController = new CaptureController(amount, timeout, address);
+			CaptureController captureController = new CaptureController(amount, limit, timeout, address);
 			captureController.run();
-			assertTrue(true); 
-		} catch (Exception exception){
+			assertTrue(true);
+		} catch (Exception exception) {
 			assertTrue(false);
 		}
 	}
-	
+
 	@Test
 	public void testStop() {
-		
-		assertTrue(true); //not implemented yet
+
+		assertTrue(true); // not implemented yet
 	}
 }

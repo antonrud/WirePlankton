@@ -16,7 +16,7 @@ public class StartCaptureEvent<T extends Event> implements EventHandler<T> {
 	@Override
 	public void handle(Event event) {
 		try {
-			MainController.capturePacket(20, 999999999, 2000000, InetAddress.getLocalHost());
+			MainController.capturePacket(0, 100000, 2000000, InetAddress.getLocalHost());
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
