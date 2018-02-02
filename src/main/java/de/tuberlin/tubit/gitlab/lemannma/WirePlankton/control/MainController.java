@@ -31,10 +31,16 @@ public class MainController {
 
 	}
 
-	public static void capturePacket(int amount, int limit, int timeout, InetAddress address)
+	public static void capturePacket(int amount, int limit, int timeout, String interfaceName, String filter)
 			throws InterruptedException {
 
-		captureThread = new Thread(new CaptureController(amount, limit, timeout, address));
+		try {
+			captureThread = new Thread(new CaptureController(amount, limit, timeout, interfaceName, filter));
+		} catch (PcapNativeException e) {
+			// TODO Auto-generated catch block
+			System.out.println("[FAIL] Somthing went wrong with pcap. Sorry for that.");
+			e.printStackTrace();
+		}
 		captureThread.start();
 	}
 

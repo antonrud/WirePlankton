@@ -1,7 +1,12 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
-import java.net.InetAddress;
+import java.io.EOFException;
+import java.util.concurrent.TimeoutException;
+
+import org.pcap4j.core.BpfProgram.BpfCompileMode;
+import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PcapHandle;
+import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.core.Pcaps;
 import org.pcap4j.packet.Packet;
@@ -19,19 +24,27 @@ public class CaptureController implements Runnable {
 	int amount;
 	int limit;
 	int timeout;
-	InetAddress address;
+	PcapNetworkInterface nif;
+	String filter;
 
-	public CaptureController(int amount, int limit, int timeout, InetAddress address) {
+	public CaptureController(int amount, int limit, int timeout, String interfaceName, String filter)
+			throws PcapNativeException {
 
 		this.amount = amount;
 		this.limit = limit;
 		this.timeout = timeout;
-		this.address = address;
+		this.nif = Pcaps.getDevByName(interfaceName);
+		this.filter = filter;
 	}
 
-	public void doCapture(int amount, int limit, int timeout, InetAddress address) throws Exception {
-		PcapNetworkInterface netInterface = Pcaps.getDevByAddress(address);
-		PcapHandle handle = netInterface.openLive(SNAP_LEN, PROMISCOUS_MODE, timeout);
+	public void doCapture(int amount, int limit, int timeout, PcapNetworkInterface nif, String filter)
+			throws TimeoutException, EOFException, PcapNativeException, NotOpenException {
+
+		PcapHandle handle = nif.openLive(SNAP_LEN, PROMISCOUS_MODE, timeout);
+
+		if (filter != "") {
+			handle.setFilter(filter, BpfCompileMode.OPTIMIZE);
+		}
 
 		if (amount <= 0) {
 
@@ -53,9 +66,20 @@ public class CaptureController implements Runnable {
 
 	@Override
 	public void run() {
+
 		try {
-			doCapture(amount, limit, timeout, address);
-		} catch (Exception e) {
+			doCapture(amount, limit, timeout, nif, filter);
+		} catch (TimeoutException e) {
+			MainController.stopCapture();
+
+		} catch (NotOpenException e) {
+			MainController.stopCapture();
+
+		} catch (EOFException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		} catch (PcapNativeException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
