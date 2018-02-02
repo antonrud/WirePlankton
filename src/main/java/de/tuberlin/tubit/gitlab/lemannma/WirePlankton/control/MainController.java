@@ -99,6 +99,20 @@ public class MainController {
 		}
 	}
 
+	private static String getFilterString(LinkedList<Setting> settingsList) {
+		String filter = "";
+
+		if (!filter.getActive().isEmpty()) {
+			
+			for (String setting : filter.getActive()) {
+				this.filter = this.filter + setting + " and ";
+			}
+			this.filter = this.filter.substring(0, this.filter.length() - 5); // Cut off the last " and "
+		}
+		
+		return filter;
+	}
+
 	public static void initApp() {
 		stopCapture();
 		packetList.clear();

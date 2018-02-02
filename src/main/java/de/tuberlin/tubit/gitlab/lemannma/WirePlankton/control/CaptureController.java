@@ -10,6 +10,9 @@ import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.core.Pcaps;
 import org.pcap4j.packet.Packet;
+
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketItem;
+
 import org.pcap4j.core.PcapNetworkInterface.PromiscuousMode;
 
 /**
@@ -37,8 +40,9 @@ public class CaptureController implements Runnable {
 		this.filter = filter;
 	}
 
-	public void doCapture(int amount, int limit, int timeout, PcapNetworkInterface nif, String filter)
-			throws TimeoutException, EOFException, PcapNativeException, NotOpenException {
+	public void doCapture() throws TimeoutException, EOFException, PcapNativeException, NotOpenException {
+		MainController.clearPacketList();
+		PacketItem.resetIndexGen();
 
 		PcapHandle handle = nif.openLive(SNAP_LEN, PROMISCOUS_MODE, timeout);
 
@@ -68,7 +72,7 @@ public class CaptureController implements Runnable {
 	public void run() {
 
 		try {
-			doCapture(amount, limit, timeout, nif, filter);
+			doCapture();
 		} catch (TimeoutException e) {
 			MainController.stopCapture();
 

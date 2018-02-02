@@ -100,6 +100,10 @@ public class PacketItem {
 		return packet;
 	}
 
+	public static void resetIndexGen() {
+		indexGen = 0;
+	}
+	
 	@Override
 	public String toString() {
 		return "PacketItem [Captured at: " + capturedAt + ", Original length: " + originalLength
