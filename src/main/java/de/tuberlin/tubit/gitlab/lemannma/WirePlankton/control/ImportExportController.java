@@ -72,14 +72,25 @@ public class ImportExportController {
 
 		PcapDumper dumper = handle.dumpOpen(path);
 
-		packetList.stream().limit(amount).forEach(item -> {
-			try {
-				dumper.dump(item.getP());
-			} catch (NotOpenException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		});
+		if (amount <= 0) {
+			packetList.stream().forEach(item -> {
+				try {
+					dumper.dump(item.getP());
+				} catch (NotOpenException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+		} else {
+			packetList.stream().limit(amount).forEach(item -> {
+				try {
+					dumper.dump(item.getP());
+				} catch (NotOpenException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+		}
 
 		dumper.close();
 		handle.close();

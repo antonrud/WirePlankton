@@ -4,8 +4,8 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
 import static org.junit.Assert.*;
-import java.net.InetAddress;
 import org.junit.Test;
+import org.pcap4j.core.Pcaps;
 
 /**
  * @author Matthias Lehmann
@@ -16,7 +16,7 @@ public class CaptureControllerUnitTest {
 	private int amount = 1;
 	private int limit = 1;
 	private int timeout = 1;
-
+	private String filter = "";
 	/**
 	 * Test method for
 	 * {@link de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.CaptureControllerUnitTest#doCapture(org.pcap4j.core.PcapNetworkInterface, int, int, java.util.ArrayList)}.
@@ -36,8 +36,8 @@ public class CaptureControllerUnitTest {
 
 		// should run without exception
 		try {
-			InetAddress address = InetAddress.getLocalHost();
-			CaptureController captureController = new CaptureController(amount, limit, timeout, address);
+			String interfaceName = Pcaps.findAllDevs().get(0).getName();
+			CaptureController captureController = new CaptureController(amount, limit, timeout, interfaceName, filter);
 			captureController.run();
 			assertTrue(true);
 		} catch (Exception exception) {

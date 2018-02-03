@@ -41,7 +41,7 @@ public class WirePlankton {
 		String[] scActive = scChoice;
 		String scField = "SINGLECHOICE";
 		String scName = "Interface:";
-		Setting scTest = new Setting(scName, scActive, scField, scChoice);
+		Setting scTest = new Setting(0, scName, scActive, scField, scChoice);
 		MainController.addSetting(scTest);
 
 		// Multi Choice
@@ -49,7 +49,7 @@ public class WirePlankton {
 		String[] mcActive = { "a" };
 		String mcField = "MULTICHOICE";
 		String mcName = "mc Testcase";
-		Setting mcTest = new Setting(mcName, mcActive, mcField, mcChoice);
+		Setting mcTest = new Setting(1, mcName, mcActive, mcField, mcChoice);
 		MainController.addSetting(mcTest);
 
 		// Text - Mal gucken, ob wir das brauchen
@@ -58,14 +58,14 @@ public class WirePlankton {
 		String[] nActive = { "17" };
 		String nField = "NUMBER";
 		String nName = "n Testcase";
-		Setting nTest = new Setting(nName, nActive, nField);
+		Setting nTest = new Setting(2, nName, nActive, nField);
 		MainController.addSetting(nTest);
 
 		// Number - Input f�r Nummern
 		String[] neActive = { "17" };
 		String neField = "NUMBER";
 		String neName = "n Testcase";
-		Setting neTest = new Setting(neName, neActive, neField);
+		Setting neTest = new Setting(3, neName, neActive, neField);
 		MainController.addExportSetting(neTest);
 
 		ViewController.go();

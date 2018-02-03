@@ -3,10 +3,11 @@ package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
+import java.util.stream.Collectors;
 
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PcapNativeException;
@@ -31,8 +32,14 @@ public class MainController {
 
 	}
 
-	public static void capturePacket(int amount, int limit, int timeout, String interfaceName, String filter)
-			throws InterruptedException {
+	public static void capturePacket() throws InterruptedException {
+		
+		//TODO Settings IDs must be defined.
+		int amount = Integer.parseInt(getSetting(1).getActive().get(0));
+		int limit = Integer.parseInt(getSetting(2).getActive().get(0));
+		int timeout = Integer.parseInt(getSetting(3).getActive().get(0));
+		String interfaceName = getSetting(0).getActive().get(0);
+		String filter = getFilterString();
 
 		try {
 			captureThread = new Thread(new CaptureController(amount, limit, timeout, interfaceName, filter));
@@ -66,7 +73,11 @@ public class MainController {
 	}
 
 	public static void doSave(File f) {
-		ImportExportController saveController = new ImportExportController(f.getPath());
+
+		int amount = Integer.parseInt(getSetting(1).getActive().get(0));
+		String filter = getFilterString();
+
+		ImportExportController saveController = new ImportExportController(f.getPath(), amount, filter);
 
 		try {
 			saveController.doSave(packetList);
@@ -80,7 +91,11 @@ public class MainController {
 	}
 
 	public static void doLoad(File f) {
-		ImportExportController loadController = new ImportExportController(f.getPath());
+
+		int amount = Integer.parseInt(getSetting(1).getActive().get(0));
+		String filter = getFilterString();
+
+		ImportExportController loadController = new ImportExportController(f.getPath(), amount, filter);
 
 		try {
 			loadController.doLoad();
@@ -99,17 +114,22 @@ public class MainController {
 		}
 	}
 
-	private static String getFilterString(LinkedList<Setting> settingsList) {
+	private static String getFilterString() {
 		String filter = "";
 
-		if (!filter.getActive().isEmpty()) {
-			
-			for (String setting : filter.getActive()) {
-				this.filter = this.filter + setting + " and ";
+		List<Integer> filterIds = Arrays.asList(4, 5); // TODO Set IDs of filter settings here!
+
+		for (Setting filterSetting : getSettings().stream().filter(setting -> filterIds.contains(setting.getId()))
+				.filter(setting -> !setting.getActive().isEmpty()).collect(Collectors.toList())) {
+			for (String active : filterSetting.getActive()) {
+				filter = filter + active;
 			}
-			this.filter = this.filter.substring(0, this.filter.length() - 5); // Cut off the last " and "
 		}
-		
+
+		if (filter.length() != 0) {
+			filter = filter.substring(0, filter.length() - 5); // Cut off the last " and "
+		}
+
 		return filter;
 	}
 

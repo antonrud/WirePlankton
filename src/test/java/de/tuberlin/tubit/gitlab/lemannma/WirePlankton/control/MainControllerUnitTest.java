@@ -34,7 +34,11 @@ public class MainControllerUnitTest {
 	public void CapturePacketTestUnvalidAddress() {
 
 		try {
-			MainController.capturePacket(amount, limit, timeout, address);
+			
+			//Old version. Please check CaptureController class.
+			//MainController.capturePacket(amount, limit, timeout, address);
+			
+			MainController.capturePacket();
 		} catch (Exception exception) {
 			assertTrue(true); // Test for Exception by unvalid address
 		}
@@ -46,7 +50,11 @@ public class MainControllerUnitTest {
 		amount = 0;
 		try {
 			address = InetAddress.getLocalHost();
-			MainController.capturePacket(amount, limit, timeout, address);
+			
+			//Old version. Please check CaptureController class.
+			//MainController.capturePacket(amount, limit, timeout, address);
+			
+			MainController.capturePacket();
 		} catch (Exception exception) {
 			assertTrue(true); // Test for Exception by unvalid amount
 		}
@@ -59,7 +67,11 @@ public class MainControllerUnitTest {
 		timeout = -1;
 		try {
 			address = InetAddress.getLocalHost();
-			MainController.capturePacket(amount, limit, timeout, address);
+			
+			//Old version. Please check CaptureController class.
+			//MainController.capturePacket(amount, limit, timeout, address);
+			
+			MainController.capturePacket();
 		} catch (Exception exception) {
 			assertTrue(true); // Test for Exception by unvalid timeout
 		}
