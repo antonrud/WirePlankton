@@ -4,33 +4,55 @@ import java.util.ArrayList;
 
 import java.util.Arrays;
 
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.SettingsController;
+
 /**
  * Supports Integer, Choice, Multichoice,
+ * 
  * @author Stef
  *
  */
 public class Setting {
 
 	private int id;
-	private static int idGen = 0;
 	private String name;
-	private ArrayList <String> choices;
-	private ArrayList <String> active;
+	private ArrayList<String> choices;
+	private ArrayList<String> active;
 	private String fieldType;
 
-	public Setting(String name, String[] active, String fieldType){
+	public Setting(int id, String name, String[] active, String fieldType) {
+
+		if (SettingsController.getSettigsList().stream().anyMatch(seting -> getId() == id)) {
+			try {
+				throw new Exception("[FAIL] Provided setting ID is in use!");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		this.id = id;
 		this.name = name;
 		this.active = new ArrayList<String>(Arrays.asList(active));
 		this.fieldType = fieldType;
-		this.id = idGen++;
 	}
 
-	public Setting(String name, String[] active, String fieldType, String[] choices){
+	public Setting(int id, String name, String[] active, String fieldType, String[] choices) {
+
+		if (SettingsController.getSettigsList().stream().anyMatch(seting -> getId() == id)) {
+			try {
+				throw new Exception("[FAIL] Provided setting ID is in use!");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		this.id = id;
 		this.name = name;
 		this.active = new ArrayList<String>(Arrays.asList(active));
 		this.fieldType = fieldType;
 		this.choices = new ArrayList<String>(Arrays.asList(choices));
-		this.id = idGen++;
 	}
 
 	public int getId() {
@@ -70,6 +92,5 @@ public class Setting {
 	public String getFieldType() {
 		return fieldType;
 	}
-
 
 }

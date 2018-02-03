@@ -9,6 +9,7 @@ import java.util.concurrent.TimeoutException;
 import org.pcap4j.core.Pcaps;
 import org.pcap4j.packet.Packet;
 import org.pcap4j.packet.namednumber.DataLinkType;
+import org.pcap4j.core.BpfProgram.BpfCompileMode;
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PcapDumper;
 import org.pcap4j.core.PcapHandle;
@@ -20,20 +21,43 @@ import javafx.collections.ObservableList;
 public class ImportExportController {
 
 	String path;
+	int amount;
+	String filter;
+
+	public ImportExportController(String path, int amount, String filter) {
+		this.path = path;
+		this.amount = amount;
+		this.filter = filter;
+	}
 
 	public ImportExportController(String path) {
 		this.path = path;
+		this.amount = Integer.MAX_VALUE;
+		this.filter = "";
 	}
 
 	public void doLoad() throws PcapNativeException, EOFException, TimeoutException, NotOpenException {
 		MainController.clearPacketList();
+		PacketItem.resetIndexGen();
 
 		PcapHandle handle = Pcaps.openOffline(path);
 
+		if (filter != "") {
+			handle.setFilter(filter, BpfCompileMode.OPTIMIZE);
+		}
+
 		Packet packet;
 
-		while ((packet = handle.getNextPacketEx()) != null) {
-			MainController.addPacket(packet);
+		if (amount <= 0) {
+			while ((packet = handle.getNextPacketEx()) != null) {
+				MainController.addPacket(packet);
+			}
+		} else {
+			int count = 0;
+			while ((packet = handle.getNextPacketEx()) != null && count < amount) {
+				MainController.addPacket(packet);
+				count++;
+			}
 		}
 
 		handle.close();
@@ -41,16 +65,32 @@ public class ImportExportController {
 
 	public void doSave(ObservableList<PacketItem> packetList) throws PcapNativeException, NotOpenException {
 		PcapHandle handle = Pcaps.openDead(DataLinkType.EN10MB, 65536);
+
+		if (filter != "") {
+			handle.setFilter(filter, BpfCompileMode.OPTIMIZE);
+		}
+
 		PcapDumper dumper = handle.dumpOpen(path);
 
-		packetList.stream().forEach(item -> {
-			try {
-				dumper.dump(item.getP());
-			} catch (NotOpenException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		});
+		if (amount <= 0) {
+			packetList.stream().forEach(item -> {
+				try {
+					dumper.dump(item.getP());
+				} catch (NotOpenException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+		} else {
+			packetList.stream().limit(amount).forEach(item -> {
+				try {
+					dumper.dump(item.getP());
+				} catch (NotOpenException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+		}
 
 		dumper.close();
 		handle.close();
@@ -61,8 +101,8 @@ public class ImportExportController {
 		FileWriter writer = new FileWriter(path, true);
 		BufferedWriter buffer = new BufferedWriter(writer);
 
-		for (PacketItem packet : packetList) {
-			buffer.write(new PacketItem(packet.getP()).toCSVFormat());
+		for (PacketItem packetItem : packetList) {
+			buffer.write(packetItem.toCSVFormat());
 			buffer.newLine();
 		}
 

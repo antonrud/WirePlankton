@@ -15,14 +15,12 @@ public class SettingsController {
 		return settingsList;
 	}
 
-	public static Setting getSettig() {
-		// TODO Auto-generated method stub
-		return null;
+	public static Setting getSetting(int id) {
+		return settingsList.stream().filter(setting -> setting.getId() == id).findFirst().get();
 	}
 
 	public static void addSetting(Setting s) {
 		settingsList.add(s);
-
 	}
 
 	public static List<Setting> getExportSettingsList() {

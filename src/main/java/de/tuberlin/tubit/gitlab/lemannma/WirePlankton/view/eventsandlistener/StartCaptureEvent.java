@@ -1,10 +1,6 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.MainController;
-import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.ViewController;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 
@@ -16,10 +12,7 @@ public class StartCaptureEvent<T extends Event> implements EventHandler<T> {
 	@Override
 	public void handle(Event event) {
 		try {
-			MainController.capturePacket(20, 2000000, InetAddress.getLocalHost());
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			MainController.capturePacket();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

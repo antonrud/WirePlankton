@@ -3,10 +3,11 @@ package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
+import java.util.stream.Collectors;
 
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PcapNativeException;
@@ -31,9 +32,22 @@ public class MainController {
 
 	}
 
-	public static void capturePacket(int amount, int timeout, InetAddress address) throws InterruptedException {
+	public static void capturePacket() throws InterruptedException {
+		
+		//TODO Settings IDs must be defined.
+		int amount = Integer.parseInt(getSetting(1).getActive().get(0));
+		int limit = Integer.parseInt(getSetting(2).getActive().get(0));
+		int timeout = Integer.parseInt(getSetting(3).getActive().get(0));
+		String interfaceName = getSetting(0).getActive().get(0);
+		String filter = getFilterString();
 
-		captureThread = new Thread(new CaptureController(amount, timeout, address));
+		try {
+			captureThread = new Thread(new CaptureController(amount, limit, timeout, interfaceName, filter));
+		} catch (PcapNativeException e) {
+			// TODO Auto-generated catch block
+			System.out.println("[FAIL] Somthing went wrong with pcap. Sorry for that.");
+			e.printStackTrace();
+		}
 		captureThread.start();
 	}
 
@@ -59,7 +73,11 @@ public class MainController {
 	}
 
 	public static void doSave(File f) {
-		ImportExportController saveController = new ImportExportController(f.getPath());
+
+		int amount = Integer.parseInt(getSetting(1).getActive().get(0));
+		String filter = getFilterString();
+
+		ImportExportController saveController = new ImportExportController(f.getPath(), amount, filter);
 
 		try {
 			saveController.doSave(packetList);
@@ -73,7 +91,11 @@ public class MainController {
 	}
 
 	public static void doLoad(File f) {
-		ImportExportController loadController = new ImportExportController(f.getPath());
+
+		int amount = Integer.parseInt(getSetting(1).getActive().get(0));
+		String filter = getFilterString();
+
+		ImportExportController loadController = new ImportExportController(f.getPath(), amount, filter);
 
 		try {
 			loadController.doLoad();
@@ -92,22 +114,31 @@ public class MainController {
 		}
 	}
 
-	public static LinkedList<Setting> getSettings() {
+	private static String getFilterString() {
+		String filter = "";
 
-		return SettingsController.getSettigsList();
-	}
+		List<Integer> filterIds = Arrays.asList(4, 5); // TODO Set IDs of filter settings here!
 
-	public static Setting getSetting(String name) {
+		for (Setting filterSetting : getSettings().stream().filter(setting -> filterIds.contains(setting.getId()))
+				.filter(setting -> !setting.getActive().isEmpty()).collect(Collectors.toList())) {
+			for (String active : filterSetting.getActive()) {
+				filter = filter + active;
+			}
+		}
 
-		return SettingsController.getSettig();
-	}
+		if (filter.length() != 0) {
+			filter = filter.substring(0, filter.length() - 5); // Cut off the last " and "
+		}
 
-	public static void setSetting(Setting setting) {
-
+		return filter;
 	}
 
 	public static void initApp() {
+		stopCapture();
+		packetList.clear();
+		SettingsController.settingsList.clear();
 
+		WirePlankton.main(new String[0]);
 	}
 
 	public static void addPacket(Packet packet) {
@@ -127,6 +158,10 @@ public class MainController {
 
 	}
 
+	public static Setting getSetting(int id) {
+		return SettingsController.getSetting(id);
+	}
+
 	public static void addExportSetting(Setting s) {
 		SettingsController.addExportSetting(s);
 
@@ -134,5 +169,10 @@ public class MainController {
 
 	public static List<Setting> getExportSettings() {
 		return SettingsController.getExportSettingsList();
+	}
+
+	public static LinkedList<Setting> getSettings() {
+
+		return SettingsController.getSettigsList();
 	}
 }

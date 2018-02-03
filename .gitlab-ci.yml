@@ -1,15 +1,8 @@
 stages:
-    - verify
     - test
+    - verify
     - deploy
     - release
-
-Verify:
-    stage: verify
-    script:
-        - mvn verify
-    tags:
-        - verify
 
 Test:
     stage: test
@@ -17,6 +10,15 @@ Test:
         - echo TEST
     tags:
         - test
+
+Verify:
+    stage: verify
+    script:
+        - mvn verify
+    only:
+        - develop
+    tags:
+        - verify
 
 Deploy:
     stage: deploy
