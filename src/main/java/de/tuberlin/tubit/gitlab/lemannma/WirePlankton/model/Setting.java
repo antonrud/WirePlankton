@@ -8,21 +8,21 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.SettingsController
 
 /**
  * Supports Integer, Choice, Multichoice,
- * 
+ *
  * @author Stef
  *
  */
 public class Setting {
 
-	private int id;
+	private String id;
 	private String name;
 	private ArrayList<String> choices;
 	private ArrayList<String> active;
-	private String fieldType;
+	private int fieldType;
 
-	public Setting(int id, String name, String[] active, String fieldType) {
+	public Setting(String id, String name, String[] active, int fieldType) {
 
-		if (SettingsController.getSettigsList().stream().anyMatch(seting -> getId() == id)) {
+		if (SettingsController.getSettigsList().stream().anyMatch(setting -> setting.getId().equals(id))) {
 			try {
 				throw new Exception("[FAIL] Provided setting ID is in use!");
 			} catch (Exception e) {
@@ -37,9 +37,9 @@ public class Setting {
 		this.fieldType = fieldType;
 	}
 
-	public Setting(int id, String name, String[] active, String fieldType, String[] choices) {
+	public Setting(String id, String name, String[] active, int fieldType, String[] choices) {
 
-		if (SettingsController.getSettigsList().stream().anyMatch(seting -> getId() == id)) {
+		if (SettingsController.getSettigsList().stream().anyMatch(setting -> setting.getId().equals(id))) {
 			try {
 				throw new Exception("[FAIL] Provided setting ID is in use!");
 			} catch (Exception e) {
@@ -55,12 +55,12 @@ public class Setting {
 		this.choices = new ArrayList<String>(Arrays.asList(choices));
 	}
 
-	public int getId() {
+	public String getId() {
 
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 
 		this.id = id;
 	}
@@ -89,7 +89,7 @@ public class Setting {
 		this.active = active;
 	}
 
-	public String getFieldType() {
+	public int getFieldType() {
 		return fieldType;
 	}
 
