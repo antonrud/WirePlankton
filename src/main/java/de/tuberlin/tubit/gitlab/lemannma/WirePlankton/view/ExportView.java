@@ -2,6 +2,7 @@ package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view;
 
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.MainController;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.SingleChoiceChangeSettingsListener;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.inputs.MultiChoice;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.inputs.NumberInput;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.inputs.SingleChoice;
@@ -20,7 +21,7 @@ public class ExportView extends ScrollPane{
 			switch(setting.getFieldType()){
 
 			case 0:
-				SingleChoice f = new SingleChoice(setting);
+				SingleChoice f = new SingleChoice(setting, new SingleChoiceChangeSettingsListener<Number>(setting));
 				this.settingsContent.getChildren().add(f);
 				break;
 			case 1:

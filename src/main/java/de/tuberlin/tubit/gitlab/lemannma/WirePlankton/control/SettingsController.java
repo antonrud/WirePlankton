@@ -41,4 +41,14 @@ public class SettingsController {
 		return statSettingsList;
 	}
 
+	public static void addStatSetting(Setting s) {
+		statSettingsList.add(s);
+
+	}
+
+	public static void addDisplaySetting(Setting s) {
+		displaySettingsList.add(s);
+
+	}
+
 }

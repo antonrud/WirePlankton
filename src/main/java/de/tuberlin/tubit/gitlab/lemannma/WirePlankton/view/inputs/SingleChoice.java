@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
-import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.SingleChoiceChangeListener;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.SingleChoiceChangeSettingsListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -23,7 +23,7 @@ public class SingleChoice extends VBox{
 	private ChoiceBox<String> field;
 	private Label name;
 
-	public SingleChoice(Setting s){
+	public SingleChoice(Setting s, ChangeListener<Number> listener){
 
 		this.s = s;
 		inputs = FXCollections.observableArrayList();
@@ -31,7 +31,7 @@ public class SingleChoice extends VBox{
 
 		field = new ChoiceBox<String>(inputs);
 		field.getSelectionModel().clearAndSelect(inputs.indexOf(this.s.getActive().get(0)));
-		field.getSelectionModel().selectedIndexProperty().addListener(new SingleChoiceChangeListener<Number>(this.s));
+		field.getSelectionModel().selectedIndexProperty().addListener(listener);
 		name = new Label(s.getName());
 
 		this.getChildren().add(name);

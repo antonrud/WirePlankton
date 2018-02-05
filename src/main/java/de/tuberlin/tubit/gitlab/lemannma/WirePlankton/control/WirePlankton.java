@@ -58,7 +58,7 @@ public class WirePlankton {
 
 		String[] timeoutActive = { "60000"};
 		String timeoutName = "Timeout in ms:";
-		Setting timeoutSetting = new Setting("TIMEOUT", limitName, limitActive, NUMBER);
+		Setting timeoutSetting = new Setting("TIMEOUT", timeoutName, timeoutActive, NUMBER);
 		MainController.addSetting(timeoutSetting);
 
 		String[] ipChoice = {"ip","ip6"};
@@ -68,7 +68,6 @@ public class WirePlankton {
 		MainController.addSetting(ipSetting);
 
 		//ExportSettings
-
 		String[] eipChoice = {"ip","ip6"};
 		String[] eipActive = {  };
 		String eipName = "Packettypes";
@@ -81,11 +80,18 @@ public class WirePlankton {
 		MainController.addExportSetting(eamountSetting);
 
 		//DisplaySettings
+		String[] dipChoice = {"all", "ipv4","ipv6"};
+		String[] dipActive = { "all" };
+		String dipName = "Packettypes";
+		Setting dipSetting = new Setting("D_IPVERSION", dipName, dipActive, SINGLECHOICE, dipChoice);
+		MainController.addDisplaySetting(dipSetting);
 
 		//StatSettings
-
-
-		// Number - Input f�r Nummern
+		String[] statChoice = {"Top 5 IP","Types"};
+		String[] statActive = {statChoice[0]};
+		String statName = "Statistic:";
+		Setting statSetting = new Setting("STAT", statName, statActive, SINGLECHOICE, statChoice);
+		MainController.addStatSetting(statSetting);
 
 		ViewController.go();
 	}

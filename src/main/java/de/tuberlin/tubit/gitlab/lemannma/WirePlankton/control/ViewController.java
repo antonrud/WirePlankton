@@ -12,6 +12,8 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.SettingsBar;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.SettingsView;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.StatisticsView;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.MainMenuEvent;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.SingleChoiceChangeStatListener;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.SingleChoiceChangeViewListener;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartCaptureEvent;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartExportEvent;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartSaveEvent;
@@ -38,6 +40,7 @@ public class ViewController extends Application {
 	private static MenuBar menuBar;
 	private static MenuBar settingsBar;
 	private static SettingsBar statSettingsBar;
+	private static SettingsBar viewSettingsBar;
 	private static MenuBar dataBar;
 	private static PacketView packetView;
 	private static ExportView exportView;
@@ -83,7 +86,8 @@ public class ViewController extends Application {
 
 
 		dataBar = new MenuBar(dataMenu);
-		statSettingsBar = new SettingsBar(MainController.getStatSettingsList());
+		statSettingsBar = new SettingsBar(MainController.getStatSettingsList(), new SingleChoiceChangeStatListener<>());
+		viewSettingsBar = new SettingsBar(MainController.getDisplaySettingsList(), new SingleChoiceChangeViewListener<>());
 
 		packetView = new PacketView();
 		exportView = new ExportView();
@@ -147,6 +151,7 @@ public class ViewController extends Application {
 			case 0:
 				currentView.add(packetView, 0, 0);
 				currentView.add(realtimeView, 1, 0);
+				root.setBottom(viewSettingsBar);
 				break;
 			case 1:
 				currentView.add(settingsView, 0, 0);

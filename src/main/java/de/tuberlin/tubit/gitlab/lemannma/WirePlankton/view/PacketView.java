@@ -72,4 +72,9 @@ public class PacketView extends VBox{
 		this.setPrefWidth(400);
 		this.view.setPrefHeight(10000);
 	}
+
+	public void reloadTable() {
+		// TODO Auto-generated method stub
+
+	}
 }
