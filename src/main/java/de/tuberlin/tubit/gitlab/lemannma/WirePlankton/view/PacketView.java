@@ -23,10 +23,20 @@ public class PacketView extends VBox{
 		this.getChildren().add(view);
 
 		TableColumn<PacketItem,Integer> index = new TableColumn<PacketItem,Integer>("Index");
-		TableColumn<PacketItem,String> value = new TableColumn<PacketItem,String>("Packet");
+		TableColumn<PacketItem,String> cAt = new TableColumn<PacketItem,String>("captured At");
+		TableColumn<PacketItem,String> length = new TableColumn<PacketItem,String>("Length");
+		TableColumn<PacketItem,String> dest = new TableColumn<PacketItem,String>("Destination");
+		TableColumn<PacketItem,String> src = new TableColumn<PacketItem,String>("Source");
+		TableColumn<PacketItem,String> type = new TableColumn<PacketItem,String>("Type");
 
 		view.getColumns().add(index);
-		view.getColumns().add(value);
+		view.getColumns().add(cAt);
+		view.getColumns().add(length);
+		view.getColumns().add(dest);
+		view.getColumns().add(src);
+		view.getColumns().add(type);
+
+
 
 		view.setRowFactory(tableView -> {
 		    TableRow<PacketItem> tableRow = new TableRow<>();
@@ -42,8 +52,20 @@ public class PacketView extends VBox{
 		index.setCellValueFactory(
 			    new PropertyValueFactory<PacketItem,Integer>("index")
 			);
-		value.setCellValueFactory(
-			    new PropertyValueFactory<PacketItem,String>("preview")
+		cAt.setCellValueFactory(
+			    new PropertyValueFactory<PacketItem,String>("capturedAt")
+			);
+		length.setCellValueFactory(
+			    new PropertyValueFactory<PacketItem,String>("originalLength")
+			);
+		dest.setCellValueFactory(
+			    new PropertyValueFactory<PacketItem,String>("destinationAddress")
+			);
+		src.setCellValueFactory(
+			    new PropertyValueFactory<PacketItem,String>("sourceAddress")
+			);
+		type.setCellValueFactory(
+			    new PropertyValueFactory<PacketItem,String>("packetType")
 			);
 		view.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		view.setItems(data);
