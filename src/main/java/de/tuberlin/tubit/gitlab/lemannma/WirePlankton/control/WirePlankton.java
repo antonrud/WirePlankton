@@ -5,6 +5,7 @@ package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.PcapNetworkInterface;
@@ -34,13 +35,11 @@ public class WirePlankton {
 			e.printStackTrace();
 		}
 
-		List<String> interfaceNames = new ArrayList<String>();
-		for (PcapNetworkInterface nif : interfaces) {
-			interfaceNames.add(nif.getName());
-		}
+		MainController.setInterfaces(interfaces.stream()
+				.collect(Collectors.toMap(PcapNetworkInterface::getName, PcapNetworkInterface::getDescription)));
 
 		// SystemSettings
-		String[] nifChoice = interfaceNames.toArray(new String[0]);
+		String[] nifChoice = MainController.getInterfaceDescriptions().toArray(new String[0]);
 		String[] nifActive = nifChoice;
 		String nifName = "Interface:";
 		Setting nifSetting = new Setting("NIF", nifName, nifActive, SINGLECHOICE, nifChoice);

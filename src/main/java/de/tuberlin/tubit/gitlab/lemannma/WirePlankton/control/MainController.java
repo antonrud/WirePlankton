@@ -4,8 +4,10 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
@@ -25,6 +27,7 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
 public class MainController {
 
 	private static ObservableList<PacketItem> packetList = FXCollections.observableArrayList();
+	private static Map<String, String> interfaces;
 	static Thread captureThread;
 
 	// Shows: We want it static
@@ -38,7 +41,7 @@ public class MainController {
 		int amount = Integer.parseInt(getSetting("AMOUNT").getActive().get(0));
 		int limit = (Integer.parseInt(getSetting("LIMIT").getActive().get(0))) * 1024;
 		int timeout = (Integer.parseInt(getSetting("TIMEOUT").getActive().get(0))) * 1000;
-		String interfaceName = getSetting("NIF").getActive().get(0);
+		String interfaceName = getNameByDescription(interfaces, getSetting("NIF").getActive().get(0)).toString();
 		String filter = getFilterString("capture");
 
 		try {
@@ -133,12 +136,12 @@ public class MainController {
 		for (Setting filterSetting : getSettings().stream().filter(setting -> filterIds.contains(setting.getId()))
 				.filter(setting -> !setting.getActive().isEmpty()).collect(Collectors.toList())) {
 			for (String active : filterSetting.getActive()) {
-				filter = filter + active + " and ";
+				filter = filter + active + " or ";
 			}
 		}
 
 		if (filter.length() != 0) {
-			filter = filter.substring(0, filter.length() - 5); // Cut off the last " and "
+			filter = filter.substring(0, filter.length() - 4); // Cut off the last " or "
 		}
 
 		return filter;
@@ -193,5 +196,22 @@ public class MainController {
 
 	public static LinkedList<Setting> getStatSettingsList() {
 		return SettingsController.getStatSettingsList();
+	}
+
+	public static Collection<String> getInterfaceDescriptions() {
+		return interfaces.values();
+	}
+
+	public static void setInterfaces(Map<String, String> map) {
+		interfaces = map;
+	}
+
+	private static Object getNameByDescription(Map<String, String> interfaces, Object description) {
+		for (Object name : interfaces.keySet()) {
+			if (interfaces.get(name).equals(description)) {
+				return name;
+			}
+		}
+		return null;
 	}
 }

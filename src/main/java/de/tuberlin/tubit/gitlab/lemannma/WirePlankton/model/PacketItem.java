@@ -11,7 +11,7 @@ import org.pcap4j.packet.Packet;
 public class PacketItem {
 
 	private static int indexGen = 0;
-	
+
 	private int index;
 	private Packet packet;
 	private String preview;
@@ -22,7 +22,7 @@ public class PacketItem {
 	private String packetType;
 
 	public PacketItem(Packet packet) {
-		
+
 		this.index = ++indexGen;
 
 		this.packet = packet;
@@ -103,7 +103,7 @@ public class PacketItem {
 	public static void resetIndexGen() {
 		indexGen = 0;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "PacketItem [Captured at: " + capturedAt + ", Original length: " + originalLength

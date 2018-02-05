@@ -47,7 +47,7 @@ public class CaptureController implements Runnable {
 		PcapHandle handle = nif.openLive(SNAP_LEN, PROMISCOUS_MODE, timeout);
 
 		System.out.println(filter);
-		
+
 		if (!filter.equals("")) {
 			handle.setFilter(filter, BpfCompileMode.OPTIMIZE);
 		}
