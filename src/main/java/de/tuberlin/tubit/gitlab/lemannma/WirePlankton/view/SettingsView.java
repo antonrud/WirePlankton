@@ -28,15 +28,15 @@ public class SettingsView extends ScrollPane{
 		for (Setting setting : MainController.getSettings()) {
 			switch(setting.getFieldType()){
 
-			case "SINGLECHOICE":
+			case 0:
 				SingleChoice f = new SingleChoice(setting);
 				this.settingsContent.getChildren().add(f);
 				break;
-			case "MULTICHOICE":
+			case 1:
 				MultiChoice m = new MultiChoice(setting);
 				this.settingsContent.getChildren().add(m);
 				break;
-			case "NUMBER":
+			case 2:
 				NumberInput n = new NumberInput(setting);
 				this.settingsContent.getChildren().add(n);
 				break;

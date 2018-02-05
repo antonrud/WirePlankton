@@ -33,12 +33,12 @@ public class MainController {
 	}
 
 	public static void capturePacket() throws InterruptedException {
-		
+
 		//TODO Settings IDs must be defined.
-		int amount = Integer.parseInt(getSetting(1).getActive().get(0));
-		int limit = Integer.parseInt(getSetting(2).getActive().get(0));
-		int timeout = Integer.parseInt(getSetting(3).getActive().get(0));
-		String interfaceName = getSetting(0).getActive().get(0);
+		int amount = Integer.parseInt(getSetting("AMOUNT").getActive().get(0));
+		int limit = Integer.parseInt(getSetting("LIMIT").getActive().get(0));
+		int timeout = Integer.parseInt(getSetting("TIMEOUT").getActive().get(0));
+		String interfaceName = getSetting("NIF").getActive().get(0);
 		String filter = getFilterString();
 
 		try {
@@ -74,7 +74,7 @@ public class MainController {
 
 	public static void doSave(File f) {
 
-		int amount = Integer.parseInt(getSetting(1).getActive().get(0));
+		int amount = Integer.parseInt(getSetting("E_AMOUNT").getActive().get(0));
 		String filter = getFilterString();
 
 		ImportExportController saveController = new ImportExportController(f.getPath(), amount, filter);
@@ -92,7 +92,7 @@ public class MainController {
 
 	public static void doLoad(File f) {
 
-		int amount = Integer.parseInt(getSetting(1).getActive().get(0));
+		int amount = Integer.parseInt(getSetting("E_AMOUNT").getActive().get(0));
 		String filter = getFilterString();
 
 		ImportExportController loadController = new ImportExportController(f.getPath(), amount, filter);
@@ -117,12 +117,12 @@ public class MainController {
 	private static String getFilterString() {
 		String filter = "";
 
-		List<Integer> filterIds = Arrays.asList(4, 5); // TODO Set IDs of filter settings here!
+		List<String> filterIds = Arrays.asList("IPVERSION"); // TODO Set IDs of filter settings here!
 
 		for (Setting filterSetting : getSettings().stream().filter(setting -> filterIds.contains(setting.getId()))
 				.filter(setting -> !setting.getActive().isEmpty()).collect(Collectors.toList())) {
 			for (String active : filterSetting.getActive()) {
-				filter = filter + active;
+				filter = filter + active + " and ";
 			}
 		}
 
@@ -158,7 +158,7 @@ public class MainController {
 
 	}
 
-	public static Setting getSetting(int id) {
+	public static Setting getSetting(String id) {
 		return SettingsController.getSetting(id);
 	}
 
@@ -174,5 +174,13 @@ public class MainController {
 	public static LinkedList<Setting> getSettings() {
 
 		return SettingsController.getSettigsList();
+	}
+
+	public static LinkedList<Setting> getDisplaySettingsList(){
+		return SettingsController.getDisplaySettingsList();
+	}
+
+	public static LinkedList<Setting> getStatSettingsList(){
+		return SettingsController.getStatSettingsList();
 	}
 }

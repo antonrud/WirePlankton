@@ -8,7 +8,9 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.MenuBar;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.MenuButton;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.PacketView;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.RealTimeView;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.SettingsBar;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.SettingsView;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.StatisticsView;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.MainMenuEvent;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartCaptureEvent;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartExportEvent;
@@ -35,11 +37,13 @@ public class ViewController extends Application {
 
 	private static MenuBar menuBar;
 	private static MenuBar settingsBar;
+	private static SettingsBar statSettingsBar;
 	private static MenuBar dataBar;
 	private static PacketView packetView;
 	private static ExportView exportView;
 	private static RealTimeView realtimeView;
 	private static SettingsView settingsView;
+	private static StatisticsView statView;
 
 	//control of height and width
 	private static double masterWidth = 800;
@@ -79,12 +83,13 @@ public class ViewController extends Application {
 
 
 		dataBar = new MenuBar(dataMenu);
-
+		statSettingsBar = new SettingsBar(MainController.getStatSettingsList());
 
 		packetView = new PacketView();
 		exportView = new ExportView();
 		realtimeView = new RealTimeView();
 		settingsView = new SettingsView();
+		statView = new StatisticsView();
 
 		//Init Window
 		root = new BorderPane();
@@ -152,7 +157,8 @@ public class ViewController extends Application {
 				root.setBottom(dataBar);
 				break;
 			case 3:
-				break;
+				currentView.add(statView, 0, 0);
+				root.setBottom(statSettingsBar);
 			default:
 				break;
 		}

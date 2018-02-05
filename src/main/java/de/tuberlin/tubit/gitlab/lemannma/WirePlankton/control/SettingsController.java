@@ -9,14 +9,16 @@ public class SettingsController {
 
 	static LinkedList<Setting> settingsList = new LinkedList<Setting>();
 	static LinkedList<Setting> exportSettingsList = new LinkedList<Setting>();
+	static LinkedList<Setting> displaySettingsList = new LinkedList<Setting>();
+	static LinkedList<Setting> statSettingsList = new LinkedList<Setting>();
 
 	public static LinkedList<Setting> getSettigsList() {
 
 		return settingsList;
 	}
 
-	public static Setting getSetting(int id) {
-		return settingsList.stream().filter(setting -> setting.getId() == id).findFirst().get();
+	public static Setting getSetting(String id) {
+		return settingsList.stream().filter(setting -> setting.getId().equals(id)).findFirst().get();
 	}
 
 	public static void addSetting(Setting s) {
@@ -29,6 +31,14 @@ public class SettingsController {
 
 	public static void addExportSetting(Setting s) {
 		exportSettingsList.add(s);
+	}
+
+	public static LinkedList<Setting> getDisplaySettingsList() {
+		return displaySettingsList;
+	}
+
+	public static LinkedList<Setting> getStatSettingsList() {
+		return statSettingsList;
 	}
 
 }

@@ -11,6 +11,7 @@ public class NumberField extends TextField{
 
 	public NumberField(Setting setting){
 		this.setting = setting;
+		this.setText(setting.getActive().get(0));
 	}
 
 	@Override public void replaceText(int start, int end, String text) {

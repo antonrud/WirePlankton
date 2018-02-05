@@ -20,6 +20,11 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
  *
  */
 public class WirePlankton {
+
+	public static final int SINGLECHOICE = 0;
+	public static final int MULTICHOICE = 1;
+	public static final int NUMBER = 2;
+
 	public static void main(String[] args) {
 		List<PcapNetworkInterface> interfaces = new ArrayList<PcapNetworkInterface>();
 		try {
@@ -34,39 +39,53 @@ public class WirePlankton {
 			interfaceNames.add(nif.getName());
 		}
 
-		// Single Choice Setting
-		// String[] scChoice = {"this", "is", "a", "test"};
-		// String[] scActive = { "a" };
-		String[] scChoice = interfaceNames.toArray(new String[0]);
-		String[] scActive = scChoice;
-		String scField = "SINGLECHOICE";
-		String scName = "Interface:";
-		Setting scTest = new Setting(0, scName, scActive, scField, scChoice);
-		MainController.addSetting(scTest);
+		//SystemSettings
+		String[] nifChoice = interfaceNames.toArray(new String[0]);
+		String[] nifActive = nifChoice;
+		String nifName = "Interface:";
+		Setting nifSetting = new Setting("NIF", nifName, nifActive, SINGLECHOICE, nifChoice);
+		MainController.addSetting(nifSetting);
 
-		// Multi Choice
-		String[] mcChoice = { "this", "is", "a", "test","but","I","need","MOOOORE","�ptions","","Wuuuut","usw","\nTroll" };
-		String[] mcActive = { "a" };
-		String mcField = "MULTICHOICE";
-		String mcName = "mc Testcase";
-		Setting mcTest = new Setting(1, mcName, mcActive, mcField, mcChoice);
-		MainController.addSetting(mcTest);
+		String[] amountActive = { "17" };
+		String amountName = "Packets to be captured:";
+		Setting amountSetting = new Setting("AMOUNT", amountName, amountActive, NUMBER);
+		MainController.addSetting(amountSetting);
 
-		// Text - Mal gucken, ob wir das brauchen
+		String[] limitActive = { "1000"};
+		String limitName = "Max. Size in KBytes:";
+		Setting limitSetting = new Setting("LIMIT", limitName, limitActive, NUMBER);
+		MainController.addSetting(limitSetting);
+
+		String[] timeoutActive = { "60000"};
+		String timeoutName = "Timeout in ms:";
+		Setting timeoutSetting = new Setting("TIMEOUT", limitName, limitActive, NUMBER);
+		MainController.addSetting(timeoutSetting);
+
+		String[] ipChoice = {"ip","ip6"};
+		String[] ipActive = {  };
+		String ipName = "Packettypes";
+		Setting ipSetting = new Setting("IPVERSION", ipName, ipActive, MULTICHOICE, ipChoice);
+		MainController.addSetting(ipSetting);
+
+		//ExportSettings
+
+		String[] eipChoice = {"ip","ip6"};
+		String[] eipActive = {  };
+		String eipName = "Packettypes";
+		Setting eipSetting = new Setting("E_IPVERSION", eipName, eipActive, MULTICHOICE, eipChoice);
+		MainController.addExportSetting(eipSetting);
+
+		String[] eamountActive = { "17" };
+		String eamountName = "Packets to be captured:";
+		Setting eamountSetting = new Setting("E_AMOUNT", eamountName, eamountActive, NUMBER);
+		MainController.addExportSetting(eamountSetting);
+
+		//DisplaySettings
+
+		//StatSettings
+
 
 		// Number - Input f�r Nummern
-		String[] nActive = { "17" };
-		String nField = "NUMBER";
-		String nName = "n Testcase";
-		Setting nTest = new Setting(2, nName, nActive, nField);
-		MainController.addSetting(nTest);
-
-		// Number - Input f�r Nummern
-		String[] neActive = { "17" };
-		String neField = "NUMBER";
-		String neName = "n Testcase";
-		Setting neTest = new Setting(3, neName, neActive, neField);
-		MainController.addExportSetting(neTest);
 
 		ViewController.go();
 	}
