@@ -20,6 +20,8 @@ import javafx.collections.ObservableList;
 
 public class ImportExportController {
 
+	private static final int SNAP_LEN = 65536;
+
 	String path;
 	int amount;
 	String filter;
@@ -42,7 +44,7 @@ public class ImportExportController {
 
 		PcapHandle handle = Pcaps.openOffline(path);
 
-		if (filter != "") {
+		if (!filter.equals("")) {
 			handle.setFilter(filter, BpfCompileMode.OPTIMIZE);
 		}
 
@@ -64,9 +66,9 @@ public class ImportExportController {
 	}
 
 	public void doSave(ObservableList<PacketItem> packetList) throws PcapNativeException, NotOpenException {
-		PcapHandle handle = Pcaps.openDead(DataLinkType.EN10MB, 65536);
+		PcapHandle handle = Pcaps.openDead(DataLinkType.EN10MB, SNAP_LEN);
 
-		if (filter != "") {
+		if (!filter.equals("")) {
 			handle.setFilter(filter, BpfCompileMode.OPTIMIZE);
 		}
 

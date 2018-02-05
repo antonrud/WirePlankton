@@ -34,12 +34,12 @@ public class MainController {
 
 	public static void capturePacket() throws InterruptedException {
 
-		//TODO Settings IDs must be defined.
+		// TODO Settings IDs must be defined.
 		int amount = Integer.parseInt(getSetting("AMOUNT").getActive().get(0));
-		int limit = Integer.parseInt(getSetting("LIMIT").getActive().get(0));
-		int timeout = Integer.parseInt(getSetting("TIMEOUT").getActive().get(0));
+		int limit = (Integer.parseInt(getSetting("LIMIT").getActive().get(0))) * 1024;
+		int timeout = (Integer.parseInt(getSetting("TIMEOUT").getActive().get(0))) * 1000;
 		String interfaceName = getSetting("NIF").getActive().get(0);
-		String filter = getFilterString();
+		String filter = getFilterString("capture");
 
 		try {
 			captureThread = new Thread(new CaptureController(amount, limit, timeout, interfaceName, filter));
@@ -75,7 +75,7 @@ public class MainController {
 	public static void doSave(File f) {
 
 		int amount = Integer.parseInt(getSetting("E_AMOUNT").getActive().get(0));
-		String filter = getFilterString();
+		String filter = getFilterString("save");
 
 		ImportExportController saveController = new ImportExportController(f.getPath(), amount, filter);
 
@@ -93,7 +93,7 @@ public class MainController {
 	public static void doLoad(File f) {
 
 		int amount = Integer.parseInt(getSetting("E_AMOUNT").getActive().get(0));
-		String filter = getFilterString();
+		String filter = getFilterString("load");
 
 		ImportExportController loadController = new ImportExportController(f.getPath(), amount, filter);
 
@@ -114,10 +114,21 @@ public class MainController {
 		}
 	}
 
-	private static String getFilterString() {
+	private static String getFilterString(String purpose) {
 		String filter = "";
+		List<String> filterIds;
 
-		List<String> filterIds = Arrays.asList("IPVERSION"); // TODO Set IDs of filter settings here!
+		switch (purpose) {
+		case "capture":
+			filterIds = Arrays.asList("IPVERSION");
+			break;
+		case "save":
+		case "load":
+			filterIds = Arrays.asList("E_IPVERSION");
+			break;
+		default:
+			throw new IllegalArgumentException("Invalid purpose: " + purpose);
+		}
 
 		for (Setting filterSetting : getSettings().stream().filter(setting -> filterIds.contains(setting.getId()))
 				.filter(setting -> !setting.getActive().isEmpty()).collect(Collectors.toList())) {
@@ -176,11 +187,11 @@ public class MainController {
 		return SettingsController.getSettigsList();
 	}
 
-	public static LinkedList<Setting> getDisplaySettingsList(){
+	public static LinkedList<Setting> getDisplaySettingsList() {
 		return SettingsController.getDisplaySettingsList();
 	}
 
-	public static LinkedList<Setting> getStatSettingsList(){
+	public static LinkedList<Setting> getStatSettingsList() {
 		return SettingsController.getStatSettingsList();
 	}
 }

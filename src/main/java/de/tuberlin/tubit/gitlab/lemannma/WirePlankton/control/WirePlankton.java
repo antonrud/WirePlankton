@@ -39,7 +39,7 @@ public class WirePlankton {
 			interfaceNames.add(nif.getName());
 		}
 
-		//SystemSettings
+		// SystemSettings
 		String[] nifChoice = interfaceNames.toArray(new String[0]);
 		String[] nifActive = nifChoice;
 		String nifName = "Interface:";
@@ -51,41 +51,40 @@ public class WirePlankton {
 		Setting amountSetting = new Setting("AMOUNT", amountName, amountActive, NUMBER);
 		MainController.addSetting(amountSetting);
 
-		String[] limitActive = { "1000"};
+		String[] limitActive = { "1000" };
 		String limitName = "Max. Size in KBytes:";
 		Setting limitSetting = new Setting("LIMIT", limitName, limitActive, NUMBER);
 		MainController.addSetting(limitSetting);
 
-		String[] timeoutActive = { "60000"};
-		String timeoutName = "Timeout in ms:";
-		Setting timeoutSetting = new Setting("TIMEOUT", limitName, limitActive, NUMBER);
+		String[] timeoutActive = { "60" };
+		String timeoutName = "Timeout in sec:";
+		Setting timeoutSetting = new Setting("TIMEOUT", timeoutName, timeoutActive, NUMBER);
 		MainController.addSetting(timeoutSetting);
 
-		String[] ipChoice = {"ip","ip6"};
-		String[] ipActive = {  };
-		String ipName = "Packettypes";
+		String[] ipChoice = { "ip", "ip6" };
+		String[] ipActive = {};
+		String ipName = "IP version:";
 		Setting ipSetting = new Setting("IPVERSION", ipName, ipActive, MULTICHOICE, ipChoice);
 		MainController.addSetting(ipSetting);
 
-		//ExportSettings
+		// ExportSettings
 
-		String[] eipChoice = {"ip","ip6"};
-		String[] eipActive = {  };
-		String eipName = "Packettypes";
+		String[] eipChoice = { "ip", "ip6" };
+		String[] eipActive = {};
+		String eipName = "IP version:";
 		Setting eipSetting = new Setting("E_IPVERSION", eipName, eipActive, MULTICHOICE, eipChoice);
 		MainController.addExportSetting(eipSetting);
 
 		String[] eamountActive = { "17" };
-		String eamountName = "Packets to be captured:";
+		String eamountName = "Amount of packets:";
 		Setting eamountSetting = new Setting("E_AMOUNT", eamountName, eamountActive, NUMBER);
 		MainController.addExportSetting(eamountSetting);
 
-		//DisplaySettings
+		// DisplaySettings
 
-		//StatSettings
+		// StatSettings
 
-
-		// Number - Input f�r Nummern
+		// Number - Input fuer Nummern
 
 		ViewController.go();
 	}
