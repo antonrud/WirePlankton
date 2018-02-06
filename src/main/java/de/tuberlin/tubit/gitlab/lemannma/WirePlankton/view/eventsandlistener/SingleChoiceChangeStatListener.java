@@ -7,15 +7,15 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
-public class SingleChoiceChangeStatListener<T> implements ChangeListener<T>{
+public class SingleChoiceChangeStatListener<T> implements ChangeListener<T> {
 
-	public SingleChoiceChangeStatListener(){
+	public SingleChoiceChangeStatListener() {
 		super();
 	}
 
 	@Override
 	public void changed(ObservableValue<? extends T> observable, T oldValue, T newValue) {
-		ViewController.getStatView().changeStat((int) newValue);
+		ViewController.getStatView().changeStat((int) (Object) newValue);
 	}
 
 }
