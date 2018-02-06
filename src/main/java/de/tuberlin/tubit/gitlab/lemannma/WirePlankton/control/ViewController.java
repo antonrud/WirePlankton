@@ -195,6 +195,11 @@ public class ViewController extends Application {
 		return settingsView;
 	}
 
+	public static StatisticsView getStatView() {
+		return statView;
+
+	}
+
 
 
 }

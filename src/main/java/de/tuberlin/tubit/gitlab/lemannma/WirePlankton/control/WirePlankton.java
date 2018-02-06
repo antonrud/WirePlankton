@@ -87,7 +87,7 @@ public class WirePlankton {
 		MainController.addDisplaySetting(dipSetting);
 
 		//StatSettings
-		String[] statChoice = {"Top 5 IP","Types"};
+		String[] statChoice = {"Top 5 IP","Top 5 MACs"};
 		String[] statActive = {statChoice[0]};
 		String statName = "Statistic:";
 		Setting statSetting = new Setting("STAT", statName, statActive, SINGLECHOICE, statChoice);

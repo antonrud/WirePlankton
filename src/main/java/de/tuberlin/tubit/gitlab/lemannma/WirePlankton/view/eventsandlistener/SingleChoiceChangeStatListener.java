@@ -15,7 +15,7 @@ public class SingleChoiceChangeStatListener<T> implements ChangeListener<T>{
 
 	@Override
 	public void changed(ObservableValue<? extends T> observable, T oldValue, T newValue) {
-		ViewController.getPacketview().reloadTable();
+		ViewController.getStatView().changeStat((int) newValue);
 	}
 
 }
