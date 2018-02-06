@@ -16,7 +16,7 @@ public class Top5MACChart extends VBox implements Refreshable{
 	private LinkedList<Number> values;
 	@Override
 	public void refresh() {
-		Number[] dummyA = {200,120,110,180,5};
+		Number[] dummyA = {200,120,110,80,5};
 		String[] dummyI = {"00:00:00:00:00:01","00:00:00:00:00:02","00:00:00:00:00:03","00:00:00:00:00:04","00:00:00:00:00:05",};
 		macs.addAll(Arrays.asList(dummyI));
 		values.addAll(Arrays.asList(dummyA));
