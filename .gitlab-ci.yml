@@ -1,29 +1,39 @@
 stages:
+    - test
     - verify
-    - delivery
-    - deployment
-    
-Verify1:
+    - deploy
+    - release
+
+Test:
+    stage: test
+    script:
+        - echo TEST
+    tags:
+        - test
+
+Verify:
     stage: verify
     script:
         - mvn verify
+    only:
+        - develop
     tags:
         - verify
 
-Delivery1:
-    stage: delivery
+Deploy:
+    stage: deploy
     script:
-        - echo DELIVERED
-    except:
-        - master
+        - mvn clean deploy
+    only:
+        - develop
     tags:
-        - Delivery
+        - deploy
 
-Deployment1:
-    stage: deployment
+Release:
+    stage: release
     script:
-       - echo DEPLOYED
+       - mvn clean deploy
     only:
         - master
     tags:
-        - deployment
+        - release
