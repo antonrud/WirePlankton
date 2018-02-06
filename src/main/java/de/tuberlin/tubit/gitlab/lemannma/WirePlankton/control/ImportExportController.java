@@ -44,7 +44,7 @@ public class ImportExportController {
 
 		PcapHandle handle = Pcaps.openOffline(path);
 
-		if (!filter.equals("")) {
+		if (filter != null && filter.length() != 0) {
 			handle.setFilter(filter, BpfCompileMode.OPTIMIZE);
 		}
 
@@ -68,7 +68,7 @@ public class ImportExportController {
 	public void doSave(ObservableList<PacketItem> packetList) throws PcapNativeException, NotOpenException {
 		PcapHandle handle = Pcaps.openDead(DataLinkType.EN10MB, SNAP_LEN);
 
-		if (!filter.equals("")) {
+		if (filter != null && filter.length() != 0) {
 			handle.setFilter(filter, BpfCompileMode.OPTIMIZE);
 		}
 
@@ -102,6 +102,9 @@ public class ImportExportController {
 
 		FileWriter writer = new FileWriter(path, true);
 		BufferedWriter buffer = new BufferedWriter(writer);
+
+		buffer.write("Index;CapturedAt;OriginalLength;DestinationAddress;SourceAddress;PacketType");
+		buffer.newLine();
 
 		for (PacketItem packetItem : packetList) {
 			buffer.write(packetItem.toCSVFormat());

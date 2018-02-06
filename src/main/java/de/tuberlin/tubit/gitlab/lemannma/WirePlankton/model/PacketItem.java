@@ -27,13 +27,13 @@ public class PacketItem {
 
 		this.packet = packet;
 		this.preview = packet.toString().replaceAll("\n", "").replaceAll("\r", "");
-
+		
 		String[] splited = packet.toString().split("\\s*\\r?\\n\\s*");
-		this.capturedAt = splited[0];
-		this.originalLength = splited[1];
-		this.destinationAddress = splited[3];
-		this.sourceAddress = splited[4];
-		this.packetType = splited[5];
+		this.capturedAt = splited[0].substring(24, 32);
+		this.originalLength = splited[1].substring(17, splited[1].length());
+		this.destinationAddress = splited[3].substring(21, splited[3].length());
+		this.sourceAddress = splited[4].substring(16, splited[4].length());
+		this.packetType = splited[5].substring(14, splited[5].length() - 1);
 	}
 
 	public String toCSVFormat() {

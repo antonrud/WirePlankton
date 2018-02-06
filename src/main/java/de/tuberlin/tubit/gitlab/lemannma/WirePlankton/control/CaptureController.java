@@ -48,7 +48,7 @@ public class CaptureController implements Runnable {
 
 		System.out.println(filter);
 
-		if (!filter.equals("")) {
+		if (filter != null && filter.length() != 0) {
 			handle.setFilter(filter, BpfCompileMode.OPTIMIZE);
 		}
 

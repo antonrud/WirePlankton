@@ -22,8 +22,8 @@ public class PacketView extends VBox{
 		view = new TableView<PacketItem>();
 		this.getChildren().add(view);
 
-		TableColumn<PacketItem,Integer> index = new TableColumn<PacketItem,Integer>("Index");
-		TableColumn<PacketItem,String> cAt = new TableColumn<PacketItem,String>("captured At");
+		TableColumn<PacketItem,Integer> index = new TableColumn<PacketItem,Integer>("Nr");
+		TableColumn<PacketItem,String> cAt = new TableColumn<PacketItem,String>("Time");
 		TableColumn<PacketItem,String> length = new TableColumn<PacketItem,String>("Length");
 		TableColumn<PacketItem,String> dest = new TableColumn<PacketItem,String>("Destination");
 		TableColumn<PacketItem,String> src = new TableColumn<PacketItem,String>("Source");
