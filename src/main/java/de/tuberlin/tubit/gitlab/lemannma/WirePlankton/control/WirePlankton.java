@@ -5,6 +5,7 @@ package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.PcapNetworkInterface;
@@ -34,13 +35,11 @@ public class WirePlankton {
 			e.printStackTrace();
 		}
 
-		List<String> interfaceNames = new ArrayList<String>();
-		for (PcapNetworkInterface nif : interfaces) {
-			interfaceNames.add(nif.getName());
-		}
+		MainController.setInterfaces(interfaces.stream()
+				.collect(Collectors.toMap(PcapNetworkInterface::getName, PcapNetworkInterface::getDescription)));
 
-		//SystemSettings
-		String[] nifChoice = interfaceNames.toArray(new String[0]);
+		// SystemSettings
+		String[] nifChoice = MainController.getInterfaceDescriptions().toArray(new String[0]);
 		String[] nifActive = nifChoice;
 		String nifName = "Interface:";
 		Setting nifSetting = new Setting("NIF", nifName, nifActive, SINGLECHOICE, nifChoice);
@@ -51,31 +50,32 @@ public class WirePlankton {
 		Setting amountSetting = new Setting("AMOUNT", amountName, amountActive, NUMBER);
 		MainController.addSetting(amountSetting);
 
-		String[] limitActive = { "1000"};
+		String[] limitActive = { "1000" };
 		String limitName = "Max. Size in KBytes:";
 		Setting limitSetting = new Setting("LIMIT", limitName, limitActive, NUMBER);
 		MainController.addSetting(limitSetting);
 
-		String[] timeoutActive = { "60000"};
-		String timeoutName = "Timeout in ms:";
+		String[] timeoutActive = { "60" };
+		String timeoutName = "Timeout in sec:";
 		Setting timeoutSetting = new Setting("TIMEOUT", timeoutName, timeoutActive, NUMBER);
 		MainController.addSetting(timeoutSetting);
 
-		String[] ipChoice = {"ip","ip6"};
-		String[] ipActive = {  };
-		String ipName = "Packettypes";
+		String[] ipChoice = { "ip", "ip6" };
+		String[] ipActive = {};
+		String ipName = "IP version:";
 		Setting ipSetting = new Setting("IPVERSION", ipName, ipActive, MULTICHOICE, ipChoice);
 		MainController.addSetting(ipSetting);
 
-		//ExportSettings
-		String[] eipChoice = {"ip","ip6"};
-		String[] eipActive = {  };
-		String eipName = "Packettypes";
+		// ExportSettings
+
+		String[] eipChoice = { "ip", "ip6" };
+		String[] eipActive = {};
+		String eipName = "IP version:";
 		Setting eipSetting = new Setting("E_IPVERSION", eipName, eipActive, MULTICHOICE, eipChoice);
 		MainController.addExportSetting(eipSetting);
 
 		String[] eamountActive = { "17" };
-		String eamountName = "Packets to be captured:";
+		String eamountName = "Amount of packets:";
 		Setting eamountSetting = new Setting("E_AMOUNT", eamountName, eamountActive, NUMBER);
 		MainController.addExportSetting(eamountSetting);
 
