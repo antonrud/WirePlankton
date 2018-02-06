@@ -181,6 +181,16 @@ public class MainController {
 
 	}
 
+	public static void addStatSetting(Setting s) {
+		SettingsController.addStatSetting(s);
+
+	}
+
+	public static void addDisplaySetting(Setting s) {
+		SettingsController.addDisplaySetting(s);
+
+	}
+
 	public static List<Setting> getExportSettings() {
 		return SettingsController.getExportSettingsList();
 	}

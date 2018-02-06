@@ -7,18 +7,19 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.inputs.MultiChoice;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.inputs.NumberInput;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.inputs.SingleChoice;
+import javafx.beans.value.ChangeListener;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class SettingsBar extends HBox{
 
-	public SettingsBar(LinkedList<Setting> settings){
+	public SettingsBar(LinkedList<Setting> settings, ChangeListener<Number> listener){
 		super();
 		for (Setting setting : settings) {
 			switch(setting.getFieldType()){
 
 			case 0:
-				SingleChoice f = new SingleChoice(setting);
+				SingleChoice f = new SingleChoice(setting, listener);
 				this.getChildren().add(f);
 				break;
 			case 1:

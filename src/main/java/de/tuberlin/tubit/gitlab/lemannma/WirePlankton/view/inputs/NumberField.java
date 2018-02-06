@@ -18,7 +18,7 @@ public class NumberField extends TextField{
         if (text.matches("[0-9]*")) {
           super.replaceText(start, end, text);
           ArrayList<String> a = new ArrayList<String>();
-          a.add(text);
+          a.add(super.getText());
           setting.setActive(a);
         }
       }
@@ -27,7 +27,7 @@ public class NumberField extends TextField{
         if (text.matches("[0-9]*")) {
           super.replaceSelection(text);
           ArrayList<String> a = new ArrayList<String>();
-          a.add(text);
+          a.add(super.getText());
           setting.setActive(a);
         }
       }

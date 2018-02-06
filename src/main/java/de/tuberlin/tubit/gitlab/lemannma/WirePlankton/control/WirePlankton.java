@@ -79,11 +79,19 @@ public class WirePlankton {
 		Setting eamountSetting = new Setting("E_AMOUNT", eamountName, eamountActive, NUMBER);
 		MainController.addExportSetting(eamountSetting);
 
-		// DisplaySettings
+		//DisplaySettings
+		String[] dipChoice = {"all", "ipv4","ipv6"};
+		String[] dipActive = { "all" };
+		String dipName = "Packettypes";
+		Setting dipSetting = new Setting("D_IPVERSION", dipName, dipActive, SINGLECHOICE, dipChoice);
+		MainController.addDisplaySetting(dipSetting);
 
-		// StatSettings
-
-		// Number - Input fuer Nummern
+		//StatSettings
+		String[] statChoice = {"Top 5 IP","Top 5 MACs"};
+		String[] statActive = {statChoice[0]};
+		String statName = "Statistic:";
+		Setting statSetting = new Setting("STAT", statName, statActive, SINGLECHOICE, statChoice);
+		MainController.addStatSetting(statSetting);
 
 		ViewController.go();
 	}

@@ -28,12 +28,11 @@ public class StartSaveEvent <T extends Event> implements EventHandler<T> {
         fileChooser.initialFileNameProperty().set("WirePlanktonSave.pcap");
 
 		File f = fileChooser.showSaveDialog(s);
-		if(!f.getAbsolutePath().endsWith(".pcap")){
-			f = new File(f.getAbsolutePath()+".pcap");
-		}
-		if(f != null){
-
-			MainController.doSave(f);
+		if(f!=null){
+			if(!f.getAbsolutePath().endsWith(".pcap")){
+				f = new File(f.getAbsolutePath()+".pcap");
+				MainController.doSave(f);
+			}
 		}
 
 	}

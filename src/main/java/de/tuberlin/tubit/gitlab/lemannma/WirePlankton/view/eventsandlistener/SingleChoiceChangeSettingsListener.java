@@ -6,10 +6,10 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
-public class SingleChoiceChangeListener<T> implements ChangeListener<T>{
+public class SingleChoiceChangeSettingsListener<T> implements ChangeListener<T>{
 	Setting s;
 
-	public SingleChoiceChangeListener(Setting s){
+	public SingleChoiceChangeSettingsListener(Setting s){
 		super();
 		this.s = s;
 	}
