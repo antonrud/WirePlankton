@@ -21,6 +21,10 @@ public class SettingsController {
 		return settingsList.stream().filter(setting -> setting.getId().equals(id)).findFirst().get();
 	}
 
+	public static Setting getExportSetting(String id) {
+		return exportSettingsList.stream().filter(setting -> setting.getId().equals(id)).findFirst().get();
+	}
+	
 	public static void addSetting(Setting s) {
 		settingsList.add(s);
 	}

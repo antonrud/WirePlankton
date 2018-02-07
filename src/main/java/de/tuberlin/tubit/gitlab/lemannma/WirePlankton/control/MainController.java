@@ -77,7 +77,7 @@ public class MainController {
 
 	public static void doSave(File f) {
 
-		int amount = Integer.parseInt(getSetting("E_AMOUNT").getActive().get(0));
+		int amount = Integer.parseInt(getExportSetting("E_AMOUNT").getActive().get(0));
 		String filter = getFilterString("save");
 
 		ImportExportController saveController = new ImportExportController(f.getPath(), amount, filter);
@@ -95,7 +95,7 @@ public class MainController {
 
 	public static void doLoad(File f) {
 
-		int amount = Integer.parseInt(getSetting("E_AMOUNT").getActive().get(0));
+		int amount = Integer.parseInt(getExportSetting("E_AMOUNT").getActive().get(0));
 		String filter = getFilterString("load");
 
 		ImportExportController loadController = new ImportExportController(f.getPath(), amount, filter);
@@ -124,20 +124,32 @@ public class MainController {
 		switch (purpose) {
 		case "capture":
 			filterIds = Arrays.asList("IPVERSION");
+
+			for (Setting filterSetting : getSettings().stream().filter(setting -> filterIds.contains(setting.getId()))
+					.filter(setting -> !setting.getActive().isEmpty()).collect(Collectors.toList())) {
+				for (String active : filterSetting.getActive()) {
+					filter = filter + active + " or ";
+				}
+			}
+
 			break;
+
 		case "save":
 		case "load":
 			filterIds = Arrays.asList("E_IPVERSION");
+
+			for (Setting filterSetting : getExportSettings().stream()
+					.filter(setting -> filterIds.contains(setting.getId()))
+					.filter(setting -> !setting.getActive().isEmpty()).collect(Collectors.toList())) {
+				for (String active : filterSetting.getActive()) {
+					filter = filter + active + " or ";
+				}
+			}
+
 			break;
+
 		default:
 			throw new IllegalArgumentException("Invalid purpose: " + purpose);
-		}
-
-		for (Setting filterSetting : getSettings().stream().filter(setting -> filterIds.contains(setting.getId()))
-				.filter(setting -> !setting.getActive().isEmpty()).collect(Collectors.toList())) {
-			for (String active : filterSetting.getActive()) {
-				filter = filter + active + " or ";
-			}
 		}
 
 		if (filter.length() != 0) {
@@ -174,6 +186,10 @@ public class MainController {
 
 	public static Setting getSetting(String id) {
 		return SettingsController.getSetting(id);
+	}
+
+	public static Setting getExportSetting(String id) {
+		return SettingsController.getExportSetting(id);
 	}
 
 	public static void addExportSetting(Setting s) {
