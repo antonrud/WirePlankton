@@ -62,8 +62,15 @@ public class CaptureController implements Runnable {
 			}
 		} else {
 
+			int captured = 0;
+			Packet packet;
+
 			for (int packetNr = 1; packetNr <= amount; packetNr++) {
-				MainController.addPacket(handle.getNextPacketEx());
+				if ((captured += (packet = handle.getNextPacketEx()).length()) < limit) {
+					MainController.addPacket(packet);
+				} else {
+					packetNr = amount;
+				}
 			}
 		}
 
