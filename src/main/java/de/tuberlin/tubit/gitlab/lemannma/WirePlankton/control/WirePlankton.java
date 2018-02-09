@@ -4,9 +4,9 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
-
+import java.util.Map;
 import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.core.Pcaps;
@@ -35,8 +35,20 @@ public class WirePlankton {
 			e.printStackTrace();
 		}
 
-		MainController.setInterfaces(interfaces.stream()
-				.collect(Collectors.toMap(PcapNetworkInterface::getName, PcapNetworkInterface::getDescription)));
+		Map<String, String> nifs = new HashMap<String, String>();
+		for (PcapNetworkInterface nif : interfaces) {
+			if (nif.getDescription() == null) {
+				nifs.put(nif.getName(), nif.getName());
+			} else {
+				nifs.put(nif.getName(), nif.getDescription());
+			}
+		}
+		MainController.setInterfaces(nifs);
+
+		// No checking for NullPointer in Description
+		// MainController.setInterfaces(interfaces.stream()
+		// .collect(Collectors.toMap(PcapNetworkInterface::getName,
+		// PcapNetworkInterface::getDescription)));
 
 		// SystemSettings
 		String[] nifChoice = MainController.getInterfaceDescriptions().toArray(new String[0]);
@@ -79,16 +91,16 @@ public class WirePlankton {
 		Setting eamountSetting = new Setting("E_AMOUNT", eamountName, eamountActive, NUMBER);
 		MainController.addExportSetting(eamountSetting);
 
-		//DisplaySettings
-		String[] dipChoice = {"all", "ipv4","ipv6"};
+		// DisplaySettings
+		String[] dipChoice = { "all", "ipv4", "ipv6" };
 		String[] dipActive = { "all" };
 		String dipName = "Packettypes";
 		Setting dipSetting = new Setting("D_IPVERSION", dipName, dipActive, SINGLECHOICE, dipChoice);
 		MainController.addDisplaySetting(dipSetting);
 
-		//StatSettings
-		String[] statChoice = {"Top 5 IP","Top 5 MACs"};
-		String[] statActive = {statChoice[0]};
+		// StatSettings
+		String[] statChoice = { "Top 5 IP", "Top 5 MACs" };
+		String[] statActive = { statChoice[0] };
 		String statName = "Statistic:";
 		Setting statSetting = new Setting("STAT", statName, statActive, SINGLECHOICE, statChoice);
 		MainController.addStatSetting(statSetting);
