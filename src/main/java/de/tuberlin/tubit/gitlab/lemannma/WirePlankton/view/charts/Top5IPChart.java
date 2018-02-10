@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.MainController;
 import javafx.scene.chart.Axis;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -18,8 +19,12 @@ public class Top5IPChart extends VBox implements Refreshable{
 	private LinkedList<Number> values;
 	@Override
 	public void refresh() {
-		Number[] dummyA = {200,180,160,140,120};
-		String[] dummyI = {"192.168.0.1","192.168.0.2","192.168.0.3","192.168.0.4","192.168.0.5"};
+		//Number[] dummyA = {200,180,160,140,120};
+		//String[] dummyI = {"192.168.0.1","192.168.0.2","192.168.0.3","192.168.0.4","192.168.0.5"};
+		
+		String[] dummyI = MainController.getTopIPs().keySet().toArray(new String[0]);
+		Number[] dummyA = MainController.getTopIPs().values().toArray(new Number[0]);
+		
 		ips.addAll(Arrays.asList(dummyI));
 		values.addAll(Arrays.asList(dummyA));
 

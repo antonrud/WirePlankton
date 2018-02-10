@@ -83,8 +83,6 @@ public class MainController {
 
 		captureThread.interrupt();
 	}
-	
-	
 
 	// TODO No needed yet
 	// public static void doCSVImport(File f) {
@@ -188,14 +186,17 @@ public class MainController {
 
 	public static void initApp() {
 		stopCapture();
-		packetList.clear();
+		clearPacketList();
+		PacketItem.resetIndexGen();
 		SettingsController.settingsList.clear();
+		StatisticController.reset();
 
 		WirePlankton.main(new String[0]);
 	}
 
 	public static void addPacket(Packet packet) {
 		packetList.add(new PacketItem(packet));
+		StatisticController.evaluatePacket(packet);
 	}
 
 	public static ObservableList<PacketItem> getPacketList() {
@@ -266,5 +267,24 @@ public class MainController {
 			}
 		}
 		return null;
+	}
+
+	public static Map<String, Number> getTopIPs() {
+
+		return StatisticController.getTopIPs();
+	}
+
+	public static Map<String, Number> getTopMACs() {
+
+		return StatisticController.getTopMACs();
+	}
+
+	public static int getPercentageByType(String type) {
+
+		return StatisticController.getPercentageByType(type);
+	}
+
+	public void resetStatistic() {
+		StatisticController.reset();
 	}
 }
