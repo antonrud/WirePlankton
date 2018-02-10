@@ -9,6 +9,7 @@ public class StartCaptureEvent<T extends Event> implements EventHandler<T> {
 	public StartCaptureEvent() {
 		super();
 	}
+
 	@Override
 	public void handle(Event event) {
 		try {

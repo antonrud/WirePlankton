@@ -28,7 +28,7 @@ public class MainController {
 
 	private static ObservableList<PacketItem> packetList = FXCollections.observableArrayList();
 	private static Map<String, String> interfaces;
-	static Thread captureThread;
+	static Thread captureThread = new Thread();
 
 	// Shows: We want it static
 	private MainController() {

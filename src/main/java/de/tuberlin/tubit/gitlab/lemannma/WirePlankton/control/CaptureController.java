@@ -23,6 +23,7 @@ public class CaptureController implements Runnable {
 
 	private static final PromiscuousMode PROMISCOUS_MODE = PromiscuousMode.PROMISCUOUS;
 	private static final int SNAP_LEN = 65536;
+	PcapHandle handle;
 
 	int amount;
 	int limit;
@@ -44,7 +45,7 @@ public class CaptureController implements Runnable {
 		MainController.clearPacketList();
 		PacketItem.resetIndexGen();
 
-		PcapHandle handle = nif.openLive(SNAP_LEN, PROMISCOUS_MODE, timeout);
+		handle = nif.openLive(SNAP_LEN, PROMISCOUS_MODE, timeout);
 
 		System.out.println(filter);
 
@@ -74,6 +75,10 @@ public class CaptureController implements Runnable {
 			}
 		}
 
+		handle.close();
+	}
+
+	public void closeHandel() {
 		handle.close();
 	}
 

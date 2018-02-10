@@ -17,6 +17,7 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.Sin
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartCaptureEvent;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartExportEvent;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartSaveEvent;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StopCaptureEvent;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartLoadEvent;
 import javafx.application.*;
 import javafx.event.ActionEvent;
@@ -29,10 +30,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
-
 public class ViewController extends Application {
 
-	//Init basic elements
+	// Init basic elements
 	private static BorderPane root;
 	private static GridPane currentView;
 	private static Scene scene;
@@ -48,35 +48,36 @@ public class ViewController extends Application {
 	private static SettingsView settingsView;
 	private static StatisticsView statView;
 
-	//control of height and width
+	// control of height and width
 	private static double masterWidth = 800;
 	private static double masterHeight = 600;
 
-	//TODO Enums sollten eigentlich CAPS sein, dann muss ich aber eine extraliste fuer die Menuenamen pflegen..
-	public static enum ViewModes{
+	// TODO Enums sollten eigentlich CAPS sein, dann muss ich aber eine extraliste
+	// fuer die Menuenamen pflegen..
+	public static enum ViewModes {
 		Liveview, Settings, File, Statistics
 	};
 
-	public static enum captureModes{
-		Start
+	public static enum captureModes {
+		Start, Stop
 	};
 
-	public static enum dataModes{
+	public static enum dataModes {
 		Export, Save, Load
 	};
 
 	public void start(Stage primaryStage) {
 
-		//Init Elements
+		// Init Elements
 		LinkedList<MenuButton> mainMenu = new LinkedList<MenuButton>();
-		for (ViewModes viewMode : ViewController.ViewModes.values()){
+		for (ViewModes viewMode : ViewController.ViewModes.values()) {
 			mainMenu.add(new MenuButton(viewMode.toString(), new MainMenuEvent<ActionEvent>(viewMode.ordinal())));
 		}
 		menuBar = new MenuBar(mainMenu);
+
 		LinkedList<MenuButton> settingsMenu = new LinkedList<MenuButton>();
-		for (captureModes sMode : ViewController.captureModes.values()){
-			settingsMenu.add(new MenuButton(sMode.toString(), new StartCaptureEvent<ActionEvent>()));
-		}
+		settingsMenu.add(new MenuButton(captureModes.Start.toString(), new StartCaptureEvent<ActionEvent>()));
+		settingsMenu.add(new MenuButton(captureModes.Stop.toString(), new StopCaptureEvent<ActionEvent>()));
 		settingsBar = new MenuBar(settingsMenu);
 
 		LinkedList<MenuButton> dataMenu = new LinkedList<MenuButton>();
@@ -84,10 +85,10 @@ public class ViewController extends Application {
 		dataMenu.add(new MenuButton(dataModes.Load.toString(), new StartLoadEvent<ActionEvent>()));
 		dataMenu.add(new MenuButton(dataModes.Export.toString(), new StartExportEvent<ActionEvent>()));
 
-
 		dataBar = new MenuBar(dataMenu);
 		statSettingsBar = new SettingsBar(MainController.getStatSettingsList(), new SingleChoiceChangeStatListener<>());
-		viewSettingsBar = new SettingsBar(MainController.getDisplaySettingsList(), new SingleChoiceChangeViewListener<>());
+		viewSettingsBar = new SettingsBar(MainController.getDisplaySettingsList(),
+				new SingleChoiceChangeViewListener<>());
 
 		packetView = new PacketView();
 		exportView = new ExportView();
@@ -95,7 +96,7 @@ public class ViewController extends Application {
 		settingsView = new SettingsView();
 		statView = new StatisticsView();
 
-		//Init Window
+		// Init Window
 		root = new BorderPane();
 		currentView = new GridPane();
 		RowConstraints rc = new RowConstraints();
@@ -108,16 +109,15 @@ public class ViewController extends Application {
 		scene = new Scene(root, masterWidth, masterHeight);
 		primaryStage.setScene(scene);
 
-		//Style Panes
+		// Style Panes
 
 		File css = new File("styles/main.css");
 		root.getStyleClass().add("background");
 		currentView.getStyleClass().add("background");
-		root.getStylesheets().add("file:///"+css.getAbsolutePath().replace("\\", "/"));
-		root.getStylesheets().add("file:///"+css.getAbsolutePath().replace("\\", "/"));
+		root.getStylesheets().add("file:///" + css.getAbsolutePath().replace("\\", "/"));
+		root.getStylesheets().add("file:///" + css.getAbsolutePath().replace("\\", "/"));
 
-
-		//Init StandardView
+		// Init StandardView
 		changeView(0);
 
 		primaryStage.show();
@@ -135,37 +135,37 @@ public class ViewController extends Application {
 		currentView.getColumnConstraints().clear();
 		currentView.getChildren().clear();
 		int col;
-		if(view == 0){
+		if (view == 0) {
 			col = 2;
-		} else{
+		} else {
 			col = 1;
 		}
 
-		for (int i=0;i<col;i++){
+		for (int i = 0; i < col; i++) {
 			ColumnConstraints cc = new ColumnConstraints();
-	        cc.setHalignment(HPos.LEFT);
-	        cc.setPercentWidth(100/col);
-	        currentView.getColumnConstraints().add(cc);
+			cc.setHalignment(HPos.LEFT);
+			cc.setPercentWidth(100 / col);
+			currentView.getColumnConstraints().add(cc);
 		}
-		switch (view){
-			case 0:
-				currentView.add(packetView, 0, 0);
-				currentView.add(realtimeView, 1, 0);
-				root.setBottom(viewSettingsBar);
-				break;
-			case 1:
-				currentView.add(settingsView, 0, 0);
-				root.setBottom(settingsBar);
-				break;
-			case 2:
-				currentView.add(exportView, 0, 0);
-				root.setBottom(dataBar);
-				break;
-			case 3:
-				currentView.add(statView, 0, 0);
-				root.setBottom(statSettingsBar);
-			default:
-				break;
+		switch (view) {
+		case 0:
+			currentView.add(packetView, 0, 0);
+			currentView.add(realtimeView, 1, 0);
+			root.setBottom(viewSettingsBar);
+			break;
+		case 1:
+			currentView.add(settingsView, 0, 0);
+			root.setBottom(settingsBar);
+			break;
+		case 2:
+			currentView.add(exportView, 0, 0);
+			root.setBottom(dataBar);
+			break;
+		case 3:
+			currentView.add(statView, 0, 0);
+			root.setBottom(statSettingsBar);
+		default:
+			break;
 		}
 
 	}
@@ -199,7 +199,5 @@ public class ViewController extends Application {
 		return statView;
 
 	}
-
-
 
 }
