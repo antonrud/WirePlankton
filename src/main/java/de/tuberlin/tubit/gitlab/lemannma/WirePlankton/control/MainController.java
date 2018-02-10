@@ -12,7 +12,11 @@ import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
 import org.pcap4j.core.NotOpenException;
+import org.pcap4j.core.PcapHandle;
 import org.pcap4j.core.PcapNativeException;
+import org.pcap4j.core.PcapNetworkInterface.PromiscuousMode;
+import org.pcap4j.core.Pcaps;
+import org.pcap4j.core.BpfProgram.BpfCompileMode;
 import org.pcap4j.packet.Packet;
 
 import javafx.collections.FXCollections;
@@ -29,6 +33,7 @@ public class MainController {
 	private static ObservableList<PacketItem> packetList = FXCollections.observableArrayList();
 	private static Map<String, String> interfaces;
 	static Thread captureThread = new Thread();
+	static PcapHandle handle;
 
 	// Shows: We want it static
 	private MainController() {
@@ -41,23 +46,45 @@ public class MainController {
 		int amount = Integer.parseInt(getSetting("AMOUNT").getActive().get(0));
 		int limit = (Integer.parseInt(getSetting("LIMIT").getActive().get(0))) * 1024;
 		int timeout = (Integer.parseInt(getSetting("TIMEOUT").getActive().get(0))) * 1000;
-		String interfaceName = getNameByDescription(interfaces, getSetting("NIF").getActive().get(0)).toString();
 		String filter = getFilterString("capture");
 
 		try {
-			captureThread = new Thread(new CaptureController(amount, limit, timeout, interfaceName, filter));
-		} catch (PcapNativeException e) {
-			// TODO Auto-generated catch block
+			handle = Pcaps
+					.getDevByName(getNameByDescription(interfaces, getSetting("NIF").getActive().get(0)).toString())
+					.openLive(65536, PromiscuousMode.PROMISCUOUS, timeout);
+		} catch (PcapNativeException e1) {
 			System.out.println("[FAIL] Somthing went wrong with pcap. Sorry for that.");
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
+
+		if (filter != null && filter.length() != 0) {
+			try {
+				handle.setFilter(filter, BpfCompileMode.OPTIMIZE);
+			} catch (PcapNativeException e) {
+				System.out.println("[FAIL] Somthing went wrong with capture filter. Sorry for that.");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NotOpenException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		captureThread = new Thread(new CaptureController(handle, amount, limit));
 		captureThread.start();
+	}
+
+	public static void closeHandle() {
+		if (handle != null)
+			handle.close();
 	}
 
 	public static void stopCapture() {
 
 		captureThread.interrupt();
 	}
+	
+	
 
 	// TODO No needed yet
 	// public static void doCSVImport(File f) {

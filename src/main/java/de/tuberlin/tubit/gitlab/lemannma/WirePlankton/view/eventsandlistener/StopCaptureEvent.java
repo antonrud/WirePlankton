@@ -13,6 +13,7 @@ public class StopCaptureEvent<T extends Event> implements EventHandler<T> {
 	@Override
 	public void handle(Event event) {
 
-		MainController.stopCapture();
+		//MainController.stopCapture();
+		MainController.closeHandle();
 	}
 }

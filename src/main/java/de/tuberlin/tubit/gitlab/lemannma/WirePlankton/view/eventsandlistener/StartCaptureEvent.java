@@ -12,6 +12,8 @@ public class StartCaptureEvent<T extends Event> implements EventHandler<T> {
 
 	@Override
 	public void handle(Event event) {
+
+		MainController.closeHandle();
 		try {
 			MainController.capturePacket();
 		} catch (InterruptedException e) {
