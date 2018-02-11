@@ -70,10 +70,19 @@ public class StatisticController {
 	}
 
 	public static Map<String, Integer> getTopIP4() {
+		
+		//TODO This should be replaced to handle IndexOfBoundException
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("0.0.0.0", 50);
+		map.put("0.0.0.1", 10);
+		map.put("0.0.0.2", 3);
+		map.put("0.0.0.3", 2);
+		map.put("0.0.0.4", 1);
+		return map;
 
-		return ip4List.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()).limit(5)
-				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (hashMap, linkedHashMap) -> hashMap,
-						LinkedHashMap::new));
+//		return ip4List.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()).limit(5)
+//				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (hashMap, linkedHashMap) -> hashMap,
+//						LinkedHashMap::new));
 
 	}
 
