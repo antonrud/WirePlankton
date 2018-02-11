@@ -22,8 +22,8 @@ public class Top5IPChart extends VBox implements Refreshable{
 		//Number[] dummyA = {200,180,160,140,120};
 		//String[] dummyI = {"192.168.0.1","192.168.0.2","192.168.0.3","192.168.0.4","192.168.0.5"};
 		
-		String[] dummyI = MainController.getTopIPs().keySet().toArray(new String[0]);
-		Number[] dummyA = MainController.getTopIPs().values().toArray(new Number[0]);
+		String[] dummyI = MainController.getTopIP4().keySet().toArray(new String[0]);
+		Number[] dummyA = MainController.getTopIP4().values().toArray(new Number[0]);
 		
 		ips.addAll(Arrays.asList(dummyI));
 		values.addAll(Arrays.asList(dummyA));

@@ -11,7 +11,7 @@ public class StatisticControllerUnitTest {
 		
 		StatisticController statisticController = new StatisticController();
 	
-		assertTrue(!statisticController.isImplemented()); //not implemented et
+		assertTrue(statisticController.isImplemented()); //not implemented et
 	}
 
 }

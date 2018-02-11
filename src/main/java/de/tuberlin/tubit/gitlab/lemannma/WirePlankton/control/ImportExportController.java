@@ -40,6 +40,7 @@ public class ImportExportController {
 
 	public void doLoad() throws PcapNativeException, EOFException, TimeoutException, NotOpenException {
 		MainController.clearPacketList();
+		MainController.resetStatistic();
 		PacketItem.resetIndexGen();
 
 		PcapHandle handle = Pcaps.openOffline(path);

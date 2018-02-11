@@ -33,6 +33,7 @@ public class CaptureController implements Runnable {
 
 	public void doCapture() throws TimeoutException, EOFException, PcapNativeException, NotOpenException {
 		MainController.clearPacketList();
+		MainController.resetStatistic();
 		PacketItem.resetIndexGen();
 
 		if (amount <= 0) {
@@ -69,6 +70,7 @@ public class CaptureController implements Runnable {
 			MainController.stopCapture();
 
 		} catch (NotOpenException e) {
+			System.out.println("[WARNING] Handle closed!");
 			MainController.stopCapture();
 
 		} catch (EOFException e) {

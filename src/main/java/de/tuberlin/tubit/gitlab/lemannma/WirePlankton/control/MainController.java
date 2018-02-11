@@ -269,22 +269,32 @@ public class MainController {
 		return null;
 	}
 
-	public static Map<String, Number> getTopIPs() {
+	public static Map<String, Integer> getTopIP4() {
 
-		return StatisticController.getTopIPs();
+		return StatisticController.getTopIP4();
 	}
 
-	public static Map<String, Number> getTopMACs() {
+	public static Map<String, Integer> getTopIP6() {
 
-		return StatisticController.getTopMACs();
+		return StatisticController.getTopIP6();
 	}
 
-	public static int getPercentageByType(String type) {
+	public static Map<String, Integer> getTopMAC() {
 
-		return StatisticController.getPercentageByType(type);
+		return StatisticController.getTopMAC();
 	}
 
-	public void resetStatistic() {
+	public static float getPercentageIP(String version) {
+
+		return StatisticController.getPercentageIP(version);
+	}
+
+	public static float getPercentageType(String type) {
+
+		return StatisticController.getPercentageType(type);
+	}
+
+	public static void resetStatistic() {
 		StatisticController.reset();
 	}
 }
