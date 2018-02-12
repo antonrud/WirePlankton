@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2017-2018 Anton Rudacov, Stefan Pawlowski, Matthias Lehmann, Svetlana Lepikhine
+ *
+ * WirePlankton
+ * A small network traffic analyzer.
+ * 
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ */
+
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
 import java.io.BufferedWriter;
@@ -18,26 +28,64 @@ import org.pcap4j.core.PcapNativeException;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketItem;
 import javafx.collections.ObservableList;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ImportExportController.
+ */
 public class ImportExportController {
 
+	/** The Constant SNAP_LEN. */
 	private static final int SNAP_LEN = 65536;
 
+	/** The path. */
 	String path;
+
+	/** The amount. */
 	int amount;
+
+	/** The filter. */
 	String filter;
 
+	/**
+	 * Instantiates a new import export controller.
+	 *
+	 * @param path
+	 *            the path
+	 * @param amount
+	 *            the amount
+	 * @param filter
+	 *            the filter
+	 */
 	public ImportExportController(String path, int amount, String filter) {
 		this.path = path;
 		this.amount = amount;
 		this.filter = filter;
 	}
 
+	/**
+	 * Instantiates a new import export controller.
+	 *
+	 * @param path
+	 *            the path
+	 */
 	public ImportExportController(String path) {
 		this.path = path;
 		this.amount = Integer.MAX_VALUE;
 		this.filter = "";
 	}
 
+	/**
+	 * Do load.
+	 *
+	 * @throws PcapNativeException
+	 *             the pcap native exception
+	 * @throws EOFException
+	 *             the EOF exception
+	 * @throws TimeoutException
+	 *             the timeout exception
+	 * @throws NotOpenException
+	 *             the not open exception
+	 */
 	public void doLoad() throws PcapNativeException, EOFException, TimeoutException, NotOpenException {
 		MainController.clearPacketList();
 		MainController.resetStatistic();
@@ -66,6 +114,16 @@ public class ImportExportController {
 		handle.close();
 	}
 
+	/**
+	 * Do save.
+	 *
+	 * @param packetList
+	 *            the packet list
+	 * @throws PcapNativeException
+	 *             the pcap native exception
+	 * @throws NotOpenException
+	 *             the not open exception
+	 */
 	public void doSave(ObservableList<PacketItem> packetList) throws PcapNativeException, NotOpenException {
 		PcapHandle handle = Pcaps.openDead(DataLinkType.EN10MB, SNAP_LEN);
 
@@ -99,6 +157,14 @@ public class ImportExportController {
 		handle.close();
 	}
 
+	/**
+	 * Do CSV export.
+	 *
+	 * @param packetList
+	 *            the packet list
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	public void doCSVExport(ObservableList<PacketItem> packetList) throws IOException {
 
 		FileWriter writer = new FileWriter(path, true);

@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2017-2018 Anton Rudacov, Stefan Pawlowski, Matthias Lehmann, Svetlana Lepikhine
+ *
+ * WirePlankton
+ * A small network traffic analyzer.
+ * 
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ */
+
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
 import java.io.EOFException;
@@ -24,22 +34,40 @@ import javafx.collections.ObservableList;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketItem;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
 
+// TODO: Auto-generated Javadoc
 /**
- * @author Anton, Stefan, Matthias, Lana
+ * The Class MainController.
  *
+ * @author Anton, Stefan, Matthias, Lana
  */
 public class MainController {
 
+	/** The packet list. */
 	private static ObservableList<PacketItem> packetList = FXCollections.observableArrayList();
+
+	/** The interfaces. */
 	private static Map<String, String> interfaces;
+
+	/** The capture thread. */
 	static Thread captureThread = new Thread();
+
+	/** The handle. */
 	static PcapHandle handle;
 
+	/**
+	 * Instantiates a new main controller.
+	 */
 	// Shows: We want it static
 	private MainController() {
 
 	}
 
+	/**
+	 * Capture packet.
+	 *
+	 * @throws InterruptedException
+	 *             the interrupted exception
+	 */
 	public static void capturePacket() throws InterruptedException {
 
 		// TODO Settings IDs must be defined.
@@ -74,11 +102,17 @@ public class MainController {
 		captureThread.start();
 	}
 
+	/**
+	 * Close handle.
+	 */
 	public static void closeHandle() {
 		if (handle != null)
 			handle.close();
 	}
 
+	/**
+	 * Stop capture.
+	 */
 	public static void stopCapture() {
 
 		captureThread.interrupt();
@@ -89,6 +123,12 @@ public class MainController {
 	//
 	// }
 
+	/**
+	 * Do CSV export.
+	 *
+	 * @param f
+	 *            the f
+	 */
 	public static void doCSVExport(File f) {
 		ImportExportController exportController = new ImportExportController(f.getPath());
 
@@ -100,6 +140,12 @@ public class MainController {
 		}
 	}
 
+	/**
+	 * Do save.
+	 *
+	 * @param f
+	 *            the f
+	 */
 	public static void doSave(File f) {
 
 		int amount = Integer.parseInt(getExportSetting("E_AMOUNT").getActive().get(0));
@@ -118,6 +164,12 @@ public class MainController {
 		}
 	}
 
+	/**
+	 * Do load.
+	 *
+	 * @param f
+	 *            the f
+	 */
 	public static void doLoad(File f) {
 
 		int amount = Integer.parseInt(getExportSetting("E_AMOUNT").getActive().get(0));
@@ -142,6 +194,13 @@ public class MainController {
 		}
 	}
 
+	/**
+	 * Gets the filter string.
+	 *
+	 * @param purpose
+	 *            the purpose
+	 * @return the filter string
+	 */
 	private static String getFilterString(String purpose) {
 		String filter = "";
 		List<String> filterIds;
@@ -184,6 +243,9 @@ public class MainController {
 		return filter;
 	}
 
+	/**
+	 * Inits the app.
+	 */
 	public static void initApp() {
 		stopCapture();
 		clearPacketList();
@@ -194,72 +256,164 @@ public class MainController {
 		WirePlankton.main(new String[0]);
 	}
 
+	/**
+	 * Adds the packet.
+	 *
+	 * @param packet
+	 *            the packet
+	 */
 	public static void addPacket(Packet packet) {
 		packetList.add(new PacketItem(packet));
 		StatisticController.evaluatePacket(packet);
 	}
 
+	/**
+	 * Gets the packet list.
+	 *
+	 * @return the packet list
+	 */
 	public static ObservableList<PacketItem> getPacketList() {
 		return packetList;
 	}
 
+	/**
+	 * Clear packet list.
+	 */
 	public static void clearPacketList() {
 		packetList.clear();
 	}
 
+	/**
+	 * Adds the setting.
+	 *
+	 * @param s
+	 *            the s
+	 */
 	public static void addSetting(Setting s) {
 		SettingsController.addSetting(s);
 
 	}
 
+	/**
+	 * Gets the setting.
+	 *
+	 * @param id
+	 *            the id
+	 * @return the setting
+	 */
 	public static Setting getSetting(String id) {
 		return SettingsController.getSetting(id);
 	}
 
+	/**
+	 * Gets the export setting.
+	 *
+	 * @param id
+	 *            the id
+	 * @return the export setting
+	 */
 	public static Setting getExportSetting(String id) {
 		return SettingsController.getExportSetting(id);
 	}
 
+	/**
+	 * Adds the export setting.
+	 *
+	 * @param s
+	 *            the s
+	 */
 	public static void addExportSetting(Setting s) {
 		SettingsController.addExportSetting(s);
 
 	}
 
+	/**
+	 * Adds the stat setting.
+	 *
+	 * @param s
+	 *            the s
+	 */
 	public static void addStatSetting(Setting s) {
 		SettingsController.addStatSetting(s);
 
 	}
 
+	/**
+	 * Adds the display setting.
+	 *
+	 * @param s
+	 *            the s
+	 */
 	public static void addDisplaySetting(Setting s) {
 		SettingsController.addDisplaySetting(s);
 
 	}
 
+	/**
+	 * Gets the export settings.
+	 *
+	 * @return the export settings
+	 */
 	public static List<Setting> getExportSettings() {
 		return SettingsController.getExportSettingsList();
 	}
 
+	/**
+	 * Gets the settings.
+	 *
+	 * @return the settings
+	 */
 	public static LinkedList<Setting> getSettings() {
 
 		return SettingsController.getSettigsList();
 	}
 
+	/**
+	 * Gets the display settings list.
+	 *
+	 * @return the display settings list
+	 */
 	public static LinkedList<Setting> getDisplaySettingsList() {
 		return SettingsController.getDisplaySettingsList();
 	}
 
+	/**
+	 * Gets the stat settings list.
+	 *
+	 * @return the stat settings list
+	 */
 	public static LinkedList<Setting> getStatSettingsList() {
 		return SettingsController.getStatSettingsList();
 	}
 
+	/**
+	 * Gets the interface descriptions.
+	 *
+	 * @return the interface descriptions
+	 */
 	public static Collection<String> getInterfaceDescriptions() {
 		return interfaces.values();
 	}
 
+	/**
+	 * Sets the interfaces.
+	 *
+	 * @param map
+	 *            the map
+	 */
 	public static void setInterfaces(Map<String, String> map) {
 		interfaces = map;
 	}
 
+	/**
+	 * Gets the name by description.
+	 *
+	 * @param interfaces
+	 *            the interfaces
+	 * @param description
+	 *            the description
+	 * @return the name by description
+	 */
 	private static Object getNameByDescription(Map<String, String> interfaces, Object description) {
 		for (Object name : interfaces.keySet()) {
 			if (interfaces.get(name).equals(description)) {
@@ -269,31 +423,63 @@ public class MainController {
 		return null;
 	}
 
+	/**
+	 * Gets the top IP 4.
+	 *
+	 * @return the top IP 4
+	 */
 	public static Map<String, Integer> getTopIP4() {
 
 		return StatisticController.getTopIP4();
 	}
 
+	/**
+	 * Gets the top IP 6.
+	 *
+	 * @return the top IP 6
+	 */
 	public static Map<String, Integer> getTopIP6() {
 
 		return StatisticController.getTopIP6();
 	}
 
+	/**
+	 * Gets the top MAC.
+	 *
+	 * @return the top MAC
+	 */
 	public static Map<String, Integer> getTopMAC() {
 
 		return StatisticController.getTopMAC();
 	}
 
+	/**
+	 * Gets the percentage IP.
+	 *
+	 * @param version
+	 *            the version
+	 * @return the percentage IP
+	 */
 	public static float getPercentageIP(String version) {
 
 		return StatisticController.getPercentageIP(version);
 	}
 
+	/**
+	 * Gets the percentage type.
+	 *
+	 * @param type
+	 *            the type
+	 * @return the percentage type
+	 */
 	public static float getPercentageType(String type) {
 
 		return StatisticController.getPercentageType(type);
 	}
 
+	/**
+	 * Reset statistic.
+	 */
 	public static void resetStatistic() {
 		StatisticController.reset();
 	}

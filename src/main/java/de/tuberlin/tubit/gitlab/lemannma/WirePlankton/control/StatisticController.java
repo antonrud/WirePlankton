@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2017-2018 Anton Rudacov, Stefan Pawlowski, Matthias Lehmann, Svetlana Lepikhine
+ *
+ * WirePlankton
+ * A small network traffic analyzer.
+ * 
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ */
+
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
 import java.util.HashMap;
@@ -12,20 +22,46 @@ import org.pcap4j.packet.Packet;
 import org.pcap4j.packet.TcpPacket;
 import org.pcap4j.packet.UdpPacket;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StatisticController.
+ */
 public class StatisticController {
 
+	/** The mac list. */
 	static Map<String, Integer> macList = new HashMap<String, Integer>();
+
+	/** The ip 4 list. */
 	static Map<String, Integer> ip4List = new HashMap<String, Integer>();
+
+	/** The ip 6 list. */
 	static Map<String, Integer> ip6List = new HashMap<String, Integer>();
+
+	/** The ip 4 amount. */
 	static int ip4Amount;
+
+	/** The ip 6 amount. */
 	static int ip6Amount;
+
+	/** The tcp amount. */
 	static int tcpAmount;
+
+	/** The udp amount. */
 	static int udpAmount;
 
+	/**
+	 * Instantiates a new statistic controller.
+	 */
 	public StatisticController() {
 
 	}
 
+	/**
+	 * Evaluate packet.
+	 *
+	 * @param packet
+	 *            the packet
+	 */
 	public static void evaluatePacket(Packet packet) {
 
 		// Filling macList
@@ -69,9 +105,14 @@ public class StatisticController {
 		}
 	}
 
+	/**
+	 * Gets the top IP 4.
+	 *
+	 * @return the top IP 4
+	 */
 	public static Map<String, Integer> getTopIP4() {
-		
-		//TODO This should be replaced to handle IndexOfBoundException
+
+		// TODO This should be replaced to handle IndexOfBoundException
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("0.0.0.0", 50);
 		map.put("0.0.0.1", 10);
@@ -80,12 +121,19 @@ public class StatisticController {
 		map.put("0.0.0.4", 1);
 		return map;
 
-//		return ip4List.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()).limit(5)
-//				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (hashMap, linkedHashMap) -> hashMap,
-//						LinkedHashMap::new));
+		// return ip4List.entrySet().stream().sorted(Map.Entry.<String,
+		// Integer>comparingByValue().reversed()).limit(5)
+		// .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (hashMap,
+		// linkedHashMap) -> hashMap,
+		// LinkedHashMap::new));
 
 	}
 
+	/**
+	 * Gets the top IP 6.
+	 *
+	 * @return the top IP 6
+	 */
 	public static Map<String, Integer> getTopIP6() {
 
 		return ip6List.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()).limit(5)
@@ -93,6 +141,11 @@ public class StatisticController {
 						LinkedHashMap::new));
 	}
 
+	/**
+	 * Gets the top MAC.
+	 *
+	 * @return the top MAC
+	 */
 	public static Map<String, Integer> getTopMAC() {
 
 		return macList.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()).limit(5)
@@ -100,6 +153,13 @@ public class StatisticController {
 						LinkedHashMap::new));
 	}
 
+	/**
+	 * Gets the percentage IP.
+	 *
+	 * @param version
+	 *            the version
+	 * @return the percentage IP
+	 */
 	public static float getPercentageIP(String version) {
 
 		switch (version) {
@@ -118,6 +178,13 @@ public class StatisticController {
 		}
 	}
 
+	/**
+	 * Gets the percentage type.
+	 *
+	 * @param type
+	 *            the type
+	 * @return the percentage type
+	 */
 	public static float getPercentageType(String type) {
 
 		switch (type) {
@@ -136,6 +203,9 @@ public class StatisticController {
 		}
 	}
 
+	/**
+	 * Reset.
+	 */
 	public static void reset() {
 
 		macList.clear();
@@ -147,11 +217,21 @@ public class StatisticController {
 		udpAmount = 0;
 	}
 
+	/**
+	 * Gets the packet amount.
+	 *
+	 * @return the packet amount
+	 */
 	public static int getPacketAmount() {
 
 		return MainController.getPacketList().size();
 	}
 
+	/**
+	 * Checks if is implemented.
+	 *
+	 * @return true, if is implemented
+	 */
 	public boolean isImplemented() {
 
 		return true;

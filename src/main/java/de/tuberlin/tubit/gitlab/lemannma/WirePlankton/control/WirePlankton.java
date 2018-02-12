@@ -1,6 +1,13 @@
-/**
+/*
+ * Copyright (c) 2017-2018 Anton Rudacov, Stefan Pawlowski, Matthias Lehmann, Svetlana Lepikhine
  *
+ * WirePlankton
+ * A small network traffic analyzer.
+ * 
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
  */
+
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
 import java.util.ArrayList;
@@ -13,19 +20,26 @@ import org.pcap4j.core.Pcaps;
 
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
 
-//import prise.nexus.test.NexusConnection;
-
 /**
- *
- * @author Anton, Matthias, Stefan, Lana
- *
+ * This is the main class of WirePlankton.
  */
 public class WirePlankton {
 
+	/** A setting type - SINGLECHOICE. */
 	public static final int SINGLECHOICE = 0;
+
+	/** A setting type - MULTICHOICE. */
 	public static final int MULTICHOICE = 1;
+
+	/** A setting type - NUMBER. */
 	public static final int NUMBER = 2;
 
+	/**
+	 * The main method.
+	 *
+	 * @param args
+	 *            the arguments
+	 */
 	public static void main(String[] args) {
 		List<PcapNetworkInterface> interfaces = new ArrayList<PcapNetworkInterface>();
 		try {
@@ -44,11 +58,6 @@ public class WirePlankton {
 			}
 		}
 		MainController.setInterfaces(nifs);
-
-		// No checking for NullPointer in Description
-		// MainController.setInterfaces(interfaces.stream()
-		// .collect(Collectors.toMap(PcapNetworkInterface::getName,
-		// PcapNetworkInterface::getDescription)));
 
 		// SystemSettings
 		String[] nifChoice = MainController.getInterfaceDescriptions().toArray(new String[0]);
@@ -79,7 +88,6 @@ public class WirePlankton {
 		MainController.addSetting(ipSetting);
 
 		// ExportSettings
-
 		String[] eipChoice = { "ip", "ip6" };
 		String[] eipActive = {};
 		String eipName = "IP version:";
