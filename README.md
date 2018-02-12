@@ -10,8 +10,22 @@ Development of a small network traffic analyzer as part of module "AOT-Praktikum
 
 ## How to use
 
-Build project with Maven (requires Java JDK8 with JavaFX libraries).
-Run WirePlankton.jar 
+1. Make sure you have [Java JDK8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and [Maven](https://maven.apache.org/download.cgi) installed on your system (you might also need to [update your PATH](https://docs.oracle.com/javase/tutorial/essential/environment/paths.html)).
+
+2. To build the project with Maven navigate to project directory and run:
+```
+mvn clean package
+```
+
+3. In order to get skins applied, copy "styles" folder into the "target" directory.
+
+4. Run **WirePlankton-xxx-jar-with-dependencies.jar** from "target" directory:
+```
+java -jar WirePlankton-xxx-jar-with-dependencies.jar
+```
+
+5. Enjoy!
+ 
 
 ## Built With
 
