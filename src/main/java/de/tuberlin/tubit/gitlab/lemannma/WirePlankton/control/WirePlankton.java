@@ -41,6 +41,12 @@ public class WirePlankton {
 	 *            the arguments
 	 */
 	public static void main(String[] args) {
+		configure();
+
+		ViewController.go();
+	}
+
+	private static void configure(){
 		List<PcapNetworkInterface> interfaces = new ArrayList<PcapNetworkInterface>();
 		try {
 			interfaces = Pcaps.findAllDevs();
@@ -112,7 +118,5 @@ public class WirePlankton {
 		String statName = "Statistic:";
 		Setting statSetting = new Setting("STAT", statName, statActive, SINGLECHOICE, statChoice);
 		MainController.addStatSetting(statSetting);
-
-		ViewController.go();
 	}
 }
