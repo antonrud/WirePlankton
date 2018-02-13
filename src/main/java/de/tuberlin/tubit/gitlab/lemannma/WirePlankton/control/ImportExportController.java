@@ -98,10 +98,10 @@ public class ImportExportController {
 				while ((packet = handle.getNextPacketEx()) != null) {
 					MainController.addPacket(packet);
 				}
-			}catch(EOFException exception){
+			} catch (EOFException exception) {
 				System.out.println("End of file reached");
 			}
-			
+
 		} else {
 			int count = 0;
 			try {
@@ -109,7 +109,7 @@ public class ImportExportController {
 					MainController.addPacket(packet);
 					count++;
 				}
-			}catch(EOFException exception){
+			} catch (EOFException exception) {
 				System.out.println("End of file reached");
 			}
 		}

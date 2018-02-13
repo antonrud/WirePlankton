@@ -10,7 +10,6 @@
 
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
-import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -20,8 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
-
-import javax.naming.InitialContext;
 
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PcapHandle;
@@ -260,7 +257,7 @@ public class MainController {
 		SettingsController.settingsList.clear();
 		StatisticController.reset();
 	}
-	
+
 	/**
 	 * Inits the app.
 	 */

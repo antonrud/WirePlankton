@@ -11,7 +11,6 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import org.pcap4j.packet.EthernetPacket;

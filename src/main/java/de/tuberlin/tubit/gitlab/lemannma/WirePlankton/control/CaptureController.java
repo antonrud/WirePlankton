@@ -55,9 +55,10 @@ public class CaptureController implements Runnable {
 	}
 
 	/**
-	 * This method gets packets from provided handle and adds them to packetList owned by MainController.
- 	 * The capturing process is restricted by amount of packets and limit of memory.
- 	 * 
+	 * This method gets packets from provided handle and adds them to packetList
+	 * owned by MainController. The capturing process is restricted by amount of
+	 * packets and limit of memory.
+	 * 
 	 * @throws TimeoutException
 	 *             if handle times out
 	 * @throws EOFException
@@ -65,7 +66,7 @@ public class CaptureController implements Runnable {
 	 * @throws PcapNativeException
 	 *             the pcap native exception
 	 * @throws NotOpenException
-	 *             if handle isn't open any more 
+	 *             if handle isn't open any more
 	 */
 	public void doCapture() throws TimeoutException, EOFException, PcapNativeException, NotOpenException {
 		MainController.clearPacketList();

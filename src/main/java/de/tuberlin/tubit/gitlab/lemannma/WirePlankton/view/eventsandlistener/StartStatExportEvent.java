@@ -25,7 +25,7 @@ public class StartStatExportEvent<T extends Event> implements EventHandler<T> {
 		//Filter
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Pcap files (*.txt)", "*.txt");
         fileChooser.getExtensionFilters().add(extFilter);
-        fileChooser.initialFileNameProperty().set("WirePlanktonStatExport.txt");
+        fileChooser.initialFileNameProperty().set("WirePlankton-StatExport.txt");
 
 		File f = fileChooser.showSaveDialog(s);
 		if(f != null && !f.getAbsolutePath().endsWith(".txt")){
