@@ -118,11 +118,6 @@ public class MainController {
 		captureThread.interrupt();
 	}
 
-	// TODO No needed yet
-	// public static void doCSVImport(File f) {
-	//
-	// }
-
 	/**
 	 * Do CSV export.
 	 *
@@ -264,7 +259,7 @@ public class MainController {
 	 */
 	public static void addPacket(Packet packet) {
 		packetList.add(new PacketItem(packet));
-		StatisticController.evaluatePacket(packet);
+		//StatisticController.evaluatePacket(packet);
 	}
 
 	/**
@@ -414,7 +409,7 @@ public class MainController {
 	 *            the description
 	 * @return the name by description
 	 */
-	private static Object getNameByDescription(Map<String, String> interfaces, Object description) {
+	public static Object getNameByDescription(Map<String, String> interfaces, Object description) {
 		for (Object name : interfaces.keySet()) {
 			if (interfaces.get(name).equals(description)) {
 				return name;

@@ -28,33 +28,29 @@ import org.pcap4j.core.PcapNativeException;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketItem;
 import javafx.collections.ObservableList;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ImportExportController.
+ * This class is used to safe and load dumped packets.
+ * It cat also export packets information as CSV.
+ * 
+ * @author Anton Rudacov
  */
 public class ImportExportController {
 
-	/** The Constant SNAP_LEN. */
+	/** The Constant SNAP_LEN for most possible packet size. */
 	private static final int SNAP_LEN = 65536;
 
-	/** The path. */
+	/** The safe/load/export path. */
 	String path;
 
-	/** The amount. */
+	/** The amount of packets. */
 	int amount;
 
-	/** The filter. */
+	/** The filter for packets. */
 	String filter;
 
 	/**
-	 * Instantiates a new import export controller.
+	 * Instantiates a new ImportExportController.
 	 *
-	 * @param path
-	 *            the path
-	 * @param amount
-	 *            the amount
-	 * @param filter
-	 *            the filter
 	 */
 	public ImportExportController(String path, int amount, String filter) {
 		this.path = path;

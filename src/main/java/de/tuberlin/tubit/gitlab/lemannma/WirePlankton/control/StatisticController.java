@@ -3,7 +3,7 @@
  *
  * WirePlankton
  * A small network traffic analyzer.
- * 
+ *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
  */
@@ -161,7 +161,9 @@ public class StatisticController {
 	 * @return the percentage IP
 	 */
 	public static float getPercentageIP(String version) {
-
+		if(MainController.getPacketList().size() == 0){
+			return 0;
+		}
 		switch (version) {
 		case "ip4":
 			return (float) ip4Amount / getPacketAmount();
@@ -186,7 +188,9 @@ public class StatisticController {
 	 * @return the percentage type
 	 */
 	public static float getPercentageType(String type) {
-
+		if(MainController.getPacketList().size() == 0){
+			return 0;
+		}
 		switch (type) {
 		case "tcp":
 			return (float) tcpAmount / getPacketAmount();

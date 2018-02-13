@@ -49,6 +49,8 @@ public class ExportView extends ScrollPane{
 				NumberInput n = new NumberInput(setting);
 				this.settingsContent.getChildren().add(n);
 				break;
+			default:
+				break;
 			}
 		}
 		this.setContent(this.settingsContent);

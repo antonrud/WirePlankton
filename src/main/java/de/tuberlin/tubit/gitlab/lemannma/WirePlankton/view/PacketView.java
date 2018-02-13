@@ -59,6 +59,7 @@ public class PacketView extends VBox{
 		TableColumn<PacketItem,String> dest = new TableColumn<PacketItem,String>("Destination");
 		TableColumn<PacketItem,String> src = new TableColumn<PacketItem,String>("Source");
 		TableColumn<PacketItem,String> type = new TableColumn<PacketItem,String>("Type");
+		TableColumn<PacketItem,String> ip = new TableColumn<PacketItem,String>("IPVersion");
 
 		view.getColumns().add(index);
 		view.getColumns().add(cAt);
@@ -66,6 +67,7 @@ public class PacketView extends VBox{
 		view.getColumns().add(dest);
 		view.getColumns().add(src);
 		view.getColumns().add(type);
+		view.getColumns().add(ip);
 
 
 
@@ -98,6 +100,10 @@ public class PacketView extends VBox{
 		type.setCellValueFactory(
 			    new PropertyValueFactory<PacketItem,String>("packetType")
 			);
+		ip.setCellValueFactory(
+			    new PropertyValueFactory<PacketItem,String>("ipVersion")
+			);
+
 		view.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		view.setItems(data);
 		this.setPrefWidth(400);
