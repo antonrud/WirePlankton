@@ -10,9 +10,13 @@
 
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import org.pcap4j.packet.EthernetPacket;
@@ -21,6 +25,9 @@ import org.pcap4j.packet.IpV6Packet;
 import org.pcap4j.packet.Packet;
 import org.pcap4j.packet.TcpPacket;
 import org.pcap4j.packet.UdpPacket;
+
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketItem;
+import javafx.collections.ObservableList;
 
 /**
  * This class provides fields and methods for statistics purposes.
@@ -196,6 +203,41 @@ public class StatisticController {
 			System.out.println("[WARNING] Wrong packet type!");
 			return 0;
 		}
+	}
+
+	/**
+	 * Export statistics data as text.
+	 * 
+	 * @param path
+	 *            the export path
+	 */
+	public static void doExportAsText(String path) throws IOException {
+
+		FileWriter writer = new FileWriter(path, true);
+		BufferedWriter buffer = new BufferedWriter(writer);
+
+		buffer.write("WirePlankton: Packet statistics\n");
+		buffer.newLine();
+
+		for (Entry<String, Integer> mac : macList.entrySet()) {
+
+		}
+
+		for (Entry<String, Integer> ip4 : ip4List.entrySet()) {
+
+		}
+
+		for (Entry<String, Integer> ip6 : ip6List.entrySet()) {
+
+		}
+
+		ip4Amount = 0;
+		ip6Amount = 0;
+		tcpAmount = 0;
+		udpAmount = 0;
+
+		buffer.close();
+		writer.close();
 	}
 
 	/**
