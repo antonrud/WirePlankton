@@ -3,7 +3,7 @@
  *
  * WirePlankton
  * A small network traffic analyzer.
- * 
+ *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
  */
@@ -17,8 +17,9 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
 /**
+ *The class MenuButton.
  *
- * @author Stef
+ * @author Stefan
  *
  */
 public class MenuButton extends Button {
@@ -26,11 +27,11 @@ public class MenuButton extends Button {
 	public MenuButton(String label, EventHandler<ActionEvent> event){
 
 		super();
+		/** The label. */
 
-		//Set Label
 		this.setText(label);
 
-		//Set Integer for viewchange
+		/** The integer for viewchange. */
 		this.setOnAction(event);
 
 		File css = new File("styles/menu.css");

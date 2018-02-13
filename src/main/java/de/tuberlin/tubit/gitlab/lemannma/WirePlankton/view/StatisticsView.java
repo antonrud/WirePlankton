@@ -21,6 +21,13 @@ import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
+
+/**
+ * The Class StatisticsView.
+ *
+ * @author Stefan
+ */
+
 public class StatisticsView extends VBox{
 
 	private LinkedList<Refreshable> stats;
@@ -35,6 +42,13 @@ public class StatisticsView extends VBox{
 		stats.add(new ByPackageTypeChart());
 		changeStat(0);
 	}
+
+
+	/**
+	 * Change statistics by getting the children and adding a node.
+	 *
+	 *
+	 */
 
 	public void changeStat(int stat){
 		if(stat== 0){

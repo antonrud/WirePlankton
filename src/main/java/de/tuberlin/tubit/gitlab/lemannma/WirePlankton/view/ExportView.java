@@ -18,12 +18,20 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.inputs.SingleChoice;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * The Class ExportView.
+ *
+ * @author Stefan
+ */
+
+
 public class ExportView extends ScrollPane{
 
 	private VBox settingsContent;
 
 	public ExportView(){
 
+	/** The content of the settings and its possible cases. */
 		super();
 		this.settingsContent = new VBox();
 		for (Setting setting : MainController.getExportSettings()) {
@@ -47,7 +55,7 @@ public class ExportView extends ScrollPane{
 		}
 		this.setContent(this.settingsContent);
 
-		//Style
+		/** Style. */
 		this.setStyle("-fx-background: white");
 		this.settingsContent.setStyle("-fx-background-color: white");
 		//File css = new File("styles/settings.css");
