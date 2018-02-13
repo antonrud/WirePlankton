@@ -46,7 +46,7 @@ public class WirePlankton {
 		ViewController.go();
 	}
 
-	private static void configure(){
+	public static void configure(){
 		List<PcapNetworkInterface> interfaces = new ArrayList<PcapNetworkInterface>();
 		try {
 			interfaces = Pcaps.findAllDevs();

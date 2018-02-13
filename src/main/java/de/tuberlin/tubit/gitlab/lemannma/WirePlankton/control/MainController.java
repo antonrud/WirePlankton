@@ -21,6 +21,8 @@ import java.util.Map;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
+import javax.naming.InitialContext;
+
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PcapHandle;
 import org.pcap4j.core.PcapNativeException;
@@ -236,15 +238,21 @@ public class MainController {
 	}
 
 	/**
-	 * Inits the app.
+	 * Inits the context.
 	 */
-	public static void initApp() {
+	public static void initContext() {
 		stopCapture();
 		clearPacketList();
 		PacketItem.resetIndexGen();
 		SettingsController.settingsList.clear();
 		StatisticController.reset();
-
+	}
+	
+	/**
+	 * Inits the app.
+	 */
+	public static void initApp() {
+		initContext();
 		WirePlankton.main(new String[0]);
 	}
 
