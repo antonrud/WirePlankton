@@ -3,11 +3,18 @@
  *
  * WirePlankton
  * A small network traffic analyzer.
- * 
+ *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
  */
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.charts;
+
+import java.io.IOException;
+
+/**
+ * Refresh the interface.
+ *
+ */
 
 public interface Refreshable {
 
