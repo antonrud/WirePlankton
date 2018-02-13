@@ -20,32 +20,32 @@ import org.pcap4j.packet.Packet;
 
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketItem;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class CaptureController.
+ * This class works in own thread and captures packets from provided handle.
+ * Captured packets are added to packetList owned by mainController
  *
  * @author Anton Rudacov
  */
 public class CaptureController implements Runnable {
 
-	/** The handle. */
+	/** The pcap handle. */
 	PcapHandle handle;
 
-	/** The amount. */
+	/** The amount of packets to be captured. */
 	int amount;
 
-	/** The limit. */
+	/** The limit for memory could be used. */
 	int limit;
 
 	/**
-	 * Instantiates a new capture controller.
+	 * Instantiates a new CaptureController.
 	 *
 	 * @param handle
 	 *            the handle
 	 * @param amount
-	 *            the amount
+	 *            the amount of packets
 	 * @param limit
-	 *            the limit
+	 *            the limit of memory
 	 */
 	public CaptureController(PcapHandle handle, int amount, int limit) {
 
@@ -55,16 +55,17 @@ public class CaptureController implements Runnable {
 	}
 
 	/**
-	 * Do capture.
-	 *
+	 * This method gets packets from provided handle and adds them to packetList owned by MainController.
+ 	 * The capturing process is restricted by amount of packets and limit of memory.
+ 	 * 
 	 * @throws TimeoutException
-	 *             the timeout exception
+	 *             if handle times out
 	 * @throws EOFException
 	 *             the EOF exception
 	 * @throws PcapNativeException
 	 *             the pcap native exception
 	 * @throws NotOpenException
-	 *             the not open exception
+	 *             if handle isn't open any more 
 	 */
 	public void doCapture() throws TimeoutException, EOFException, PcapNativeException, NotOpenException {
 		MainController.clearPacketList();
