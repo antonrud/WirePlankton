@@ -174,9 +174,6 @@ public class MainController {
 
 		try {
 			loadController.doLoad();
-		} catch (EOFException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (PcapNativeException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

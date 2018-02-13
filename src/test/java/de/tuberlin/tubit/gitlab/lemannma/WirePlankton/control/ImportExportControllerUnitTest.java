@@ -12,13 +12,57 @@ package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.pcap4j.core.PcapNativeException;
+
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketItem;
+import javafx.collections.ObservableList;
 
 public class ImportExportControllerUnitTest {
 
 	@Test
-	public void doImportTest() {
+	public void exportTest() throws Exception{
 		
-		assertTrue(true); //not implemented yet
+		//init
+		String path ="Test";
+		ImportExportController importExportController = new ImportExportController(path);
+		ObservableList<PacketItem> packetList = MainController.getPacketList();
+		importExportController.doSave(packetList);
 	}
 
+	@Test
+	public void importTest() throws Exception{
+		
+		//init
+		String path ="test.pcap";
+		ImportExportController importExportController = new ImportExportController(path);
+		importExportController.doLoad();
+	}
+	
+	@Test
+	public void importWithNotValidPathTest(){
+		
+		//init
+		try {
+			String path ="//test.pcap";
+			ImportExportController importExportController = new ImportExportController(path);
+			importExportController.doLoad();
+			assertTrue(false);
+		}
+		catch(PcapNativeException exception) {
+			assertTrue(true);
+		}
+		catch(Exception exception) {
+			assertTrue(false);
+		}
+	}
+	
+	@Test
+	public void CSVExportTest() throws Exception{
+		
+		//init
+		String path ="test";
+		ImportExportController importExportController = new ImportExportController(path);
+		ObservableList<PacketItem> packetList = MainController.getPacketList();
+		importExportController.doCSVExport(packetList);
+	}
 }

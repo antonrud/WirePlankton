@@ -66,7 +66,7 @@ public class ImportExportController {
 	 */
 	public ImportExportController(String path) {
 		this.path = path;
-		this.amount = Integer.MAX_VALUE;
+		this.amount = 0;
 		this.filter = "";
 	}
 
@@ -82,7 +82,7 @@ public class ImportExportController {
 	 * @throws NotOpenException
 	 *             the not open exception
 	 */
-	public void doLoad() throws PcapNativeException, EOFException, TimeoutException, NotOpenException {
+	public void doLoad() throws PcapNativeException, TimeoutException, NotOpenException {
 		MainController.clearPacketList();
 		MainController.resetStatistic();
 		PacketItem.resetIndexGen();
@@ -96,14 +96,23 @@ public class ImportExportController {
 		Packet packet;
 
 		if (amount <= 0) {
-			while ((packet = handle.getNextPacketEx()) != null) {
-				MainController.addPacket(packet);
+			try {
+				while ((packet = handle.getNextPacketEx()) != null) {
+					MainController.addPacket(packet);
+				}
+			}catch(EOFException exception){
+				System.out.println("End of file reached");
 			}
+			
 		} else {
 			int count = 0;
-			while ((packet = handle.getNextPacketEx()) != null && count < amount) {
-				MainController.addPacket(packet);
-				count++;
+			try {
+				while ((packet = handle.getNextPacketEx()) != null && count < amount) {
+					MainController.addPacket(packet);
+					count++;
+				}
+			}catch(EOFException exception){
+				System.out.println("End of file reached");
 			}
 		}
 
