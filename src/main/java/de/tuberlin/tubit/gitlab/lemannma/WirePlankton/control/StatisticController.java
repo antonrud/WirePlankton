@@ -213,13 +213,15 @@ public class StatisticController {
 	 */
 	public static void doExportAsText(String path) throws IOException {
 
-		FileWriter writer = new FileWriter(path, true);
+		FileWriter writer = new FileWriter(path, false);
 		BufferedWriter buffer = new BufferedWriter(writer);
 
-		buffer.write("WirePlankton - Packet statistics\n");
+		buffer.write("WirePlankton - Packet statistics");
+		buffer.newLine();
 		buffer.newLine();
 
 		buffer.write("Total amount of packets: " + getPacketAmount());
+		buffer.newLine();
 		buffer.newLine();
 		buffer.write("IPv4 packets: " + ip4Amount);
 		buffer.newLine();
@@ -231,10 +233,12 @@ public class StatisticController {
 		buffer.newLine();
 		buffer.newLine();
 
-		buffer.write("MAC adresses:\n");
+		buffer.write("MAC adresses:");
+		buffer.newLine();
 		macList.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()).forEach(mac -> {
 			try {
 				buffer.write(mac.toString());
+				buffer.newLine();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -242,10 +246,12 @@ public class StatisticController {
 		});
 		buffer.newLine();
 
-		buffer.write("IPv4 adresses:\n");
+		buffer.write("IPv4 adresses:");
+		buffer.newLine();
 		ip4List.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()).forEach(mac -> {
 			try {
 				buffer.write(mac.toString());
+				buffer.newLine();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -253,16 +259,17 @@ public class StatisticController {
 		});
 		buffer.newLine();
 
-		buffer.write("IPv6 adresses:\n");
+		buffer.write("IPv6 adresses:");
+		buffer.newLine();
 		ip6List.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()).forEach(mac -> {
 			try {
 				buffer.write(mac.toString());
+				buffer.newLine();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		});
-		buffer.newLine();
 
 		buffer.close();
 		writer.close();

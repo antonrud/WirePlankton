@@ -170,7 +170,7 @@ public class ImportExportController {
 	 */
 	public void doCSVExport(ObservableList<PacketItem> packetList) throws IOException {
 
-		FileWriter writer = new FileWriter(path, true);
+		FileWriter writer = new FileWriter(path, false);
 		BufferedWriter buffer = new BufferedWriter(writer);
 
 		buffer.write("Index;CapturedAt;OriginalLength;DestinationAddress;SourceAddress;PacketType");
