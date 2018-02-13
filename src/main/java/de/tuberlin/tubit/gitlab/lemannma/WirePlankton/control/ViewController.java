@@ -25,8 +25,8 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.Sin
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.SingleChoiceChangeViewListener;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartCaptureEvent;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartExportEvent;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartExportStatisticEvent;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartSaveEvent;
-import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartStatExportEvent;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StopCaptureEvent;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartLoadEvent;
 import javafx.application.*;
@@ -40,42 +40,87 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
+/**
+ * This class initializes and controls the GUI.
+ * 
+ * @author Stefan Pawlowski
+ */
 public class ViewController extends Application {
 
-	// Init basic elements
+	/** The layout root. */
 	private static BorderPane root;
+
+	/** The current view. */
 	private static GridPane currentView;
+
+	/** The scene. */
 	private static Scene scene;
 
+	/** The menu bar. */
 	private static MenuBar menuBar;
+
+	/** The settings bar. */
 	private static MenuBar settingsBar;
+
+	/** The statistics settings bar. */
 	private static SettingsBar statSettingsBar;
+
+	/** The view settings bar. */
 	private static SettingsBar viewSettingsBar;
+
+	/** The data bar. */
 	private static MenuBar dataBar;
+
+	/** The packet view. */
 	private static PacketView packetView;
+
+	/** The export view. */
 	private static ExportView exportView;
+
+	/** The real-time view for packets. */
 	private static RealTimeView realtimeView;
+
+	/** The settings view. */
 	private static SettingsView settingsView;
+
+	/** The statistics view. */
 	private static StatisticsView statView;
 
-	// control of height and width
+	/** Initial width of window. */
 	private static double masterWidth = 800;
+
+	/** Initial height of window. */
 	private static double masterHeight = 600;
 
-	// TODO Enums sollten eigentlich CAPS sein, dann muss ich aber eine extraliste
-	// fuer die Menuenamen pflegen..
+	/**
+	 * The Enum to determinate the next view.
+	 */
 	public static enum ViewModes {
+
 		Liveview, Settings, File, Statistics
 	};
 
+	/**
+	 * The Enum for generating capture options.
+	 */
 	public static enum captureModes {
+
 		Start, Stop
 	};
 
+	/**
+	 * The Enum for data options.
+	 */
 	public static enum dataModes {
+
 		Export, Save, Load, ExportStats
 	};
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javafx.application.Application#start(javafx.stage.Stage)
+	 */
 	public void start(Stage primaryStage) {
 
 		// Init Elements
@@ -134,11 +179,20 @@ public class ViewController extends Application {
 		primaryStage.show();
 	}
 
+	/**
+	 * Go.
+	 */
 	public static void go() {
 
 		ViewController.launch();
 	}
 
+	/**
+	 * Change view.
+	 *
+	 * @param view
+	 *            the view
+	 */
 	public static void changeView(int view) {
 		root.getChildren().clear();
 		root.setTop(menuBar);
@@ -182,31 +236,61 @@ public class ViewController extends Application {
 
 	}
 
+	/**
+	 * Gets the menubar.
+	 *
+	 * @return the menubar
+	 */
 	public static MenuBar getMenubar() {
 
 		return menuBar;
 	}
 
+	/**
+	 * Gets the packetview.
+	 *
+	 * @return the packetview
+	 */
 	public static PacketView getPacketview() {
 
 		return packetView;
 	}
 
+	/**
+	 * Gets the exportview.
+	 *
+	 * @return the exportview
+	 */
 	public static ExportView getExportview() {
 
 		return exportView;
 	}
 
+	/**
+	 * Gets the realtimeview.
+	 *
+	 * @return the realtimeview
+	 */
 	public static RealTimeView getRealtimeview() {
 
 		return realtimeView;
 	}
 
+	/**
+	 * Gets the settingsview.
+	 *
+	 * @return the settingsview
+	 */
 	public static SettingsView getSettingsview() {
 
 		return settingsView;
 	}
 
+	/**
+	 * Gets the stat view.
+	 *
+	 * @return the stat view
+	 */
 	public static StatisticsView getStatView() {
 		return statView;
 
