@@ -3,7 +3,7 @@
  *
  * WirePlankton
  * A small network traffic analyzer.
- * 
+ *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
  */
@@ -54,7 +54,7 @@ public class WirePlankton {
 			if (nif.getDescription() == null) {
 				nifs.put(nif.getName(), nif.getName());
 			} else {
-				nifs.put(nif.getName(), nif.getDescription());
+				nifs.put(nif.getName(), nif.getName());
 			}
 		}
 		MainController.setInterfaces(nifs);
@@ -107,7 +107,7 @@ public class WirePlankton {
 		MainController.addDisplaySetting(dipSetting);
 
 		// StatSettings
-		String[] statChoice = { "Top 5 IP", "Top 5 MACs" };
+		String[] statChoice = { "Select a Stat", "Top 5 IPv4", "Top 5 IPv6", "Top 5 MACs", "IPv4/IPv6", "TCP/UDP" };
 		String[] statActive = { statChoice[0] };
 		String statName = "Statistic:";
 		Setting statSetting = new Setting("STAT", statName, statActive, SINGLECHOICE, statChoice);
