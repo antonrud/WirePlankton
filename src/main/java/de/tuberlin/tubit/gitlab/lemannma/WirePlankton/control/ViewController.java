@@ -25,6 +25,7 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.Sin
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.SingleChoiceChangeViewListener;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartCaptureEvent;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartExportEvent;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartExportStatisticEvent;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartSaveEvent;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StopCaptureEvent;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.eventsandlistener.StartLoadEvent;
@@ -112,7 +113,7 @@ public class ViewController extends Application {
 	 */
 	public static enum dataModes {
 
-		Export, Save, Load
+		Save, Load, Export, StatisticsExport
 	};
 
 	/*
@@ -138,6 +139,7 @@ public class ViewController extends Application {
 		dataMenu.add(new MenuButton(dataModes.Save.toString(), new StartSaveEvent<ActionEvent>()));
 		dataMenu.add(new MenuButton(dataModes.Load.toString(), new StartLoadEvent<ActionEvent>()));
 		dataMenu.add(new MenuButton(dataModes.Export.toString(), new StartExportEvent<ActionEvent>()));
+		dataMenu.add(new MenuButton(dataModes.StatisticsExport.toString(), new StartExportStatisticEvent<ActionEvent>()));
 
 		dataBar = new MenuBar(dataMenu);
 		statSettingsBar = new SettingsBar(MainController.getStatSettingsList(), new SingleChoiceChangeStatListener<>());

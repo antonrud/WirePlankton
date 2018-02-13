@@ -141,6 +141,15 @@ public class MainController {
 		}
 	}
 
+	public static void doStatisticsExport(File f) {
+		try {
+			StatisticController.doExportAsText(f.getPath());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * Do save.
 	 *
