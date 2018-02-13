@@ -1,5 +1,6 @@
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view.charts;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Map;
@@ -12,11 +13,27 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.VBox;
 
+
+/**
+ * The Class Top5IP6Chart.
+ *
+ * @author Stefan
+ */
+
+
 public class Top5IP6Chart extends VBox implements Refreshable{
 
 	private BarChart<String,Number> chart;
 	private LinkedList<String> ips;
 	private LinkedList<Number> values;
+
+
+
+	/**
+	 * Refresh in order to adjust the statistic.
+	 *
+	 */
+
 	@Override
 	public void refresh() {
 		//Number[] dummyA = {200,180,160,140,120};

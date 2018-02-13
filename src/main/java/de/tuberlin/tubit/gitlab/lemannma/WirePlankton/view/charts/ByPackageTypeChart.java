@@ -15,6 +15,15 @@ import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 import javafx.scene.layout.VBox;
 
+
+/**
+ * The Class ByPackageTypeChart.
+ *
+ *
+ * @author Stefan
+ */
+
+
 public class ByPackageTypeChart extends VBox implements Refreshable{
 
 	final PieChart chart;
@@ -32,6 +41,11 @@ public class ByPackageTypeChart extends VBox implements Refreshable{
 	        this.chart.setPrefHeight(9999);
 			this.chart.setPrefWidth(9999);
 	}
+
+	/**
+	 * Refresh the statistic.
+	 *
+	 */
 
 	@Override
 	public void refresh() {

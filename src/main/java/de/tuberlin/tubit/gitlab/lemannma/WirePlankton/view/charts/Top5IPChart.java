@@ -23,9 +23,22 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.VBox;
 
+/**
+ * The Class Top5IPChart.
+ *
+ * @author Stefan
+ */
+
+
 public class Top5IPChart extends VBox implements Refreshable{
 
 	private BarChart<String,Number> chart;
+
+
+	/**
+	 * Refresh in order to adjust the statistic.
+	 *
+	 */
 
 	@Override
 	public void refresh() {

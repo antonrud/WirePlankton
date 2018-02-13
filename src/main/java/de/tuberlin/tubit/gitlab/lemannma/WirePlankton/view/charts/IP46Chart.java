@@ -15,6 +15,12 @@ import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 import javafx.scene.layout.VBox;
 
+/**
+ * The Class IP46Chart.
+ *
+ * @author Stefan
+ */
+
 public class IP46Chart extends VBox implements Refreshable{
 
 	final PieChart chart;
@@ -34,6 +40,12 @@ public class IP46Chart extends VBox implements Refreshable{
 
 
 	}
+
+
+	/**
+	 * Refresh  in order to adjust the statistic.
+	 *
+	 */
 
 	@Override
 	public void refresh() {
