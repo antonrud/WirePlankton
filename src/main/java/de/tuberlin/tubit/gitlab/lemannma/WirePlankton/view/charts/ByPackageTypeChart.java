@@ -15,6 +15,15 @@ import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 import javafx.scene.layout.VBox;
 
+
+/**
+ * The Class ByPackageTypeChart.
+ *
+ *
+ * @author Stefan
+ */
+
+
 public class ByPackageTypeChart extends VBox implements Refreshable{
 
 	final PieChart chart;
@@ -33,6 +42,11 @@ public class ByPackageTypeChart extends VBox implements Refreshable{
 			this.chart.setPrefWidth(9999);
 	}
 
+	/**
+	 * Refresh the statistic.
+	 *
+	 */
+
 	@Override
 	public void refresh() {
 		float tcp = MainController.getPercentageType("tcp");
@@ -42,8 +56,8 @@ public class ByPackageTypeChart extends VBox implements Refreshable{
 			return;
 		}
 		data.clear();
-		data.add(new PieChart.Data("IPv4", tcp));
-		data.add(new PieChart.Data("IPv6", udp));
+		data.add(new PieChart.Data("TCP", tcp));
+		data.add(new PieChart.Data("UDP", udp));
 		data.add(new PieChart.Data("Other", other));
 
 
