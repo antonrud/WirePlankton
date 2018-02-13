@@ -3,12 +3,18 @@
  *
  * WirePlankton
  * A small network traffic analyzer.
- * 
+ *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
  */
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view;
 
+
+import java.io.EOFException;
+import java.util.concurrent.TimeoutException;
+
+import org.pcap4j.core.NotOpenException;
+import org.pcap4j.core.PcapNativeException;
 
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.MainController;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.ViewController;
@@ -20,11 +26,27 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
+/**
+ * The Class PacketView.
+ *
+ *
+ * @author Stefan
+ */
+
+
 public class PacketView extends VBox{
 
+	/** The data. */
 	ObservableList<PacketItem> data;
+	/** The view. */
 	TableView<PacketItem> view;
 
+
+	/**
+	 * Instantiates of the package view.
+	 *
+	 * @return tableRow
+	 */
 	public PacketView(){
 
 		data = MainController.getPacketList();
@@ -81,6 +103,13 @@ public class PacketView extends VBox{
 		this.setPrefWidth(400);
 		this.view.setPrefHeight(10000);
 	}
+
+	/**
+	 *
+	 * Reload table.
+	 *
+	 */
+
 
 	public void reloadTable() {
 		// TODO Auto-generated method stub

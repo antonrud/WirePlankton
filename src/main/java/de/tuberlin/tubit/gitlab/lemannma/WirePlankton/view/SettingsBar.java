@@ -3,7 +3,7 @@
  *
  * WirePlankton
  * A small network traffic analyzer.
- * 
+ *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
  */
@@ -20,6 +20,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+
+
+/**
+ * The Class SettingsBar.
+ *
+ * @author Stefan
+ */
 public class SettingsBar extends HBox{
 
 	public SettingsBar(LinkedList<Setting> settings, ChangeListener<Number> listener){

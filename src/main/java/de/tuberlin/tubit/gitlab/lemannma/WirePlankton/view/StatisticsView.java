@@ -3,7 +3,7 @@
  *
  * WirePlankton
  * A small network traffic analyzer.
- * 
+ *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
  */
@@ -18,6 +18,13 @@ import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
+
+/**
+ * The Class StatisticsView.
+ *
+ * @author Stefan
+ */
+
 public class StatisticsView extends VBox{
 
 	private LinkedList<Refreshable> stats;
@@ -29,6 +36,13 @@ public class StatisticsView extends VBox{
 		stats.add(new Top5MACChart());
 		changeStat(0);
 	}
+
+
+	/**
+	 * Change statistics by getting the children and adding a node.
+	 *
+	 *
+	 */
 
 	public void changeStat(int stat){
 		this.getChildren().clear();
