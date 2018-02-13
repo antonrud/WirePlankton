@@ -22,45 +22,47 @@ import org.pcap4j.packet.Packet;
 import org.pcap4j.packet.TcpPacket;
 import org.pcap4j.packet.UdpPacket;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class StatisticController.
+ * This class provides fields and methods for statistics purposes.
+ * 
+ * @author Anton Rudacov
+ * 
  */
 public class StatisticController {
 
-	/** The mac list. */
+	/** Map for MACs and their particle amount. */
 	static Map<String, Integer> macList = new HashMap<String, Integer>();
 
-	/** The ip 4 list. */
+	/** Map for IPv4s and their particle amount. */
 	static Map<String, Integer> ip4List = new HashMap<String, Integer>();
 
-	/** The ip 6 list. */
+	/** Map for IPv6s and their particle amount. */
 	static Map<String, Integer> ip6List = new HashMap<String, Integer>();
 
-	/** The ip 4 amount. */
+	/** Amount of captured packets with IP4 header. */
 	static int ip4Amount;
 
-	/** The ip 6 amount. */
+	/** Amount of captured packets with IP6 header. */
 	static int ip6Amount;
 
-	/** The tcp amount. */
+	/** Amount of captured packets with TCP header. */
 	static int tcpAmount;
 
-	/** The udp amount. */
+	/** Amount of captured packets with IUDP header. */
 	static int udpAmount;
 
 	/**
-	 * Instantiates a new statistic controller.
+	 * StatisticController only uses static methods.
 	 */
-	public StatisticController() {
+	private StatisticController() {
 
 	}
 
 	/**
-	 * Evaluate packet.
+	 * This method evaluates captured packets.
 	 *
 	 * @param packet
-	 *            the packet
+	 *            the captured packet
 	 */
 	public static void evaluatePacket(Packet packet) {
 
@@ -106,33 +108,22 @@ public class StatisticController {
 	}
 
 	/**
-	 * Gets the top IP 4.
+	 * Gets the top 5 IPv4 packets.
 	 *
-	 * @return the top IP 4
+	 * @return the top5 IPv4 packets
 	 */
 	public static Map<String, Integer> getTopIP4() {
 
-		// TODO This should be replaced to handle IndexOfBoundException
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("0.0.0.0", 50);
-		map.put("0.0.0.1", 10);
-		map.put("0.0.0.2", 3);
-		map.put("0.0.0.3", 2);
-		map.put("0.0.0.4", 1);
-		return map;
-
-		// return ip4List.entrySet().stream().sorted(Map.Entry.<String,
-		// Integer>comparingByValue().reversed()).limit(5)
-		// .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (hashMap,
-		// linkedHashMap) -> hashMap,
-		// LinkedHashMap::new));
+		return ip4List.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()).limit(5)
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (hashMap, linkedHashMap) -> hashMap,
+						LinkedHashMap::new));
 
 	}
 
 	/**
-	 * Gets the top IP 6.
+	 * Gets the top 5 IPv6 packets.
 	 *
-	 * @return the top IP 6
+	 * @return the top5 IPv6 packets
 	 */
 	public static Map<String, Integer> getTopIP6() {
 
@@ -142,9 +133,9 @@ public class StatisticController {
 	}
 
 	/**
-	 * Gets the top MAC.
+	 * Gets the top 5 MACs ofpackets.
 	 *
-	 * @return the top MAC
+	 * @return the top5 MACs of packets
 	 */
 	public static Map<String, Integer> getTopMAC() {
 
@@ -154,14 +145,14 @@ public class StatisticController {
 	}
 
 	/**
-	 * Gets the percentage IP.
+	 * Gets the percentage of packets by ip version.
 	 *
 	 * @param version
-	 *            the version
-	 * @return the percentage IP
+	 *            the ip version of packet
+	 * @return the percentage of packets by ip version
 	 */
 	public static float getPercentageIP(String version) {
-		if(MainController.getPacketList().size() == 0){
+		if (MainController.getPacketList().size() == 0) {
 			return 0;
 		}
 		switch (version) {
@@ -181,14 +172,14 @@ public class StatisticController {
 	}
 
 	/**
-	 * Gets the percentage type.
+	 * Gets the percentage of packets by packet type.
 	 *
 	 * @param type
-	 *            the type
-	 * @return the percentage type
+	 *            the type of packet
+	 * @return the percentage of packets by type
 	 */
 	public static float getPercentageType(String type) {
-		if(MainController.getPacketList().size() == 0){
+		if (MainController.getPacketList().size() == 0) {
 			return 0;
 		}
 		switch (type) {
@@ -208,7 +199,7 @@ public class StatisticController {
 	}
 
 	/**
-	 * Reset.
+	 * Reset statistics fields.
 	 */
 	public static void reset() {
 
@@ -222,22 +213,12 @@ public class StatisticController {
 	}
 
 	/**
-	 * Gets the packet amount.
+	 * Gets the overall packet amount.
 	 *
-	 * @return the packet amount
+	 * @return the overall packet amount
 	 */
 	public static int getPacketAmount() {
 
 		return MainController.getPacketList().size();
-	}
-
-	/**
-	 * Checks if is implemented.
-	 *
-	 * @return true, if is implemented
-	 */
-	public boolean isImplemented() {
-
-		return true;
 	}
 }

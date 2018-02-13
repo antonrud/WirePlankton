@@ -22,6 +22,12 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
 
 /**
  * This is the main class of WirePlankton.
+ * 
+ * @author Anton Rudacov
+ * @author Stefan Pawlowski
+ * @author Matthias Lehmann
+ * @author Svetlana Lepikhine
+ * 
  */
 public class WirePlankton {
 
