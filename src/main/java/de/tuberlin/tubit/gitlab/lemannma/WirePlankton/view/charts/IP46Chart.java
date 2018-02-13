@@ -51,4 +51,4 @@ public class IP46Chart extends VBox implements Refreshable{
 
 	}
 
-}
+}

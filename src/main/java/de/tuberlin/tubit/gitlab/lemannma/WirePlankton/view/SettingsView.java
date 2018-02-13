@@ -3,7 +3,7 @@
  *
  * WirePlankton
  * A small network traffic analyzer.
- * 
+ *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
  */
@@ -26,6 +26,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+
+
+/**
+ * The Class SettingsView.
+ *
+ * @author Stefan
+ */
 
 public class SettingsView extends ScrollPane{
 
@@ -54,7 +62,7 @@ public class SettingsView extends ScrollPane{
 		}
 		this.setContent(this.settingsContent);
 
-		//Style
+		/** Style. */
 		File css = new File("styles/settings.css");
 		this.getStyleClass().add("settingsBack");
 		this.getStylesheets().add("file:///"+css.getAbsolutePath().replace("\\", "/"));
