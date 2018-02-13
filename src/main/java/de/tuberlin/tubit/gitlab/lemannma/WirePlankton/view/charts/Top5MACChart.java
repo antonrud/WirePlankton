@@ -28,7 +28,7 @@ public class Top5MACChart extends VBox implements Refreshable{
 	@Override
 	public void refresh() {
 
-		Map<String, Integer> top5 = MainController.getTopIP4();
+		Map<String, Integer> top5 = MainController.getTopMAC();
 
 		XYChart.Series<String,Number> series1 = new XYChart.Series<String,Number>();
 		for(Entry<String, Integer> e : top5.entrySet()){

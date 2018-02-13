@@ -37,8 +37,13 @@ public class StatisticsView extends VBox{
 	}
 
 	public void changeStat(int stat){
+		if(stat== 0){
+			this.getChildren().clear();
+			return;
+		}
 		this.getChildren().clear();
-		this.getChildren().add((Node) stats.get(stat));
+		stats.get(stat-1).refresh();
+		this.getChildren().add((Node) stats.get(stat-1));
 	}
 
 }
