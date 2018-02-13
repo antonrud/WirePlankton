@@ -36,11 +36,15 @@ import javafx.collections.ObservableList;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketItem;
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class MainController.
+ * This class is essential part of WirePlankton. It provides triggers from GUI
+ * to other controllers and supplies GUI with data.
  *
- * @author Anton, Stefan, Matthias, Lana
+ * @author Anton Rudacov
+ * @author Stefan Pawlowski
+ * @author Matthias Lehmann
+ * @author Svetlana Lepikhine
+ * 
  */
 public class MainController {
 
@@ -365,7 +369,7 @@ public class MainController {
 	 */
 	public static LinkedList<Setting> getSettings() {
 
-		return SettingsController.getSettigsList();
+		return SettingsController.getSettingsList();
 	}
 
 	/**

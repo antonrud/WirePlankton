@@ -47,7 +47,7 @@ public class Setting {
 	 */
 	public Setting(String id, String name, String[] active, int fieldType) {
 
-		if (SettingsController.getSettigsList().stream().anyMatch(setting -> setting.getId().equals(id))) {
+		if (SettingsController.getSettingsList().stream().anyMatch(setting -> setting.getId().equals(id))) {
 			try {
 				throw new Exception("[FAIL] Provided setting ID is in use!");
 			} catch (Exception e) {
@@ -72,7 +72,7 @@ public class Setting {
 	 */
 	public Setting(String id, String name, String[] active, int fieldType, String[] choices) {
 
-		if (SettingsController.getSettigsList().stream().anyMatch(setting -> setting.getId().equals(id))) {
+		if (SettingsController.getSettingsList().stream().anyMatch(setting -> setting.getId().equals(id))) {
 			try {
 				throw new Exception("[FAIL] Provided setting ID is in use!");
 			} catch (Exception e) {

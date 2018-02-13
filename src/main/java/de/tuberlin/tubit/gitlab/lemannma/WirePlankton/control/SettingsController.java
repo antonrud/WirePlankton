@@ -15,13 +15,14 @@ import java.util.List;
 
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
 
-//TODO: Auto-generated Javadoc
 /**
- * The Class SettingsController.
+ * This class facilitates settings.
+ * 
+ * @author Stefan Pawlowski
  */
 public class SettingsController {
 
-	/** The settings list. */
+	/** The settings list for capturing. */
 	static LinkedList<Setting> settingsList = new LinkedList<Setting>();
 
 	/** The export settings list. */
@@ -30,46 +31,46 @@ public class SettingsController {
 	/** The display settings list. */
 	static LinkedList<Setting> displaySettingsList = new LinkedList<Setting>();
 
-	/** The stat settings list. */
+	/** The settings list for statistics. */
 	static LinkedList<Setting> statSettingsList = new LinkedList<Setting>();
 
 	/**
-	 * Gets the settigs list.
+	 * Gets settings list for capturing.
 	 *
-	 * @return the settigs list
+	 * @return the settings list for capturing
 	 */
-	public static LinkedList<Setting> getSettigsList() {
+	public static LinkedList<Setting> getSettingsList() {
 
 		return settingsList;
 	}
 
 	/**
-	 * Gets the setting.
+	 * Gets the specific capruting setting.
 	 *
 	 * @param id
-	 *            the id
-	 * @return the setting
+	 *            the id of a setting
+	 * @return the specific setting
 	 */
 	public static Setting getSetting(String id) {
 		return settingsList.stream().filter(setting -> setting.getId().equals(id)).findFirst().get();
 	}
 
 	/**
-	 * Gets the export setting.
+	 * Gets the specific export setting.
 	 *
 	 * @param id
-	 *            the id
-	 * @return the export setting
+	 *            the id of a setting
+	 * @return the specific export setting
 	 */
 	public static Setting getExportSetting(String id) {
 		return exportSettingsList.stream().filter(setting -> setting.getId().equals(id)).findFirst().get();
 	}
 
 	/**
-	 * Adds the setting.
+	 * Adds the capturing setting.
 	 *
 	 * @param s
-	 *            the s
+	 *            the new setting
 	 */
 	public static void addSetting(Setting s) {
 		settingsList.add(s);
@@ -88,7 +89,7 @@ public class SettingsController {
 	 * Adds the export setting.
 	 *
 	 * @param s
-	 *            the s
+	 *            the new export setting
 	 */
 	public static void addExportSetting(Setting s) {
 		exportSettingsList.add(s);
@@ -104,19 +105,19 @@ public class SettingsController {
 	}
 
 	/**
-	 * Gets the stat settings list.
+	 * Gets the statistics settings list.
 	 *
-	 * @return the stat settings list
+	 * @return the statistics settings list
 	 */
 	public static LinkedList<Setting> getStatSettingsList() {
 		return statSettingsList;
 	}
 
 	/**
-	 * Adds the stat setting.
+	 * Adds the statistic setting.
 	 *
 	 * @param s
-	 *            the s
+	 *            the statistic setting
 	 */
 	public static void addStatSetting(Setting s) {
 		statSettingsList.add(s);
@@ -127,7 +128,7 @@ public class SettingsController {
 	 * Adds the display setting.
 	 *
 	 * @param s
-	 *            the s
+	 *            the new display setting
 	 */
 	public static void addDisplaySetting(Setting s) {
 		displaySettingsList.add(s);

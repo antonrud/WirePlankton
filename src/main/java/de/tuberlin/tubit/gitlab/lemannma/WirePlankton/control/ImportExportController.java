@@ -29,8 +29,8 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketItem;
 import javafx.collections.ObservableList;
 
 /**
- * This class is used to safe and load dumped packets.
- * It cat also export packets information as CSV.
+ * This class is used to safe and load dumped packets. It can also export
+ * packets information as CSV.
  * 
  * @author Anton Rudacov
  */
@@ -61,8 +61,6 @@ public class ImportExportController {
 	/**
 	 * Instantiates a new import export controller.
 	 *
-	 * @param path
-	 *            the path
 	 */
 	public ImportExportController(String path) {
 		this.path = path;
@@ -71,16 +69,16 @@ public class ImportExportController {
 	}
 
 	/**
-	 * Do load.
+	 * This method loads packets from file
 	 *
 	 * @throws PcapNativeException
-	 *             the pcap native exception
+	 *             if something is wrong with Pcap
 	 * @throws EOFException
-	 *             the EOF exception
+	 *             if end of file is reached
 	 * @throws TimeoutException
-	 *             the timeout exception
+	 *             if handle is closed by timeout
 	 * @throws NotOpenException
-	 *             the not open exception
+	 *             if handle is not open any more
 	 */
 	public void doLoad() throws PcapNativeException, TimeoutException, NotOpenException {
 		MainController.clearPacketList();
@@ -120,14 +118,14 @@ public class ImportExportController {
 	}
 
 	/**
-	 * Do save.
+	 * This method saves packets to file
 	 *
 	 * @param packetList
-	 *            the packet list
+	 *            list of packets to be saved
 	 * @throws PcapNativeException
-	 *             the pcap native exception
+	 *             if something is wrong with Pcap
 	 * @throws NotOpenException
-	 *             the not open exception
+	 *             if handle is not open any more
 	 */
 	public void doSave(ObservableList<PacketItem> packetList) throws PcapNativeException, NotOpenException {
 		PcapHandle handle = Pcaps.openDead(DataLinkType.EN10MB, SNAP_LEN);
@@ -163,10 +161,10 @@ public class ImportExportController {
 	}
 
 	/**
-	 * Do CSV export.
+	 * This method exports packet information as CSV.
 	 *
 	 * @param packetList
-	 *            the packet list
+	 *            list of packets to be exported
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
@@ -186,19 +184,4 @@ public class ImportExportController {
 		buffer.close();
 		writer.close();
 	}
-
-	// TODO CSV Import can't be handled by now. Might not be necessary at all.
-	// public ObservableList<PacketItem> doCSVImport() throws IOException {
-	//
-	// BufferedReader reader = new BufferedReader(new FileReader(path));
-	// String line;
-	//
-	// while ((line = reader.readLine()) != null) {
-	// packetList.add(new PacketItem(line));
-	// }
-	//
-	// reader.close();
-	//
-	// return packetList;
-	// }
 }
