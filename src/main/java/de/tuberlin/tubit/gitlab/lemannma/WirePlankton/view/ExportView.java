@@ -3,7 +3,7 @@
  *
  * WirePlankton
  * A small network traffic analyzer.
- * 
+ *
  * This software may be modified and distributed under the terms
  * of the MIT license.  See the LICENSE file for details.
  */
@@ -40,6 +40,8 @@ public class ExportView extends ScrollPane{
 			case 2:
 				NumberInput n = new NumberInput(setting);
 				this.settingsContent.getChildren().add(n);
+				break;
+			default:
 				break;
 			}
 		}
