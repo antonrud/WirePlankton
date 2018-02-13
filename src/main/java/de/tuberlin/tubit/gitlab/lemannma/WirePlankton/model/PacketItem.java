@@ -210,7 +210,7 @@ public class PacketItem {
 		this.packetType = packetType;
 	}
 
-	public String ipVersion() {
+	public String getIpVersion() {
 		return ipVersion;
 	}
 
