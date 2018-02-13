@@ -118,11 +118,6 @@ public class MainController {
 		captureThread.interrupt();
 	}
 
-	// TODO No needed yet
-	// public static void doCSVImport(File f) {
-	//
-	// }
-
 	/**
 	 * Do CSV export.
 	 *
@@ -264,7 +259,7 @@ public class MainController {
 	 */
 	public static void addPacket(Packet packet) {
 		packetList.add(new PacketItem(packet));
-		StatisticController.evaluatePacket(packet);
+		//StatisticController.evaluatePacket(packet);
 	}
 
 	/**
