@@ -94,7 +94,7 @@ public class ViewController extends Application {
 		dataMenu.add(new MenuButton(dataModes.Save.toString(), new StartSaveEvent<ActionEvent>()));
 		dataMenu.add(new MenuButton(dataModes.Load.toString(), new StartLoadEvent<ActionEvent>()));
 		dataMenu.add(new MenuButton(dataModes.Export.toString(), new StartExportEvent<ActionEvent>()));
-		dataMenu.add(new MenuButton(dataModes.Export.toString(), new StartStatExportEvent<ActionEvent>()));
+		dataMenu.add(new MenuButton(dataModes.ExportStats.toString(), new StartStatExportEvent<ActionEvent>()));
 
 		dataBar = new MenuBar(dataMenu);
 		statSettingsBar = new SettingsBar(MainController.getStatSettingsList(), new SingleChoiceChangeStatListener<>());
