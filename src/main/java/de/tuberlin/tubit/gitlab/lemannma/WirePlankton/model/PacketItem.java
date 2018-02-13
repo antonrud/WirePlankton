@@ -15,7 +15,11 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import org.pcap4j.packet.EthernetPacket;
+import org.pcap4j.packet.IpV4Packet;
+import org.pcap4j.packet.IpV6Packet;
 import org.pcap4j.packet.Packet;
+import org.pcap4j.packet.TcpPacket;
+import org.pcap4j.packet.UdpPacket;
 
 /**
  * This class instantiates PacketItem objects and facilitate conversion to CSV.
@@ -79,9 +83,26 @@ public class PacketItem {
 		this.originalLength = "" + packet.length();
 		this.destinationAddress = packet.get(EthernetPacket.class).getHeader().getDstAddr().toString();
 		this.sourceAddress = packet.get(EthernetPacket.class).getHeader().getSrcAddr().toString();
-		this.packetType = "";
-		this.ipVersion = "";
 
+		if (packet.get(TcpPacket.class) == null) {
+			if (packet.get(UdpPacket.class) == null) {
+				this.packetType = "other";
+			} else {
+				this.packetType = "UDP";
+			}
+		} else {
+			this.packetType = "TCP";
+		}
+
+		if (packet.get(IpV4Packet.class) == null) {
+			if (packet.get(IpV6Packet.class) == null) {
+				this.ipVersion = "other";
+			} else {
+				this.ipVersion = "IP6";
+			}
+		} else {
+			this.ipVersion = "IP4";
+		}
 	}
 
 	/**
