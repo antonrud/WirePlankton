@@ -55,7 +55,6 @@ public class RealTimeView  extends ScrollPane{
 	 *
 	 *
 	 */
-
 	public void setPacket(Packet packet) {
 
 		this.label.setText(packet.toString());

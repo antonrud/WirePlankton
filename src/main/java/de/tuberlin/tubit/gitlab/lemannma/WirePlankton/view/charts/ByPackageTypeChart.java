@@ -42,8 +42,8 @@ public class ByPackageTypeChart extends VBox implements Refreshable{
 			return;
 		}
 		data.clear();
-		data.add(new PieChart.Data("IPv4", tcp));
-		data.add(new PieChart.Data("IPv6", udp));
+		data.add(new PieChart.Data("TCP", tcp));
+		data.add(new PieChart.Data("UDP", udp));
 		data.add(new PieChart.Data("Other", other));
 
 
