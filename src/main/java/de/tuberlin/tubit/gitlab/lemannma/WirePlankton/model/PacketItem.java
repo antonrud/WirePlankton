@@ -10,6 +10,11 @@
 
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
+import org.pcap4j.packet.EthernetPacket;
 import org.pcap4j.packet.Packet;
 
 /**
@@ -47,6 +52,9 @@ public class PacketItem {
 	/** The version of IP protocol of the packet. */
 	private String packetType;
 
+	/** The version of IP protocol of the packet. */
+	private String ipVersion;
+
 	/**
 	 * Instantiates a new PacketItem.
 	 *
@@ -60,12 +68,20 @@ public class PacketItem {
 		this.packet = packet;
 		this.preview = packet.toString().replaceAll("\n", "").replaceAll("\r", "");
 
-		String[] splited = packet.toString().split("\\s*\\r?\\n\\s*");
-		this.capturedAt = splited[0].substring(24, 32);
-		this.originalLength = splited[1].substring(17, splited[1].length());
-		this.destinationAddress = splited[3].substring(21, splited[3].length());
-		this.sourceAddress = splited[4].substring(16, splited[4].length());
-		this.packetType = splited[5].substring(14, splited[5].length() - 1);
+		// String[] splited = packet.toString().split("\\s*\\r?\\n\\s*");
+		// this.capturedAt = splited[0].substring(24, 32);
+		// this.originalLength = splited[1].substring(17, splited[1].length());
+		// this.destinationAddress = splited[3].substring(21, splited[3].length());
+		// this.sourceAddress = splited[4].substring(16, splited[4].length());
+		// this.packetType = splited[5].substring(14, splited[5].length() - 1);
+
+		this.capturedAt = DateTimeFormatter.ofPattern("HH:mm:ss").format(LocalDateTime.now());
+		this.originalLength = "" + packet.length();
+		this.destinationAddress = packet.get(EthernetPacket.class).getHeader().getDstAddr().toString();
+		this.sourceAddress = packet.get(EthernetPacket.class).getHeader().getSrcAddr().toString();
+		this.packetType = "";
+		this.ipVersion = "";
+
 	}
 
 	/**
@@ -75,7 +91,7 @@ public class PacketItem {
 	 */
 	public String toCSVFormat() {
 		return index + ";" + capturedAt + ";" + originalLength + ";" + destinationAddress + ";" + sourceAddress + ";"
-				+ packetType;
+				+ packetType + ipVersion;
 	}
 
 	/**
@@ -155,12 +171,26 @@ public class PacketItem {
 	}
 
 	/**
-	 * Gets the version of IP protocol of the packet.
+	 * Gets the type of the packet.
 	 *
-	 * @return the version of IP protocol of the packet
+	 * @return the type of the packet
 	 */
 	public String getPacketType() {
 		return packetType;
+	}
+
+	/**
+	 * Sets the type of the packet.
+	 *
+	 * @param packetType
+	 *            the type of the packet
+	 */
+	public void setPacketType(String packetType) {
+		this.packetType = packetType;
+	}
+
+	public String ipVersion() {
+		return ipVersion;
 	}
 
 	/**
@@ -169,8 +199,8 @@ public class PacketItem {
 	 * @param packetType
 	 *            the version of IP protocol of the packet
 	 */
-	public void setPacketType(String packetType) {
-		this.packetType = packetType;
+	public void ipVersion(String ipVersion) {
+		this.ipVersion = ipVersion;
 	}
 
 	/**
