@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class SafeLoadControllerUnitTest {
+public class SettingControllerUnitTest {
 
 	@Test
 	public void test() {

@@ -414,7 +414,7 @@ public class MainController {
 	 *            the description
 	 * @return the name by description
 	 */
-	private static Object getNameByDescription(Map<String, String> interfaces, Object description) {
+	public static Object getNameByDescription(Map<String, String> interfaces, Object description) {
 		for (Object name : interfaces.keySet()) {
 			if (interfaces.get(name).equals(description)) {
 				return name;
