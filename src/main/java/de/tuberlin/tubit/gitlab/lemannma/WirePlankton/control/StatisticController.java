@@ -216,25 +216,53 @@ public class StatisticController {
 		FileWriter writer = new FileWriter(path, true);
 		BufferedWriter buffer = new BufferedWriter(writer);
 
-		buffer.write("WirePlankton: Packet statistics\n");
+		buffer.write("WirePlankton - Packet statistics\n");
 		buffer.newLine();
 
-		for (Entry<String, Integer> mac : macList.entrySet()) {
+		buffer.write("Total amount of packets: " + getPacketAmount());
+		buffer.newLine();
+		buffer.write("IPv4 packets: " + ip4Amount);
+		buffer.newLine();
+		buffer.write("IPv6 packets: " + ip6Amount);
+		buffer.newLine();
+		buffer.write("TCP packets: " + tcpAmount);
+		buffer.newLine();
+		buffer.write("UDP packets: " + udpAmount);
+		buffer.newLine();
+		buffer.newLine();
 
-		}
+		buffer.write("MAC adresses:\n");
+		macList.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()).forEach(mac -> {
+			try {
+				buffer.write(mac.toString());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
+		buffer.newLine();
 
-		for (Entry<String, Integer> ip4 : ip4List.entrySet()) {
+		buffer.write("IPv4 adresses:\n");
+		ip4List.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()).forEach(mac -> {
+			try {
+				buffer.write(mac.toString());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
+		buffer.newLine();
 
-		}
-
-		for (Entry<String, Integer> ip6 : ip6List.entrySet()) {
-
-		}
-
-		ip4Amount = 0;
-		ip6Amount = 0;
-		tcpAmount = 0;
-		udpAmount = 0;
+		buffer.write("IPv6 adresses:\n");
+		ip6List.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()).forEach(mac -> {
+			try {
+				buffer.write(mac.toString());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
+		buffer.newLine();
 
 		buffer.close();
 		writer.close();
