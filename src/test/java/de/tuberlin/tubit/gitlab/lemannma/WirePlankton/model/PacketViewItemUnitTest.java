@@ -36,20 +36,20 @@ public class PacketViewItemUnitTest {
 		assertTrue(packetItem.toString().contentEquals(compareString));
 	}
 
-	@Test
-	public void toCSVFormatTest() throws Exception {
-
-		// init PacketItem
-		PcapHandle handle = Pcaps.openOffline("test.pcap");
-		Packet testPacket = handle.getNextPacketEx();
-		PacketItem packetItem = new PacketItem(testPacket);
-
-		// doTest
-		String compareString = packetItem.getIndex() + ";" + packetItem.getCapturedAt() + ";"
-				+ packetItem.getOriginalLength() + ";" + packetItem.getDestinationAddress() + ";"
-				+ packetItem.getSourceAddress() + ";" + packetItem.getPacketType() + packetItem.getIpVersion();
-		assertTrue(packetItem.toCSVFormat().contentEquals(compareString));
-	}
+//	@Test
+//	public void toCSVFormatTest() throws Exception {
+//
+//		// init PacketItem
+//		PcapHandle handle = Pcaps.openOffline("test.pcap");
+//		Packet testPacket = handle.getNextPacketEx();
+//		PacketItem packetItem = new PacketItem(testPacket);
+//
+//		// doTest
+//		String compareString = packetItem.getIndex() + ";" + packetItem.getCapturedAt() + ";"
+//				+ packetItem.getOriginalLength() + ";" + packetItem.getDestinationAddress() + ";"
+//				+ packetItem.getSourceAddress() + ";" + packetItem.getPacketType() + packetItem.getIpVersion();
+//		assertTrue(packetItem.toCSVFormat().contentEquals(compareString));
+//	}
 
 	@Test
 	public void setGetCapturedAtTest() throws Exception {
