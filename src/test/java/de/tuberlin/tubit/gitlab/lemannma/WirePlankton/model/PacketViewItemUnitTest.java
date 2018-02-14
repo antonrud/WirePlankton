@@ -32,7 +32,7 @@ public class PacketViewItemUnitTest {
 		String compareString = "PacketItem [Captured at: " + packetItem.getCapturedAt() + ", " + "Original length: "
 				+ packetItem.getOriginalLength() + ", Destination address: " + packetItem.getDestinationAddress()
 				+ ", Source address: " + packetItem.getSourceAddress() + ", Packet type: " + packetItem.getPacketType()
-				+ "]" + ", IP version: " + packetItem.getIpVersion();
+				+ ", IP version: " + packetItem.getIpVersion() + "]";
 		assertTrue(packetItem.toString().contentEquals(compareString));
 	}
 
