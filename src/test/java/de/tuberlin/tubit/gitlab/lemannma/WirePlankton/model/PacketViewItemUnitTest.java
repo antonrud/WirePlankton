@@ -12,21 +12,63 @@ package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.pcap4j.core.PcapHandle;
+import org.pcap4j.core.Pcaps;
 import org.pcap4j.packet.Packet;
+import org.pcap4j.packet.Packet.Builder;
+import org.pcap4j.packet.Packet.Header;
 
 public class PacketViewItemUnitTest {
-
+	
+	
 	@Test
-	public void getIndexTest() {
+	public void toStringTest() throws Exception {	
+
+		//init PacketItem
+		PcapHandle handle = Pcaps.openOffline("test.pcap");
+		Packet testPacket = handle.getNextPacketEx();
+		PacketItem packetItem = new PacketItem(testPacket);
 		
-		/*
-		int index = 42;
-		Packet packet = null;
+		//doTest
+		String compareString = "PacketItem [Captured at: " + packetItem.getCapturedAt() + ", "
+									 + "Original length: " + packetItem.getOriginalLength()
+									 + ", Destination address: " + packetItem.getDestinationAddress()
+									 + ", Source address: " + packetItem.getSourceAddress()
+									 + ", Packet type: " + packetItem.getPacketType() + "]";
+		assertTrue(packetItem.toString().contentEquals(compareString));
+	}
+	
+	@Test
+	public void toCSVFormatTest() throws Exception {	
+
+		//init PacketItem
+		PcapHandle handle = Pcaps.openOffline("test.pcap");
+		Packet testPacket = handle.getNextPacketEx();
+		PacketItem packetItem = new PacketItem(testPacket);
 		
-		PacketViewItem item = new PacketViewItem(packet, index);
-		assertTrue(index == item.getIndex());
-		*/
-		//not working, error in code, deactivated to keep maven running
+		//doTest
+		String compareString = packetItem.getIndex() + ";"
+								+ packetItem.getCapturedAt() 
+								+ ";" + packetItem.getOriginalLength()
+								+ ";" + packetItem.getDestinationAddress() + ";" 
+								+ packetItem.getSourceAddress() + ";"
+								+ packetItem.getPacketType() 
+								+ packetItem.getIpVersion();
+		assertTrue(packetItem.toCSVFormat().contentEquals(compareString));
+	}
+	
+	@Test
+	public void setGetCapturedAtTest() throws Exception {	
+
+		//init PacketItem
+		PcapHandle handle = Pcaps.openOffline("test.pcap");
+		Packet testPacket = handle.getNextPacketEx();
+		PacketItem packetItem = new PacketItem(testPacket);
+		
+		//doTest
+		String value = "value";
+		packetItem.setCapturedAt(value);
+		assertTrue(packetItem.getCapturedAt().contentEquals(value));
 	}
 
 }
