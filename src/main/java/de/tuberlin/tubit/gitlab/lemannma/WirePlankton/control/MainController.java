@@ -1,3 +1,4 @@
+
 /*
  * Copyright (c) 2017-2018 Anton Rudacov, Stefan Pawlowski, Matthias Lehmann, Svetlana Lepikhine
  *
@@ -8,7 +9,7 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
+package com.roche.rudacova.test;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,29 +46,29 @@ import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
  */
 public class MainController {
 
-	/** The packet list. */
+	/** The list of packets. */
 	private static ObservableList<PacketItem> packetList = FXCollections.observableArrayList();
 
-	/** The interfaces. */
+	/** The list of available interfaces. */
 	private static Map<String, String> interfaces;
 
-	/** The capture thread. */
+	/** The thread for capturing packets. */
 	static Thread captureThread = new Thread();
 
-	/** The handle. */
+	/** The Pcap handle. */
 	static PcapHandle handle;
 
 	/**
-	 * Instantiates a new main controller.
+	 * The MainController only have static methods.
 	 */
-	// Shows: We want it static
 	private MainController() {
 
 	}
 
 	/**
-	 * Capture packet.
+	 * This method instantiates CaptureController as new thread and starts it.
 	 *
+	 * @see CaptureController
 	 * @throws InterruptedException
 	 *             the interrupted exception
 	 */
@@ -106,7 +107,7 @@ public class MainController {
 	}
 
 	/**
-	 * Close handle.
+	 * Closes Pcap handle.
 	 */
 	public static void closeHandle() {
 		if (handle != null)
@@ -114,7 +115,7 @@ public class MainController {
 	}
 
 	/**
-	 * Stop capture.
+	 * Interrupts capturing thread.
 	 */
 	public static void stopCapture() {
 
@@ -122,10 +123,12 @@ public class MainController {
 	}
 
 	/**
-	 * Do CSV export.
+	 * Exports packet information as CSV.
+	 * 
+	 * @see ImportExportController#doCSVExport(String path)
 	 *
 	 * @param f
-	 *            the f
+	 *            the file for export
 	 */
 	public static void doCSVExport(File f) {
 		ImportExportController exportController = new ImportExportController(f.getPath());
@@ -138,6 +141,14 @@ public class MainController {
 		}
 	}
 
+	/**
+	 * Exports statistics information as CSV.
+	 * 
+	 * @see StatisticController#doExportAsText(String path)
+	 *
+	 * @param f
+	 *            the file for export statistics
+	 */
 	public static void doStatisticsExport(File f) {
 		try {
 			StatisticController.doExportAsText(f.getPath());
@@ -148,10 +159,12 @@ public class MainController {
 	}
 
 	/**
-	 * Do save.
+	 * Saves packets as Pcap dump.
+	 *
+	 * @see ImportExportController#doSave(ObservableList<PacketItem> packetList)
 	 *
 	 * @param f
-	 *            the f
+	 *            the file for saving dumped packets
 	 */
 	public static void doSave(File f) {
 
@@ -172,10 +185,12 @@ public class MainController {
 	}
 
 	/**
-	 * Do load.
+	 * Loads packets from Pcap dump.
+	 *
+	 * @see ImportExportController#doLoad()
 	 *
 	 * @param f
-	 *            the f
+	 *            the file for loading dumped packets
 	 */
 	public static void doLoad(File f) {
 
@@ -199,11 +214,11 @@ public class MainController {
 	}
 
 	/**
-	 * Gets the filter string.
+	 * Gets the filter as string.
 	 *
 	 * @param purpose
-	 *            the purpose
-	 * @return the filter string
+	 *            the filtering purpose (capture, safe, load)
+	 * @return filter as string in Bpf format
 	 */
 	private static String getFilterString(String purpose) {
 		String filter = "";
@@ -267,10 +282,12 @@ public class MainController {
 	}
 
 	/**
-	 * Adds the packet.
+	 * Adds the packet to packetList and sends packet for evaluation.
+	 *
+	 * @see StatisticController#evaluatePacket(Packet packet)
 	 *
 	 * @param packet
-	 *            the packet
+	 *            the captured packet
 	 */
 	public static void addPacket(Packet packet) {
 		packetList.add(new PacketItem(packet));
@@ -287,7 +304,7 @@ public class MainController {
 	}
 
 	/**
-	 * Clear packet list.
+	 * Clears the packet list.
 	 */
 	public static void clearPacketList() {
 		packetList.clear();
@@ -297,7 +314,7 @@ public class MainController {
 	 * Adds the setting.
 	 *
 	 * @param s
-	 *            the s
+	 *            the setting
 	 */
 	public static void addSetting(Setting s) {
 		SettingsController.addSetting(s);
@@ -308,7 +325,7 @@ public class MainController {
 	 * Gets the setting.
 	 *
 	 * @param id
-	 *            the id
+	 *            the id of the setting
 	 * @return the setting
 	 */
 	public static Setting getSetting(String id) {
@@ -319,7 +336,7 @@ public class MainController {
 	 * Gets the export setting.
 	 *
 	 * @param id
-	 *            the id
+	 *            the id of the export setting
 	 * @return the export setting
 	 */
 	public static Setting getExportSetting(String id) {
@@ -330,7 +347,7 @@ public class MainController {
 	 * Adds the export setting.
 	 *
 	 * @param s
-	 *            the s
+	 *            the export setting
 	 */
 	public static void addExportSetting(Setting s) {
 		SettingsController.addExportSetting(s);
@@ -338,10 +355,10 @@ public class MainController {
 	}
 
 	/**
-	 * Adds the stat setting.
+	 * Adds the statistic setting.
 	 *
 	 * @param s
-	 *            the s
+	 *            the statistic setting
 	 */
 	public static void addStatSetting(Setting s) {
 		SettingsController.addStatSetting(s);
@@ -352,7 +369,7 @@ public class MainController {
 	 * Adds the display setting.
 	 *
 	 * @param s
-	 *            the s
+	 *            the display setting
 	 */
 	public static void addDisplaySetting(Setting s) {
 		SettingsController.addDisplaySetting(s);
@@ -360,18 +377,18 @@ public class MainController {
 	}
 
 	/**
-	 * Gets the export settings.
+	 * Gets the export settings list.
 	 *
-	 * @return the export settings
+	 * @return the export settings as list
 	 */
 	public static List<Setting> getExportSettings() {
 		return SettingsController.getExportSettingsList();
 	}
 
 	/**
-	 * Gets the settings.
+	 * Gets the settings list.
 	 *
-	 * @return the settings
+	 * @return the settings as list
 	 */
 	public static LinkedList<Setting> getSettings() {
 
@@ -381,16 +398,16 @@ public class MainController {
 	/**
 	 * Gets the display settings list.
 	 *
-	 * @return the display settings list
+	 * @return the display settings as list
 	 */
 	public static LinkedList<Setting> getDisplaySettingsList() {
 		return SettingsController.getDisplaySettingsList();
 	}
 
 	/**
-	 * Gets the stat settings list.
+	 * Gets the statistic settings list.
 	 *
-	 * @return the stat settings list
+	 * @return the statistic settings as list
 	 */
 	public static LinkedList<Setting> getStatSettingsList() {
 		return SettingsController.getStatSettingsList();
@@ -409,20 +426,20 @@ public class MainController {
 	 * Sets the interfaces.
 	 *
 	 * @param map
-	 *            the map
+	 *            the interfaces map with name and description
 	 */
 	public static void setInterfaces(Map<String, String> map) {
 		interfaces = map;
 	}
 
 	/**
-	 * Gets the name by description.
+	 * Gets the name of interface by description.
 	 *
 	 * @param interfaces
-	 *            the interfaces
+	 *            the interfaces map
 	 * @param description
-	 *            the description
-	 * @return the name by description
+	 *            the description of interface
+	 * @return the name of interface
 	 */
 	public static Object getNameByDescription(Map<String, String> interfaces, Object description) {
 		for (Object name : interfaces.keySet()) {
@@ -434,9 +451,11 @@ public class MainController {
 	}
 
 	/**
-	 * Gets the top IP 4.
+	 * Gets the top IPv4 by captured amount.
 	 *
-	 * @return the top IP 4
+	 * @see StatisticController#getTopIP4()
+	 *
+	 * @return the top IPv4 by amount
 	 */
 	public static Map<String, Integer> getTopIP4() {
 
@@ -444,9 +463,11 @@ public class MainController {
 	}
 
 	/**
-	 * Gets the top IP 6.
+	 * Gets the top IPv6 by captured amount.
 	 *
-	 * @return the top IP 6
+	 * @see StatisticController#getTopIP6()
+	 *
+	 * @return the top IPv6 by amount
 	 */
 	public static Map<String, Integer> getTopIP6() {
 
@@ -454,9 +475,11 @@ public class MainController {
 	}
 
 	/**
-	 * Gets the top MAC.
+	 * Gets the top MACs by captured amount.
 	 *
-	 * @return the top MAC
+	 * @see StatisticController#getTopMAC()
+	 *
+	 * @return the top MACs by amount
 	 */
 	public static Map<String, Integer> getTopMAC() {
 
@@ -464,11 +487,13 @@ public class MainController {
 	}
 
 	/**
-	 * Gets the percentage IP.
+	 * Gets the percentage of captured packets by IP version.
+	 *
+	 * @see StatisticController#getPercentageIP(String version)
 	 *
 	 * @param version
-	 *            the version
-	 * @return the percentage IP
+	 *            the version of IP protocol (ip4, ip6)
+	 * @return the percentage of packets
 	 */
 	public static float getPercentageIP(String version) {
 
@@ -476,11 +501,13 @@ public class MainController {
 	}
 
 	/**
-	 * Gets the percentage type.
+	 * Gets the percentage of captured packets by packet type.
 	 *
-	 * @param type
-	 *            the type
-	 * @return the percentage type
+	 * @see StatisticController#getPercentageType(String type)
+	 *
+	 * @param version
+	 *            the type of packet (tcp, udp)
+	 * @return the percentage of packets
 	 */
 	public static float getPercentageType(String type) {
 
@@ -488,7 +515,9 @@ public class MainController {
 	}
 
 	/**
-	 * Reset statistic.
+	 * Reset statistics.
+	 * 
+	 * @see StatisticController#reset()
 	 */
 	public static void resetStatistic() {
 		StatisticController.reset();
