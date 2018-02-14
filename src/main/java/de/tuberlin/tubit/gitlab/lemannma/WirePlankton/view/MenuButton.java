@@ -1,4 +1,15 @@
+/*
+ * Copyright (c) 2017-2018 Anton Rudacov, Stefan Pawlowski, Matthias Lehmann, Svetlana Lepikhine
+ *
+ * WirePlankton
+ * A small network traffic analyzer.
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ */
 package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.view;
+
+import java.io.File;
 
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control.ViewController;
 import javafx.event.ActionEvent;
@@ -6,35 +17,26 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
 /**
+ *The class MenuButton.
  *
- * @author Stef
+ * @author Stefan
  *
  */
 public class MenuButton extends Button {
 
-	private int view;
+	public MenuButton(String label, EventHandler<ActionEvent> event){
 
-	public MenuButton(int view, String label){
 		super();
-		this.view = view;
+		/** The label. */
 
-		//Set Label
 		this.setText(label);
 
-		//Set Integer for viewchange
-		this.setOnAction(new EventHandler<ActionEvent>() {
-			@Override public void handle(ActionEvent e) {
-				//TODO Okay oder eigenes Event?
-				ViewController.changeView(((MenuButton)e.getSource()).getView());
-			}
-		});
+		/** The integer for viewchange. */
+		this.setOnAction(event);
 
-		//TODO Styling
+		File css = new File("styles/menu.css");
+		this.getStyleClass().add("button");
+		this.getStylesheets().add("file:///"+css.getAbsolutePath().replace("\\", "/"));
 	}
-
-	public int getView() {
-		return view;
-	}
-
 
 }
