@@ -42,7 +42,7 @@ import javafx.stage.Stage;
 
 /**
  * This class initializes and controls the GUI.
- * 
+ *
  * @author Stefan Pawlowski
  */
 public class ViewController extends Application {
@@ -118,7 +118,7 @@ public class ViewController extends Application {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see javafx.application.Application#start(javafx.stage.Stage)
 	 */
 	public void start(Stage primaryStage) {
@@ -180,7 +180,7 @@ public class ViewController extends Application {
 	}
 
 	/**
-	 * Go.
+	 * Supportfunction to launch controller
 	 */
 	public static void go() {
 
@@ -188,10 +188,10 @@ public class ViewController extends Application {
 	}
 
 	/**
-	 * Change view.
+	 * Change Main View
 	 *
 	 * @param view
-	 *            the view
+	 *            The View Enum for the next view
 	 */
 	public static void changeView(int view) {
 		root.getChildren().clear();
