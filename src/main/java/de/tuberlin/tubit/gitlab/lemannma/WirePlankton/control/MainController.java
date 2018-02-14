@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c) 2017-2018 Anton Rudacov, Stefan Pawlowski, Matthias Lehmann, Svetlana Lepikhine
  *
@@ -9,7 +8,7 @@
  * of the MIT license.  See the LICENSE file for details.
  */
 
-package com.roche.rudacova.test;
+package de.tuberlin.tubit.gitlab.lemannma.WirePlankton.control;
 
 import java.io.File;
 import java.io.IOException;
