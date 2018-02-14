@@ -78,12 +78,12 @@ public class WirePlankton {
 		Setting nifSetting = new Setting("NIF", nifName, nifActive, SINGLECHOICE, nifChoice);
 		MainController.addSetting(nifSetting);
 
-		String[] amountActive = { "17" };
+		String[] amountActive = { "0" };
 		String amountName = "Packets to be captured:";
 		Setting amountSetting = new Setting("AMOUNT", amountName, amountActive, NUMBER);
 		MainController.addSetting(amountSetting);
 
-		String[] limitActive = { "1000" };
+		String[] limitActive = { "10000" };
 		String limitName = "Max. Size in KBytes:";
 		Setting limitSetting = new Setting("LIMIT", limitName, limitActive, NUMBER);
 		MainController.addSetting(limitSetting);
@@ -106,7 +106,7 @@ public class WirePlankton {
 		Setting eipSetting = new Setting("E_IPVERSION", eipName, eipActive, MULTICHOICE, eipChoice);
 		MainController.addExportSetting(eipSetting);
 
-		String[] eamountActive = { "17" };
+		String[] eamountActive = { "0" };
 		String eamountName = "Amount of packets:";
 		Setting eamountSetting = new Setting("E_AMOUNT", eamountName, eamountActive, NUMBER);
 		MainController.addExportSetting(eamountSetting);

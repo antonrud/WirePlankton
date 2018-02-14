@@ -111,7 +111,7 @@ public class PacketItem {
 	 */
 	public String toCSVFormat() {
 		return index + ";" + capturedAt + ";" + originalLength + ";" + destinationAddress + ";" + sourceAddress + ";"
-				+ packetType + ipVersion;
+				+ packetType + ";" + ipVersion;
 	}
 
 	/**
@@ -219,7 +219,7 @@ public class PacketItem {
 	 * @param packetType
 	 *            the version of IP protocol of the packet
 	 */
-	public void ipVersion(String ipVersion) {
+	public void setIpVersion(String ipVersion) {
 		this.ipVersion = ipVersion;
 	}
 
@@ -279,6 +279,6 @@ public class PacketItem {
 	public String toString() {
 		return "PacketItem [Captured at: " + capturedAt + ", Original length: " + originalLength
 				+ ", Destination address: " + destinationAddress + ", Source address: " + sourceAddress
-				+ ", Packet type: " + packetType + "]";
+				+ ", Packet type: " + packetType + ", IP version: " + ipVersion + "]";
 	}
 }

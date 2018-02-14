@@ -17,6 +17,7 @@ Verify:
         - mvn verify
     only:
         - develop
+        - master
     tags:
         - verify
 
