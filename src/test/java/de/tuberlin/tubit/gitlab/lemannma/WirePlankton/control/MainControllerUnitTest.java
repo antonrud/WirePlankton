@@ -13,11 +13,13 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.net.InetAddress;
+import java.util.LinkedList;
 
 import org.junit.Test;
 import org.pcap4j.packet.Packet;
 
 import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.PacketItem;
+import de.tuberlin.tubit.gitlab.lemannma.WirePlankton.model.Setting;
 import javafx.collections.ObservableList;
 
 /**
@@ -25,10 +27,6 @@ import javafx.collections.ObservableList;
  *
  */
 public class MainControllerUnitTest {
-	int amount = 20;
-	int limit = 10;
-	int timeout = 2000;
-	InetAddress address = null;
 
 	Packet mockPacket = new Packet() {
 		
@@ -84,19 +82,13 @@ public class MainControllerUnitTest {
 		}
 	};	
 
-	/*
 	@Test
-	public void addAndGetPacketTest() {
-
+	public void getEmptyPacketListTest() {
+	
 		ObservableList<PacketItem> packetList = MainController.getPacketList();
 		MainController.clearPacketList();
 		assertTrue(packetList.isEmpty());
-		MainController.addPacket(mockPacket);
-		packetList = MainController.getPacketList();
-		Packet testPacket = packetList.get(0).getP();
-		assertTrue(mockPacket==testPacket);
 	}
-	*/
 	
 	@Test
 	public void capturePacketTest() throws Exception {
@@ -115,5 +107,21 @@ public class MainControllerUnitTest {
 		MainController.doCSVExport(fTest1);
 		MainController.doSave(fTest1);
 		MainController.doLoad(fTest2);
+		MainController.doStatisticsExport(fTest1);
 	}
+	
+	@Test
+	public void settingsGetterTest( ) {
+		WirePlankton.configure();		
+		
+		LinkedList<Setting> displaySettings = MainController.getDisplaySettingsList();
+		assertTrue(displaySettings.get(0).getChoices().size()
+				==3);
+		
+		LinkedList<Setting> statSettings = MainController.getStatSettingsList();
+		assertTrue(statSettings.get(0).getChoices().size()==6);
+		System.out.println("need to look");
+	}
+	
+	//skip getter for statistics, cause they just make sence in a running context
 }
