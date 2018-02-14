@@ -161,7 +161,7 @@ public class ViewController extends Application {
 		currentView.getRowConstraints().add(rc);
 		currentView.setPrefSize(10000, 10000);
 
-		primaryStage.setTitle("Wireplankton v1.0.3");
+		primaryStage.setTitle("Wireplankton v1.1.0");
 		scene = new Scene(root, masterWidth, masterHeight);
 		primaryStage.setScene(scene);
 
