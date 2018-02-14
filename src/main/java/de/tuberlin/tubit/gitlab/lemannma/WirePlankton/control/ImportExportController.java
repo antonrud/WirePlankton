@@ -173,7 +173,7 @@ public class ImportExportController {
 		FileWriter writer = new FileWriter(path, false);
 		BufferedWriter buffer = new BufferedWriter(writer);
 
-		buffer.write("Index;CapturedAt;OriginalLength;DestinationAddress;SourceAddress;PacketType");
+		buffer.write("Index;CapturedAt;OriginalLength;DestinationAddress;SourceAddress;PacketType;IpVersion");
 		buffer.newLine();
 
 		for (PacketItem packetItem : packetList) {

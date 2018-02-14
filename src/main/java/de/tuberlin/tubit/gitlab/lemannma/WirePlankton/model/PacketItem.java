@@ -111,7 +111,7 @@ public class PacketItem {
 	 */
 	public String toCSVFormat() {
 		return index + ";" + capturedAt + ";" + originalLength + ";" + destinationAddress + ";" + sourceAddress + ";"
-				+ packetType + ipVersion;
+				+ packetType + ";" + ipVersion;
 	}
 
 	/**
